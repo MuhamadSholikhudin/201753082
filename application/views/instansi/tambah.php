@@ -31,7 +31,19 @@
                                         <label> No Telephone :</label>
                                         <input class="form-control" type="text" name="no_telp" placeholder="Nomer Telephone" required>
                                     </div>
-
+                                    <div class="form-group">
+                                        <label> Email :</label>
+                                        <input class="form-control" type="text" name="email" placeholder="Email" required>
+                                    </div>
+<div class="form-group">
+                                        <label>Pene :</label>
+                                        <select class="form-control" name="posisi" required>
+                                            
+                                                <option value="internal">Internal</option>
+                                                <option value="eksternal">Eksternal</option>
+                                            
+                                        </select>
+                                    </div>
 
                                     <button type="submit" class="btn btn-primary">Simpan</button>
                                     <a href="<?= base_url('instansi') ?>" class="btn btn-danger ">Batal</a>
