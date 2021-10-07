@@ -1,0 +1,19 @@
+
+surat masuk level 
+0 = artinya surat baru di buat
+1 = surat surat dikirim dari ka sub umum dan pegawai kepada kepala pelaksanan
+2 = surat masuk sudah di baca oleh kepala pelaksana 
+3 = surat masuk tidak di validasi oleh kepala pelaksana 
+4 = surat masuk sudah di validasi oleh kepala pelaksana
+
+
+
+surat keluar level
+0 = surat keluar baru di buat oleh bidang tertentu
+1 = surat keluar di kirim dari kepala bidang ke kepala pelaksana
+2 = surat keluar sudah di baca oleh kepala pelaksana 
+3 = surat keluar tidak di setuji oleh kepala pelaksana 
+4 = surat keluar sudah di setujui oleh kepala pelaksana
+5 = surat keluar dibaca oleh kepala sun umum dan pegawai
+6 = surat keluar sudah di beri penomoran oleh kepala sub umum dan pegawai
+
