@@ -42,6 +42,9 @@ class Validasi_surat_masuk extends CI_Controller
        
         $data['instansi'] = $this->db->query("SELECT * FROM instansi")->result();
 
+        $data['terus'] = $this->db->query("SELECT * FROM pegawai WHERE hakakses = 'Admin Kepala'")->result();
+        $data['disposisi'] = $this->db->query("SELECT * FROM diaposisi WHERE id_suratmasuk = $id_suratmasuk ")->result();
+
         $data['sifat_surat'] = ['Penting', 'Biasa'];
         $data['klasifikasi_surat'] = ['Umum', 'Pemerintahan'];
 
