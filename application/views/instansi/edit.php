@@ -31,6 +31,19 @@
                                         <label> no_telp :</label>
                                         <input class="form-control" type="text" name="no_telp" value="<?= $instansi->no_telp ?>">
                                     </div>
+                                    <div class="form-group">
+                                        <label> Email :</label>
+                                        <input class="form-control" type="text" name="email" value="<?= $instansi->email ?>">
+                                    </div>
+                                     <div class="form-group">
+                                        <label>Pene :</label>
+                                        <select class="form-control" name="posisi" required>
+                  
+                                                <option value="internal">Internal</option>
+                                                <option value="eksternal">Eksternal</option>
+                                            
+                                        </select>
+                                    </div>
 
 
                                     <button type="submit" class="btn btn-primary">Simpan</button>
