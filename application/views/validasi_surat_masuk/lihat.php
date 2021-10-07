@@ -146,11 +146,11 @@
                                                     <label>Di tujukan ke :</label>
                                                     <input class="form-control" type="hidden" name="id_suratmasuk" value="<?= $surat_masuk->id_suratmasuk ?>" placeholder="Nomer Urut Surat Masuk" required>
                                                     <select class="form-control" name="teruskan_ke" required>
-                                                        <?php foreach ($instansi as $ins) : ?>
-                                                            <?php if ($ins->id_instansi == $surat_masuk->id_instansi) { ?>
-                                                                <option value="<?= $ins->id_instansi ?>" selected><?= $ins->nama_instansi ?></option>
+                                                        <?php foreach ($terus as $ins) : ?>
+                                                            <?php if ($ins->id_pegawai == $disposisi->teruskan_ke) { ?>
+                                                                <option value="<?= $ins->id_pegawai ?>" selected><?= $ins->nama ?></option>
                                                             <?php } else { ?>
-                                                                <option value="<?= $ins->id_instansi ?>"><?= $ins->nama_instansi ?></option>
+                                                                <option value="<?= $ins->id_pegawai ?>"><?= $ins->nama ?></option>
                                                             <?php } ?>
                                                         <?php endforeach; ?>
                                                     </select>
