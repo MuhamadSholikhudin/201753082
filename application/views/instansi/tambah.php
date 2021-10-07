@@ -35,13 +35,13 @@
                                         <label> Email :</label>
                                         <input class="form-control" type="text" name="email" placeholder="Email" required>
                                     </div>
-<div class="form-group">
-                                        <label>Pene :</label>
+                                    <div class="form-group">
+                                        <label>Penempatan :</label>
                                         <select class="form-control" name="posisi" required>
-                                            
-                                                <option value="internal">Internal</option>
-                                                <option value="eksternal">Eksternal</option>
-                                            
+
+                                            <option value="internal">Internal</option>
+                                            <option value="eksternal">Eksternal</option>
+
                                         </select>
                                     </div>
 

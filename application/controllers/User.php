@@ -1,7 +1,7 @@
 <?php 
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Pegawai extends CI_Controller {
+class User extends CI_Controller {
 
     public function __construct()
     {
@@ -15,12 +15,12 @@ class Pegawai extends CI_Controller {
     }
     public function index()
     {
-        // echo 'pegawai';
-        $data['pegawai'] = $this->db->query("SELECT * FROM pegawai")->result();
+        // echo 'user';
+        $data['user'] = $this->db->query("SELECT * FROM user")->result();
 
         $this->load->view('templates/header');
         $this->load->view('templates/sidebar');
-        $this->load->view('pegawai/index', $data);
+        $this->load->view('user/index', $data);
         $this->load->view('templates/footer');
     }
 
@@ -29,19 +29,19 @@ class Pegawai extends CI_Controller {
         // echo 'oke';
         $this->load->view('templates/header');
         $this->load->view('templates/sidebar');
-        $this->load->view('pegawai/tambah');
+        $this->load->view('user/tambah');
         $this->load->view('templates/footer');
     }
 
-    public function edit($id_pegawai)
+    public function edit($id_user)
     {
-        $data['pegawai'] = $this->db->query("SELECT * FROM pegawai WHERE id_pegawai = $id_pegawai ")->row();
+        $data['user'] = $this->db->query("SELECT * FROM user WHERE id_user = $id_user ")->row();
         $data['hakakses'] = [1, 2, 3];
 
         // echo 'oke';
         $this->load->view('templates/header');
         $this->load->view('templates/sidebar');
-        $this->load->view('pegawai/edit', $data);
+        $this->load->view('user/edit', $data);
         $this->load->view('templates/footer');
     }
 
@@ -81,24 +81,24 @@ class Pegawai extends CI_Controller {
                 );
 
 
-        // $this->db->query("INSERT INTO pegawai (nama, nip, jabatan, hakakses, username, password) VALUES 
+        // $this->db->query("INSERT INTO user (nama, nip, jabatan, hakakses, username, password) VALUES 
         // ($nama, $nip, $jabatan, $hakakses, $username, $password )");
 
-        //             $sql = "INSERT INTO pegawai (nama, nip, jabatan, hakakses, username, password) 
+        //             $sql = "INSERT INTO user (nama, nip, jabatan, hakakses, username, password) 
         //         VALUES (".$nama.", ".$nip.", ".$jabatan. ", " . $hakakses . ", " . $username . ",".$password.")";
         // $this->db->query($sql);
 
 
-        // $this->db->insert('pegawai'); 
+        // $this->db->insert('user'); 
         
-        $this->Model_pegawai->tambah_pegawai($data, 'pegawai');
-            redirect('pegawai/index');
+        $this->Model_user->tambah_user($data, 'user');
+            redirect('user/index');
         }
 
         public function aksi_edit(){
 
 
-        $id_pegawai = $this->input->post('id_pegawai');
+        $id_user = $this->input->post('id_user');
         $nama = $this->input->post('nama');
         $nip = $this->input->post('nip');
         // $foto = $this->input->post('foto');
@@ -107,7 +107,7 @@ class Pegawai extends CI_Controller {
         $username = $this->input->post('username');
         $password = $this->input->post('password');
 
-            $cari_foto = $this->db->query("SELECT * FROM pegawai WHERE id_pegawai = $id_pegawai")->row();
+            $cari_foto = $this->db->query("SELECT * FROM user WHERE id_user = $id_user")->row();
 
         $foto = $_FILES['foto']['name'];
         // $file_ket_ijin = $_FILES['file_ket_ijin']['name'];
@@ -138,20 +138,20 @@ class Pegawai extends CI_Controller {
             'password'    =>  $password
         );
         $this->db->set($data);
-        $this->db->where('id_pegawai', $id_pegawai);
-        $this->db->update('pegawai');
-        redirect('pegawai/index');
+        $this->db->where('id_user', $id_user);
+        $this->db->update('user');
+        redirect('user/index');
 
         }
 
-    public function hapus($id_pegawai)
+    public function hapus($id_user)
     {
 
 
         
-        $this->db->delete('pegawai', array('id_pegawai' => $id_pegawai));
+        $this->db->delete('user', array('id_user' => $id_user));
       
-        redirect('pegawai');
+        redirect('user');
     }
 
 }

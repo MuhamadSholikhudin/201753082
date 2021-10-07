@@ -20,9 +20,11 @@ class Surat_keluar extends CI_Controller
     {
         // $data['instansi'] = $this->db->query("SELECT * FROM instansi")->result();
         $data['surat_keluar'] = $this->db->query("SELECT * FROM surat_keluar")->result();
+        $id_user = $this->session->userdata('id_user');
+        $data['surat_valid'] = $this->db->query("SELECT * FROM surat_masuk JOIN disposisi WHERE surat_masuk.status = 4 AND disposisi.teruskan_ke = $id_user ")->result();
 
 
-        $this->load->view('templates/header');
+        $this->load->view('templates/header', $data);
         $this->load->view('templates/sidebar');
         $this->load->view('surat_keluar/index', $data);
         $this->load->view('templates/footer');
@@ -32,8 +34,10 @@ class Surat_keluar extends CI_Controller
     {
         // echo 'oke';
         $data['instansi'] = $this->db->query("SELECT * FROM instansi")->result();
+        $id_user = $this->session->userdata('id_user');
+        $data['surat_valid'] = $this->db->query("SELECT * FROM surat_masuk JOIN disposisi WHERE surat_masuk.status = 4 AND disposisi.teruskan_ke = $id_user ")->result();
 
-        $this->load->view('templates/header');
+        $this->load->view('templates/header', $data);
         $this->load->view('templates/sidebar');
         $this->load->view('surat_keluar/tambah', $data);
         $this->load->view('templates/footer');
@@ -47,8 +51,11 @@ class Surat_keluar extends CI_Controller
 
         $data['sifat_surat'] = ['Penting', 'Biasa'];
         $data['klasifikasi_surat'] = ['Umum', 'Pemerintahan'];
+        $id_user = $this->session->userdata('id_user');
+        $data['surat_valid'] = $this->db->query("SELECT * FROM surat_masuk JOIN disposisi WHERE surat_masuk.status = 4 AND disposisi.teruskan_ke = $id_user ")->result();
 
-        $this->load->view('templates/header');
+
+        $this->load->view('templates/header', $data);
         $this->load->view('templates/sidebar');
         $this->load->view('surat_keluar/edit', $data);
         $this->load->view('templates/footer');

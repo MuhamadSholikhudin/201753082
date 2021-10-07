@@ -3,29 +3,29 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-12">
-                <h1 class="page-header">Edit Pegawai</h1>
+                <h1 class="page-header">Edit user</h1>
             </div>
             <!-- /.col-lg-12 -->
             <div class="col-lg-12">
 
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        Form Edit Pegawai
+                        Form Edit user
                     </div>
 
                     <div class="panel-body">
                         <div class="row">
-                            <form role="form" action="<?= base_url('pegawai/aksi_edit') ?>" method="POST" enctype="multipart/form-data">
+                            <form role="form" action="<?= base_url('user/aksi_edit') ?>" method="POST" enctype="multipart/form-data">
                                 <div class="col-lg-6">
                                     <div class="form-group">
-                                        <label>Nama Pegawai :</label>
-                                        <input class="form-control" type="hidden" name="id_pegawai" value="<?= $pegawai->id_pegawai ?>">
-                                        <input class="form-control" type="text" name="nama" value="<?= $pegawai->nama ?>">
+                                        <label>Nama user :</label>
+                                        <input class="form-control" type="hidden" name="id_user" value="<?= $user->id_user ?>">
+                                        <input class="form-control" type="text" name="nama" value="<?= $user->nama ?>">
                                         <p class="help-block">Example block-level help text here.</p>
                                     </div>
                                     <div class="form-group">
                                         <label> Nip :</label>
-                                        <input class="form-control" type="text" name="nip" value="<?= $pegawai->nip ?>">
+                                        <input class="form-control" type="text" name="nip" value="<?= $user->nip ?>">
                                     </div>
 
                                     <div class="form-group">
@@ -38,14 +38,14 @@
                                     </script>
                                     <div class="form-group">
                                         <label> Username :</label>
-                                        <input class="form-control" type="text" name="username" value="<?= $pegawai->username ?>">
+                                        <input class="form-control" type="text" name="username" value="<?= $user->username ?>">
                                     </div>
                                 </div>
                                 <!-- /.col-lg-6 (nested) -->
                                 <div class="col-lg-6">
                                     <div class="form-group">
                                         <label>Jabatan :</label>
-                                        <input class="form-control" type="text" name="jabatan" value="<?= $pegawai->jabatan ?>">
+                                        <input class="form-control" type="text" name="jabatan" value="<?= $user->jabatan ?>">
                                         <p class="help-block">Example block-level help text here.</p>
                                     </div>
                                     <div class="form-group">
@@ -64,11 +64,11 @@
 
                                     <div class="form-group">
                                         <label>Password :</label>
-                                        <input class="form-control" type="text" name="password" value="<?= $pegawai->password ?>">
+                                        <input class="form-control" type="text" name="password" value="<?= $user->password ?>">
                                         <p class="help-block">Example block-level help text here.</p>
                                     </div>
                                     <button type="submit" class="btn btn-primary">Simpan</button>
-                                    <a href="<?= base_url('pegawai') ?>" class="btn btn-danger ">Batal</a>
+                                    <a href="<?= base_url('user') ?>" class="btn btn-danger ">Batal</a>
                                     <button type="reset" class="btn btn-default">Reset </button>
                                 </div>
                             </form>

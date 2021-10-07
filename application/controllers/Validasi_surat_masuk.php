@@ -19,6 +19,7 @@ class Validasi_surat_masuk extends CI_Controller
     {
         $data['surat_masuk'] = $this->db->query("SELECT * FROM surat_masuk WHERE status > 0")->result();
         $data['surat_kirim'] = $this->db->query("SELECT * FROM surat_masuk WHERE status = 1")->result();
+        $data['surat_keluar_baru'] = $this->db->query("SELECT * FROM surat_keluar WHERE status = 1")->result();
         
         $this->load->view('templates/header', $data);
         $this->load->view('templates/sidebar');
@@ -39,11 +40,12 @@ class Validasi_surat_masuk extends CI_Controller
 
         $data['surat_masuk'] = $this->db->query("SELECT * FROM surat_masuk WHERE id_suratmasuk = $id_suratmasuk")->row();
         $data['surat_kirim'] = $this->db->query("SELECT * FROM surat_masuk WHERE status = 1")->result();
-       
+        $data['surat_keluar_baru'] = $this->db->query("SELECT * FROM surat_keluar WHERE status = 1")->result();
+        
         $data['instansi'] = $this->db->query("SELECT * FROM instansi")->result();
 
-        $data['terus'] = $this->db->query("SELECT * FROM pegawai WHERE hakakses = 'Admin Kepala'")->result();
-        $data['disposisi'] = $this->db->query("SELECT * FROM diaposisi WHERE id_suratmasuk = $id_suratmasuk ")->result();
+        $data['terus'] = $this->db->query("SELECT * FROM user WHERE hakakses != 'Admin Kepala'")->result();
+
 
         $data['sifat_surat'] = ['Penting', 'Biasa'];
         $data['klasifikasi_surat'] = ['Umum', 'Pemerintahan'];
@@ -178,6 +180,9 @@ class Validasi_surat_masuk extends CI_Controller
 
     public function lampiran($id_suratmasuk)
     {
+        $data['surat_kirim'] = $this->db->query("SELECT * FROM surat_masuk WHERE status = 1")->result();
+        $data['surat_keluar_baru'] = $this->db->query("SELECT * FROM surat_keluar WHERE status = 1")->result();
+        
 
         $data['surat_masuk'] = $this->db->query("SELECT * FROM surat_masuk WHERE id_suratmasuk = $id_suratmasuk")->row();
         $data['lampiran'] = $this->db->query("SELECT * FROM lampiran WHERE id_suratmasuk = $id_suratmasuk")->result();

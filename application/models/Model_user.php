@@ -1,25 +1,25 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class Model_pegawai extends CI_Model
+class Model_user extends CI_Model
 {
     public function tampil_data()
     {
-        return $this->db->get('pegawai');
+        return $this->db->get('user');
     }
 
-    public function tampil_pegawai()
+    public function tampil_user()
     {
         $tahun = date('Y');
-        return $this->db->get_where('pegawai', array('tahun' => $tahun));
+        return $this->db->get_where('user', array('tahun' => $tahun));
     }
 
-    public function tambah_pegawai($data, $table)
+    public function tambah_user($data, $table)
     {
         $this->db->insert($table, $data);
     }
 
-    public function edit_pegawai($where, $table)
+    public function edit_user($where, $table)
     {
         return $this->db->get_where($table, $where);
     }

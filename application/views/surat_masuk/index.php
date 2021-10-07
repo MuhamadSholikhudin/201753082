@@ -14,8 +14,8 @@
                                 <a href="<?= base_url('surat_masuk/tambah') ?>" class="btn btn-primary ">+ Surat Masuk</a>
 
                             <?php } elseif ($this->session->userdata('hakakses') == 'Admin Kepala') { ?>
-                            
-                                <?php } ?>
+
+                            <?php } ?>
 
                         </p>
                         <div class="panel panel-default mt-3">
@@ -80,11 +80,16 @@
 
                                                                 </td>
                                                                 <td class="center">
+                                                                    <?php if ($masuk->status == 0) { ?>
+                                                                        <a href="<?= base_url('surat_masuk/kirim/') . $masuk->id_suratmasuk ?>" type="button" class="btn btn-info"><i class="fa  fa-location-arrow fa-fw"></i> Kirim</a>
 
-                                                                    <a href="<?= base_url('surat_masuk/kirim/') . $masuk->id_suratmasuk ?>" type="button" class="btn btn-info"><i class="fa  fa-location-arrow fa-fw"></i> Kirim</a>
-                                                                    <a href="<?= base_url('surat_masuk/lampiran/') . $masuk->id_suratmasuk ?>" type="button" class="btn btn-default"><i class="fa fa-file-pdf-o fa-fw"></i>Lampiran</a>
-                                                                    <a href="<?= base_url('surat_masuk/edit/') . $masuk->id_suratmasuk ?>" type="button" class="btn btn-warning"><i class="fa fa-edit fa-fw"></i>Edit</a>
-                                                                    <a href="<?= base_url('surat_masuk/hapus/') . $masuk->id_suratmasuk ?>" type="button" class="btn btn-danger"><i class="fa fa-trash fa-fw"></i>Hapus</a>
+                                                                        <a href="<?= base_url('surat_masuk/edit/') . $masuk->id_suratmasuk ?>" type="button" class="btn btn-warning"><i class="fa fa-edit fa-fw"></i>Edit</a>
+                                                                        <a href="<?= base_url('surat_masuk/hapus/') . $masuk->id_suratmasuk ?>" type="button" class="btn btn-danger"><i class="fa fa-trash fa-fw"></i>Hapus</a>
+                                                                        <?php } elseif ($masuk->status >= 4) { ?>
+                                                                            <a href="<?= base_url('surat_masuk/lihat/') . $masuk->id_suratmasuk ?>" type="button" class="btn btn-success"><i class="fa fa-eye fa-fw"></i>Lihat</a>
+                                                                        
+                                                                        <?php } ?>
+                                                                        <a href="<?= base_url('surat_masuk/lampiran/') . $masuk->id_suratmasuk ?>" type="button" class="btn btn-default"><i class="fa fa-file-pdf-o fa-fw"></i>Lampiran</a>
                                                                 </td>
                                                             </tr>
                                                         <?php endforeach ?>

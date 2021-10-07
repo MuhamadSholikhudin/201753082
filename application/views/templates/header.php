@@ -126,19 +126,51 @@
           <?php } elseif ($this->session->userdata('hakakses') == 'Admin TU') { ?>
             <a class="dropdown-toggle " data-toggle="dropdown" href="#">
               <i class="fa fa-bell fa-fw"></i><span class="text-white">
+                <?php
+            $id_user = $this->session->userdata('id_user');
+
+                $hitung_masuk = $this->db->query("SELECT COUNT(surat_masuk.id_suratmasuk) as surat FROM surat_masuk JOIN disposisi WHERE surat_masuk.status = 4 AND disposisi.teruskan_ke = $id_user ")->row();
+
+                if ($hitung_masuk->surat > 0) {
+                  $n_masuk = $hitung_masuk->surat;
+                } else {
+                  $n_masuk = 0;
+                }
+
+
+                // $hitung_keluar = $this->db->query("SELECT COUNT(id_suratkeluar) as surat FROM surat_keluar WHERE status = 1")->row();
+
+                // if ($hitung_keluar->surat > 0) {
+                //   $n_keluar = $hitung_keluar->surat;
+                // } else {
+                //   $n_keluar = 0;
+                // }
+
+                echo  $n_masuk;
+                ?>
+
               </span>
               <b class="caret"></b>
             </a>
             <ul class="dropdown-menu dropdown-alerts">
+              <?php foreach ($surat_valid as $kir) : ?>
+                <li>
+                  <a href="<?= base_url('surat_masuk/lihat/' . $kir->id_suratmasuk) ?>">
+                    <div>
+                      <i class="fa fa-envelope-open fa-fw"></i>
+                      <?php
+                      $cari_instansi = $this->db->query("SELECT * FROM instansi WHERE id_instansi = $kir->id_instansi ")->row();
 
-              <li>
-                <a href="#">
-                  <div>
-                    <i class="fa fa-envelope fa-fw"></i> Message Sent
-                    <span class="pull-right text-muted small">4 minutes ago</span>
-                  </div>
-                </a>
-              </li>
+                      echo $cari_instansi->nama_instansi
+                      ?>
+                      <span class="pull-right text-muted small">Sudah Valid</span>
+                    </div>
+                  </a>
+                </li>
+              <?php endforeach ?>
+
+             
+
             </ul>
 
           <?php } elseif ($this->session->userdata('hakakses') == 'Admin Bidang') { ?>
@@ -182,9 +214,9 @@
             <li>
 
               <?php
-              $id_peg =  $this->session->userdata('id_pegawai');
+              $id_peg =  $this->session->userdata('id_user');
 
-              $cari_foto = $this->db->query("SELECT * FROM pegawai WHERE id_pegawai = $id_peg ")->row();
+              $cari_foto = $this->db->query("SELECT * FROM user WHERE id_user = $id_peg ")->row();
               ?>
               <img src="<?= base_url('uploads/') . $cari_foto->foto ?>" width="100%" height="150px" alt="" srcset="">
             </li>

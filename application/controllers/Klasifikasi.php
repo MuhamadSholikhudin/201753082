@@ -11,14 +11,19 @@ class Klasifikasi extends CI_Controller {
             $this->session->sess_destroy();
             redirect('auth/login');
         }
+
+      
+
     }
 
     public function index()
     {
         // echo 'klasifikasi';
         $data['klasifikasi'] = $this->db->query("SELECT * FROM klasifikasi")->result();
-
-        $this->load->view('templates/header');
+        $id_user = $this->session->userdata('id_user');
+        $data['surat_valid'] = $this->db->query("SELECT * FROM surat_masuk JOIN disposisi WHERE surat_masuk.status = 4 AND disposisi.teruskan_ke = $id_user ")->result();
+        
+        $this->load->view('templates/header' , $data);
         $this->load->view('templates/sidebar');
         $this->load->view('klasifikasi/index', $data);
         $this->load->view('templates/footer');
@@ -26,6 +31,8 @@ class Klasifikasi extends CI_Controller {
 
     public function tambah()
     {
+        $id_user = $this->session->userdata('id_user');
+        $data['surat_valid'] = $this->db->query("SELECT * FROM surat_masuk JOIN disposisi WHERE surat_masuk.status = 4 AND disposisi.teruskan_ke = $id_user ")->result();
         // echo 'oke';
         $this->load->view('templates/header');
         $this->load->view('templates/sidebar');
@@ -35,6 +42,8 @@ class Klasifikasi extends CI_Controller {
 
     public function edit($id_klasifikasi)
     {
+        $id_user = $this->session->userdata('id_user');
+        $data['surat_valid'] = $this->db->query("SELECT * FROM surat_masuk JOIN disposisi WHERE surat_masuk.status = 4 AND disposisi.teruskan_ke = $id_user ")->result();
         $data['klasifikasi'] = $this->db->query("SELECT * FROM klasifikasi WHERE id_klasifikasi = $id_klasifikasi ")->row();
         $data['hakakses'] = [1, 2, 3];
 

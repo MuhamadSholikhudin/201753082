@@ -142,22 +142,35 @@
                                                         </label>
                                                     </div>
                                                 </div>
+                                                <?php
+
+$disposisi = $this->db->query("SELECT * FROM disposisi WHERE id_suratmasuk = $surat_masuk->id_suratmasuk ");
+if($disposisi->num_rows() > 0){
+$tampil_disposisi = $disposisi->row();
+
+$terus_kan = $tampil_disposisi->terus_kan;
+                                                    $disposisi_catatan = $tampil_disposisi->catatan;
+}else{
+                                                    $terus_kan = 1;
+                                                    $disposisi_catatan = "";
+}
+?>
                                                 <div class="form-group">
                                                     <label>Di tujukan ke :</label>
                                                     <input class="form-control" type="hidden" name="id_suratmasuk" value="<?= $surat_masuk->id_suratmasuk ?>" placeholder="Nomer Urut Surat Masuk" required>
                                                     <select class="form-control" name="teruskan_ke" required>
                                                         <?php foreach ($terus as $ins) : ?>
-                                                            <?php if ($ins->id_pegawai == $disposisi->teruskan_ke) { ?>
-                                                                <option value="<?= $ins->id_pegawai ?>" selected><?= $ins->nama ?></option>
+                                                            <?php if ($ins->id_user == $disposisi->teruskan_ke) { ?>
+                                                                <option value="<?= $ins->id_user ?>" selected><?= $ins->nama ?></option>
                                                             <?php } else { ?>
-                                                                <option value="<?= $ins->id_pegawai ?>"><?= $ins->nama ?></option>
+                                                                <option value="<?= $ins->id_user ?>"><?= $ins->nama ?></option>
                                                             <?php } ?>
                                                         <?php endforeach; ?>
                                                     </select>
                                                 </div>
                                                 <div class="form-group">
                                                     <label>Catatan Disposisi :</label>
-                                                    <textarea class="form-control" rows="3" name="catatan_disposisi" required><?= $surat_masuk->catatan ?></textarea>
+                                                    <textarea class="form-control" rows="3" name="catatan_disposisi" required><?= $disposisi_catatan ?></textarea>
                                                 </div>
 
                                             </div>

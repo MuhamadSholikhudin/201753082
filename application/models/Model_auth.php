@@ -11,7 +11,7 @@ class Model_auth extends CI_Model{
                             // ->where('status', 'Aktif')
                             
                             ->limit(1)
-                            ->get('pegawai');
+                            ->get('user');
         if($result->num_rows() > 0){
             return $result->row();
         }else{

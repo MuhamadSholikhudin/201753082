@@ -16,11 +16,14 @@ class surat_masuk extends CI_Controller
 
     public function index()
     {
+        
         // $data['instansi'] = $this->db->query("SELECT * FROM instansi")->result();
         $data['surat_masuk'] = $this->db->query("SELECT * FROM surat_masuk")->result();
+        $id_user = $this->session->userdata('id_user');
+        $data['surat_valid'] = $this->db->query("SELECT * FROM surat_masuk JOIN disposisi WHERE surat_masuk.status = 4 AND disposisi.teruskan_ke = $id_user ")->result();
 
 
-        $this->load->view('templates/header');
+        $this->load->view('templates/header', $data);
         $this->load->view('templates/sidebar');
         $this->load->view('surat_masuk/index', $data);
         $this->load->view('templates/footer');
@@ -40,6 +43,8 @@ class surat_masuk extends CI_Controller
     public function edit($id_suratmasuk)
     {
         // echo 'oke';
+        $id_user = $this->session->userdata('id_user');
+        $data['surat_valid'] = $this->db->query("SELECT * FROM surat_masuk JOIN disposisi WHERE surat_masuk.status = 4 AND disposisi.teruskan_ke = $id_user ")->result();
         $data['surat_masuk'] = $this->db->query("SELECT * FROM surat_masuk WHERE id_suratmasuk = $id_suratmasuk")->row();
         $data['instansi'] = $this->db->query("SELECT * FROM instansi")->result();
 
@@ -49,6 +54,36 @@ class surat_masuk extends CI_Controller
         $this->load->view('templates/header');
         $this->load->view('templates/sidebar');
         $this->load->view('surat_masuk/edit', $data);
+        $this->load->view('templates/footer');
+    }
+
+    public function lihat($id_suratmasuk)
+    {
+        $id_user = $this->session->userdata('id_user');
+        $data['surat_valid'] = $this->db->query("SELECT * FROM surat_masuk JOIN disposisi WHERE surat_masuk.status = 4 AND disposisi.teruskan_ke = $id_user ")->result();
+
+        $tampil_surat_masuk = $this->db->query("SELECT * FROM surat_masuk WHERE id_suratmasuk = $id_suratmasuk")->row();
+
+        // echo $tampil_surat_masuk->status;
+        if ($tampil_surat_masuk->status == 4) {
+
+            $this->db->set('status', 5);
+            $this->db->where('id_suratmasuk', $id_suratmasuk);
+            $this->db->update('surat_masuk');
+
+        } else {
+            
+        }
+        // echo 'oke';
+        $data['surat_masuk'] = $this->db->query("SELECT * FROM surat_masuk WHERE id_suratmasuk = $id_suratmasuk")->row();
+        $data['instansi'] = $this->db->query("SELECT * FROM instansi")->result();
+
+        $data['sifat_surat'] = ['Penting', 'Biasa'];
+        $data['klasifikasi_surat'] = ['Umum', 'Pemerintahan'];
+
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/sidebar');
+        $this->load->view('surat_masuk/lihat', $data);
         $this->load->view('templates/footer');
     }
 

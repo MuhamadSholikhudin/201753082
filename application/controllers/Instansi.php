@@ -19,7 +19,9 @@ class Instansi extends CI_Controller {
         // echo 'instansi';
         $data['instansi'] = $this->db->query("SELECT * FROM instansi")->result();
 
-        $this->load->view('templates/header');
+        $id_user = $this->session->userdata('id_user');
+        $data['surat_valid'] = $this->db->query("SELECT * FROM surat_masuk JOIN disposisi WHERE surat_masuk.status = 4 AND disposisi.teruskan_ke = $id_user ")->result();
+        $this->load->view('templates/header', $data);
         $this->load->view('templates/sidebar');
         $this->load->view('instansi/index', $data);
         $this->load->view('templates/footer');
@@ -27,8 +29,9 @@ class Instansi extends CI_Controller {
 
     public function tambah()
     {
-        // echo 'oke';
-        $this->load->view('templates/header');
+        $id_user = $this->session->userdata('id_user');
+        $data['surat_valid'] = $this->db->query("SELECT * FROM surat_masuk JOIN disposisi WHERE surat_masuk.status = 4 AND disposisi.teruskan_ke = $id_user ")->result();
+        $this->load->view('templates/header', $data);
         $this->load->view('templates/sidebar');
         $this->load->view('instansi/tambah');
         $this->load->view('templates/footer');
@@ -39,8 +42,9 @@ class Instansi extends CI_Controller {
         $data['instansi'] = $this->db->query("SELECT * FROM instansi WHERE id_instansi = $id_instansi ")->row();
         $data['hakakses'] = [1, 2, 3];
 
-        // echo 'oke';
-        $this->load->view('templates/header');
+        $id_user = $this->session->userdata('id_user');
+        $data['surat_valid'] = $this->db->query("SELECT * FROM surat_masuk JOIN disposisi WHERE surat_masuk.status = 4 AND disposisi.teruskan_ke = $id_user ")->result();
+        $this->load->view('templates/header', $data);
         $this->load->view('templates/sidebar');
         $this->load->view('instansi/edit', $data);
         $this->load->view('templates/footer');

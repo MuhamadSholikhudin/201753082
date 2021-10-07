@@ -16,7 +16,7 @@ class surat_masuk_bidang extends CI_Controller
 
     public function index()
     {
-        $id_user = $this->session->userdata('id_pegawai');
+        $id_user = $this->session->userdata('id_user');
         // $data['instansi'] = $this->db->query("SELECT * FROM instansi")->result();
         $data['surat_masuk'] = $this->db->query("SELECT * FROM surat_masuk JOIN disposisi WHERE surat_masuk.status >= 4 AND disposisi.teruskan_ke = $id_user")->result();
 

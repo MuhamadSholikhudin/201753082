@@ -47,7 +47,7 @@
               <a href="<?= base_url('laporan/surat_masuk') ?>">Surat Keluar</a>
             </li>
             <li>
-              <a href="<?= base_url('laporan/pegawai') ?>">pegawai</a>
+              <a href="<?= base_url('laporan/user') ?>">user</a>
             </li>
           </ul>
           <!-- /.nav-second-level -->
@@ -68,7 +68,7 @@
           <a href="<?= base_url('instansi') ?>"><i class="fa fa-institution fa-fw"></i> Instansi</a>
         </li>
         <li>
-          <a href="<?= base_url('pegawai') ?>"><i class="fa fa-user fa-fw"></i> Pegawai</a>
+          <a href="<?= base_url('user') ?>"><i class="fa fa-user fa-fw"></i> user</a>
         </li>
         <li>
           <a href="#"><i class="fa fa-book fa-fw"></i>Laporan<span class="fa arrow"></span></a>
@@ -80,7 +80,7 @@
               <a href="<?= base_url('laporan/surat_masuk') ?>">Surat Keluar</a>
             </li>
             <li>
-              <a href="<?= base_url('laporan/pegawai') ?>">pegawai</a>
+              <a href="<?= base_url('laporan/user') ?>">user</a>
             </li>
           </ul>
           <!-- /.nav-second-level -->
