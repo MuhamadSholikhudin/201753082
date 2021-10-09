@@ -97,10 +97,23 @@ class surat_masuk extends CI_Controller
         $isi_ringkas = $this->input->post('isi_ringkas');
         $catatan = $this->input->post('catatan');
         $no_suratmasuk = $this->input->post('no_suratmasuk');
-        $index = $this->input->post('index');
+//        $index = $this->input->post('index');
         $tanggal_teruskan = $this->input->post('tanggal_teruskan');
-        $klasifikasi_surat = $this->input->post('klasifikasi_surat');
+        $id_klasifikasi = $this->input->post('id_klasifikasi');
         // $status = $this->input->post('status');
+        $id_pengguna = $this->input->post('id_pengguna');
+
+$file = $_FILES['file']['name'];
+
+            $config['allowed_types'] = 'gif|jpg|png|jpeg|pdf';
+//            $config['max_size']      = '2048';
+            $config['upload_path'] = './uploads/surat_masuk/';
+            $this->load->library('upload', $config);
+
+            if ($this->upload->do_upload('file')) {
+                $new_file = $this->upload->data('file_name');
+            }
+
 
         $data = array(
             'id_instansi'    =>  $id_instansi,
@@ -111,9 +124,9 @@ class surat_masuk extends CI_Controller
             'isi_ringkas' =>  $isi_ringkas,
             'catatan' =>  $catatan,
             'no_suratmasuk'    =>  $no_suratmasuk,
-            'index' =>  $index,
+            'file' =>  $new_file,
             'tanggal_teruskan' =>  $tanggal_teruskan,
-            'klasifikasi_surat' =>  $klasifikasi_surat,
+            'id_klasifikasi' =>  $id_klasifikasi,
             'status' =>  0
         );
 
@@ -121,7 +134,19 @@ class surat_masuk extends CI_Controller
         // $this->db->insert('surat_keluar', $data);
 
         $this->Model_surat_masuk->tambah_surat_masuk($data, 'surat_masuk');
-        redirect('admin_tu/surat_masuk/index');
+      
+        $cari_suratmasuk = $this->db->query("SELECT * FROM surat_masuk ORDER BY id_suratmasuk LIMIT 1")->row();  
+
+$datat = [
+'id_suratmasut' => $cari_masuk->id_suratmasuk,
+'id_sub_umum_pegawai' => $id_pengguna,
+'created_at' => date("Y-m-d H:i:s"),
+'updated_at' => date("Y-m-d H:i:s")
+];
+        $this->Model_mendata->tambah_nendatat($datat, 'mendata');
+      
+
+redirect('admin_tu/surat_masuk/index');
     }
 
     public function aksi_edit()
@@ -135,10 +160,25 @@ class surat_masuk extends CI_Controller
         $isi_ringkas = $this->input->post('isi_ringkas');
         $catatan = $this->input->post('catatan');
         $no_suratmasuk = $this->input->post('no_suratmasuk');
-        $index = $this->input->post('index');
+
         $tanggal_teruskan = $this->input->post('tanggal_teruskan');
-        $klasifikasi_surat = $this->input->post('klasifikasi_surat');
-        // $status = $this->input->post('status');
+        $id_klasifikasi = $this->input->post('id_klasifikasi');
+        
+$file = $_FILES['file']['name'];
+
+$cari_file = $thid->db->query("SELECT * FROM surat_masuk WHERE id_suratmasuk = $idsuratmasuk ")->row();
+
+
+            $config['allowed_types'] = 'gif|jpg|png|jpeg|pdf';
+//            $config['max_size']      = '2048';
+            $config['upload_path'] = './uploads/surat_masuk/';
+            $this->load->library('upload', $config);
+
+            if ($this->upload->do_upload('file')) {
+                $new_file = $this->upload->data('file_name');
+            }
+
+        $id_pengguna = $this->input->post('id_pengguna');
 
         $data = array(
             'id_instansi'    =>  $id_instansi,
@@ -149,9 +189,9 @@ class surat_masuk extends CI_Controller
             'isi_ringkas' =>  $isi_ringkas,
             'catatan' =>  $catatan,
             'no_suratmasuk'    =>  $no_suratmasuk,
-            'index' =>  $index,
+            'file' =>  $new_file,
             'tanggal_teruskan' =>  $tanggal_teruskan,
-            'klasifikasi_surat' =>  $klasifikasi_surat,
+            'id_klasifikasi' =>  $id_klasifikasi,
             'status' =>  0
         );
 
@@ -159,8 +199,19 @@ class surat_masuk extends CI_Controller
             'id_suratmasuk' => $id_suratmasuk
         ];
 
+datat = [
+'id_sub_umum_pegawai' => $id_pengguna,
+'updated_at' => date("Y-m-d H:i:s")
+];
+
+$wheret = [
+            'id_suratmasuk' => $id_suratmasuk
+        ];
+
         $this->Model_surat_masuk->update_data($where, $data, 'surat_masuk');
-        redirect('admin_tu/surat_masuk/index');
+               $this->Model_mendata->update_datat($wheret, $datat, 'mendata');
+   
+ redirect('admin_tu/surat_masuk/index');
     }
 
     public function lampiran($id_suratmasuk)
