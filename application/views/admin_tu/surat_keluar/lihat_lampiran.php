@@ -1,0 +1,56 @@
+<!-- Page Content -->
+<div id="page-wrapper">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">Lampiran Surat keluar</h1>
+                <?php if ($this->session->userdata('hakakses') == 'Admin TU') { ?>
+                    
+                    <a href="<?= base_url('admin_tu/surat_keluar/lampiran/') . $lampiran->id_suratkeluar ?>" class="btn btn-primary">Kembali</a>
+                    <?php } elseif($this->session->userdata('hakakses') == 'Admin Kepala') { ?>
+                        <a href="<?= base_url('validasi_surat_keluar/lampiran/') . $lampiran->id_suratkeluar ?>" class="btn btn-primary">Kembali</a>
+                <?php } ?>
+            </div>
+            <!-- /.col-lg-12 -->
+            <div class="col-lg-12">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <p>
+
+                        </p>
+                        <div class="panel panel-default mt-3">
+
+
+                            <div class="panel-heading">
+                                Data Lampiran Surat keluar
+                            </div>
+
+                            <!-- /.panel-heading -->
+                            <div class="panel-body">
+
+                                <!-- <img src="<?= base_url('uploads/lampiran/') . $lampiran->file_lampiran ?>" alt=""> -->
+                                <object data="<?= base_url('uploads/lampiran/') . $lampiran->file_lampiran ?>" type="" width="100%" height="1000px"></object>
+
+
+                            </div>
+
+                            <!-- /.panel-body -->
+                        </div>
+                        <!-- /.panel -->
+                    </div>
+                    <!-- /.col-lg-12 -->
+                </div>
+
+
+
+
+
+            </div>
+
+
+        </div>
+        <!-- /.row -->
+    </div>
+    <!-- /.container-fluid -->
+</div>
+<!-- /#page-wrapper -->

@@ -35,6 +35,12 @@
     <div class="container">
         <div class="row">
             <div class="col-md-4 col-md-offset-4">
+                <img class="img-responsive center-block" src="<?= base_url('assets/img/logobpbdpati.png') ?>" alt="">
+
+
+
+                <h3 class="text-center">SISTEM PENGELOLAAN SURAT </h3>
+                <h4 class="text-center">BPBD KABUPATEN PATI </h4>
                 <div class="login-panel panel panel-default">
                     <div class="panel-heading">
                         <h3 class="panel-title">Please Sign In</h3>

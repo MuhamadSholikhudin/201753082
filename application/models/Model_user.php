@@ -18,6 +18,10 @@ class Model_user extends CI_Model
     {
         $this->db->insert($table, $data);
     }
+    public function tambah_usert($datat, $table)
+    {
+        $this->db->insert($table, $datat);
+    }
 
     public function edit_user($where, $table)
     {

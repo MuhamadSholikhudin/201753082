@@ -31,23 +31,23 @@
 
       <?php if ($this->session->userdata('hakakses') == "Admin Kepala") { ?>
         <li>
-          <a href="<?= base_url('validasi_surat_masuk') ?>"><i class="fa  fa-envelope fa-fw"></i> Validasi Surat Masuk</a>
+          <a href="<?= base_url('admin_kepala/validasi_surat_masuk') ?>"><i class="fa  fa-envelope fa-fw"></i> Validasi Surat Masuk</a>
         </li>
         <li>
-          <a href="<?= base_url('persetujuan_surat_keluar') ?>"><i class="fa  fa-envelope-o fa-fw"></i>Persetujuan Surat Keluar</a>
+          <a href="<?= base_url('admin_kepala/persetujuan_surat_keluar') ?>"><i class="fa  fa-envelope-o fa-fw"></i>Persetujuan Surat Keluar</a>
         </li>
 
         <li>
           <a href="#"><i class="fa fa-book fa-fw"></i>Laporan<span class="fa arrow"></span></a>
           <ul class="nav nav-second-level">
             <li>
-              <a href="<?= base_url('laporan/surat_masuk') ?>">Surat Masuk</a>
+              <a href="<?= base_url('admin_kepala/laporan/surat_masuk') ?>">Surat Masuk</a>
             </li>
             <li>
-              <a href="<?= base_url('laporan/surat_masuk') ?>">Surat Keluar</a>
+              <a href="<?= base_url('admin_kepala/laporan/surat_masuk') ?>">Surat Keluar</a>
             </li>
             <li>
-              <a href="<?= base_url('laporan/user') ?>">user</a>
+              <a href="<?= base_url('admin_kepala/laporan/user') ?>">user</a>
             </li>
           </ul>
           <!-- /.nav-second-level -->
@@ -56,31 +56,31 @@
       <?php } elseif ($this->session->userdata('hakakses') == "Admin TU") { ?>
 
         <li>
-          <a href="<?= base_url('klasifikasi') ?>"><i class="fa fa-list fa-fw"></i> Klasifikasi</a>
+          <a href="<?= base_url('admin_tu/klasifikasi') ?>"><i class="fa fa-list fa-fw"></i> Klasifikasi</a>
         </li>
         <li>
-          <a href="<?= base_url('surat_masuk') ?>"><i class="fa  fa-envelope fa-fw"></i> Surat Masuk</a>
+          <a href="<?= base_url('admin_tu/surat_masuk') ?>"><i class="fa  fa-envelope fa-fw"></i> Surat Masuk</a>
         </li>
         <li>
-          <a href="<?= base_url('surat_keluar') ?>"><i class="fa  fa-envelope-o fa-fw"></i> Surat Keluar</a>
+          <a href="<?= base_url('admin_tu/surat_keluar') ?>"><i class="fa  fa-envelope-o fa-fw"></i> Surat Keluar</a>
         </li>
         <li>
-          <a href="<?= base_url('instansi') ?>"><i class="fa fa-institution fa-fw"></i> Instansi</a>
+          <a href="<?= base_url('admin_tu/instansi') ?>"><i class="fa fa-institution fa-fw"></i> Instansi</a>
         </li>
         <li>
-          <a href="<?= base_url('user') ?>"><i class="fa fa-user fa-fw"></i> user</a>
+          <a href="<?= base_url('admin_tu/user') ?>"><i class="fa fa-user fa-fw"></i> user</a>
         </li>
         <li>
           <a href="#"><i class="fa fa-book fa-fw"></i>Laporan<span class="fa arrow"></span></a>
           <ul class="nav nav-second-level">
             <li>
-              <a href="<?= base_url('laporan/surat_masuk') ?>">Surat Masuk</a>
+              <a href="<?= base_url('admin_tu/laporan/surat_masuk') ?>">Surat Masuk</a>
             </li>
             <li>
-              <a href="<?= base_url('laporan/surat_masuk') ?>">Surat Keluar</a>
+              <a href="<?= base_url('admin_tu/laporan/surat_masuk') ?>">Surat Keluar</a>
             </li>
             <li>
-              <a href="<?= base_url('laporan/user') ?>">user</a>
+              <a href="<?= base_url('admin_tu/laporan/user') ?>">user</a>
             </li>
           </ul>
           <!-- /.nav-second-level -->
@@ -88,10 +88,10 @@
 
       <?php } elseif ($this->session->userdata('hakakses') == "Admin Bidang") { ?>
         <li>
-          <a href="<?= base_url('surat_masuk_bidang') ?>"><i class="fa  fa-envelope fa-fw"></i> Surat Masuk</a>
+          <a href="<?= base_url('admin_bidang/surat_masuk') ?>"><i class="fa  fa-envelope fa-fw"></i> Surat Masuk</a>
         </li>
         <li>
-          <a href="<?= base_url('surat_keluar_bidang') ?>"><i class="fa  fa-envelope-o fa-fw"></i> Surat Keluar</a>
+          <a href="<?= base_url('admin_bidang/surat_keluar') ?>"><i class="fa  fa-envelope-o fa-fw"></i> Surat Keluar</a>
         </li>
       <?php } else { ?>
 
