@@ -32,7 +32,20 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
         <![endif]-->
 </head>
-
+<?php
+if($this->session->userdata('hakakses') == 'Admin TU'){
+$cari_pengguna = $this->db->query("SELECT * FROM sub_umum_pegawai WHERE id_user = $this->session->userdata('id_user')")->row();
+$id_pengguna = $cari_pengguna->id_sub_umum_pegawai;
+}elseif($this->session->userdata('hakakses') == 'Admin Kepala'){
+$cari_pengguna = $this->db->query("SELECT * FROM kepala_pelaksan WHERE id_user = $this->session->userdata('id_user')")->row();
+$id_pengguna = $cari_pengguna->id_kepala_pelaksana;
+}elseif($this->session->userdata('hakakses') == 'Admin Bidang'){
+$cari_pengguna = $this->db->query("SELECT * FROM kepala_bidang WHERE id_user = $this->session->userdata('id_user')")->row();
+$id_pengguna = $cari_pengguna->id_kepala_bidang;
+}else{
+redirect('auth/logout');
+}
+?>
 <body>
 
   <div id="wrapper">
@@ -214,11 +227,11 @@
             <li>
 
               <?php
-              $id_peg =  $this->session->userdata('id_user');
+ //             $id_peg =  $this->session->userdata('id_user');
 
-              $cari_foto = $this->db->query("SELECT * FROM user WHERE id_user = $id_peg ")->row();
+//              $cari_foto = $this->db->query("SELECT * FROM user WHERE id_user = $id_peg ")->row();
               ?>
-              <img src="<?= base_url('uploads/') . $cari_foto->foto ?>" width="100%" height="150px" alt="" srcset="">
+              <img src="<?= base_url('uploads/foto/') . $cari_pengguna->foto ?>" width="100%" height="150px" alt="" srcset="">
             </li>
             <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
             </li>
