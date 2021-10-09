@@ -175,7 +175,8 @@ $cari_file = $thid->db->query("SELECT * FROM surat_masuk WHERE id_suratmasuk = $
             $this->load->library('upload', $config);
 
             if ($this->upload->do_upload('file')) {
-                $new_file = $this->upload->data('file_name');
+unlink(FCPATH . 'uploads/surat_masuk/' . $cari_file->file);               
+ $new_file = $this->upload->data('file_name');
             }
 
         $id_pengguna = $this->input->post('id_pengguna');
