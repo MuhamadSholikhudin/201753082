@@ -18,6 +18,9 @@
                             <form role="form" action="<?= base_url('admin_tu/surat_masuk/aksi_tambah') ?>" method="POST" enctype="multipart/form-data">
                                 <div class="col-lg-6">
                                     <div class="form-group">
+
+                                        <input class="form-control" type="hidden" name="id_pengguna" value="<?= $id_pengguna ?>" required>
+                                    
                                         <label>Dari :</label>
                                         <select class="form-control" name="id_instansi" required>
                                             <?php foreach ($instansi as $ins) : ?>
@@ -56,10 +59,10 @@
                                         <label>Catatan :</label>
                                         <textarea class="form-control" rows="3" name="catatan" required></textarea>
                                     </div>
-                                    <!--  <div class="form-group">
-                                        <label>File input</label>
+                                      <div class="form-group">
+                                        <label>File Surat Masuk</label>
                                         <input type="file" name="file">
-                                    </div>  -->
+                                    </div>  
 
                                 </div>
                                 <!-- /.col-lg-6 (nested) -->
@@ -68,10 +71,10 @@
                                         <label>No Surat Masuk :</label>
                                         <input class="form-control" type="text" name="no_suratmasuk" required placeholder="Nomer Surat masuk">
                                     </div>
-                                    <div class="form-group">
+<!--                                   <div class="form-group">
                                         <label>Index :</label>
                                         <input class="form-control" placeholder="Indeks Surat" type="text" name="index" required>
-                                    </div>
+                                    </div> -->
                                     <div class="form-group">
                                         <label>Tanggal Diteruskan :</label>
                                         <input class="form-control" type="date" name="tanggal_teruskan" required>
@@ -79,10 +82,14 @@
 
                                     <div class="form-group">
                                         <label>Klasifikasi Surat :</label>
-                                        <select class="form-control" name="klasifikasi_surat" required>
-                                            <option value="Umum">Umum</option>
+                                        <select class="form-control" name="id_klasifikasi" required>
+                                          <?php foreach ($klasifikasi as $ins) : ?>
+                                                <option value="<?= $ins->id_klasifikasi ?>"><?= $ins->klasifikasi ?></option>
+                                            <?php endforeach; ?>
+<!--
+  <option value="Umum">Umum</option>
                                             <option value="Pemerintahan">Pemerintahan</option>
-
+-->
                                         </select>
                                     </div>
 
