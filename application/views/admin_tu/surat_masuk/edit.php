@@ -20,7 +20,9 @@
                                     <div class="form-group">
                                         <label>Dari :</label>
                                         <input class="form-control" type="hidden" name="id_suratmasuk" value="<?= $surat_masuk->id_suratmasuk ?>" placeholder="Nomer Urut Surat Masuk" required>
-                                        <select class="form-control" name="id_instansi" required>
+                                        
+                                       <input class="form-control" type="hidden" name="id_pengguna" value="<?= $id_pengguna ?>">
+<select class="form-control" name="id_instansi" required>
                                             <?php foreach ($instansi as $ins) : ?>
                                                 <?php if ($ins->id_instansi == $surat_masuk->id_instansi) { ?>
                                                     <option value="<?= $ins->id_instansi ?>" selected><?= $ins->nama_instansi ?></option>
@@ -66,10 +68,10 @@
                                         <label>Catatan :</label>
                                         <textarea class="form-control" rows="3" name="catatan" required><?= $surat_masuk->catatan ?></textarea>
                                     </div>
-                                    <!--  <div class="form-group">
-                                        <label>File input</label>
+                                      <div class="form-group">
+                                        <label>File Surat masuk</label>
                                         <input type="file" name="file">
-                                    </div>  -->
+                                    </div>  
 
                                 </div>
                                 <!-- /.col-lg-6 (nested) -->
@@ -78,10 +80,10 @@
                                         <label>No Surat Masuk :</label>
                                         <input class="form-control" type="text" name="no_suratmasuk" value="<?= $surat_masuk->no_suratmasuk ?>" required placeholder="Nomer Surat masuk">
                                     </div>
-                                    <div class="form-group">
+                                   <!-- <div class="form-group">
                                         <label>Index :</label>
                                         <input class="form-control" placeholder="Indeks Surat" type="text" name="index" value="<?= $surat_masuk->index ?>" required>
-                                    </div>
+                                    </div> -->
                                     <div class="form-group">
                                         <label>Tanggal Diteruskan :</label>
                                         <input class="form-control" type="date" name="tanggal_teruskan" value="<?= $surat_masuk->tanggal_teruskan ?>" required>
@@ -89,7 +91,7 @@
 
                                     <div class="form-group">
                                         <label>Klasifikasi Surat :</label>
-                                        <select class="form-control" name="klasifikasi_surat" required>
+                                        <select class="form-control" name="id_klasifikasi" required>
                                             <?php foreach ($klasifikasi_surat as $klasifikasi) : ?>
                                                 <?php if ($klasifikasi == $surat_masuk->klasifikasi_surat) { ?>
                                                     <option value="<?= $klasifikasi ?>" selected><?= $klasifikasi ?></option>
