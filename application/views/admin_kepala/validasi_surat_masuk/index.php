@@ -49,7 +49,7 @@
                                                                     echo $cari_instansi->nama_instansi
                                                                     ?>
                                                                 </td>
-                                                                <td><?= $masuk->klasifikasi_surat ?></td>
+                                                                <td><?= $masuk->id_klasifikasi ?></td>
                                                                 <td><?= $masuk->perihal ?></td>
                                                                 <td class="center"><?= $masuk->tanggal_surat ?></td>
                                                                 <td class="center">

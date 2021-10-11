@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class surat_masuk_bidang extends CI_Controller
+class Surat_masuk extends CI_Controller
 {
     public function __construct()
     {
@@ -18,10 +18,11 @@ class surat_masuk_bidang extends CI_Controller
     {
         $id_user = $this->session->userdata('id_user');
         // $data['instansi'] = $this->db->query("SELECT * FROM instansi")->result();
-        $data['surat_masuk'] = $this->db->query("SELECT * FROM surat_masuk JOIN disposisi WHERE surat_masuk.status >= 4 AND disposisi.teruskan_ke = $id_user")->result();
+        $data['surat_masuk'] = $this->db->query("SELECT * FROM surat_masuk JOIN disposisi WHERE surat_masuk.status >= 4 AND disposisi.id_user = $id_user")->result();
+        $data['surat_valid'] = $this->db->query("SELECT * FROM surat_masuk JOIN disposisi WHERE surat_masuk.status = 4 AND disposisi.id_user = $id_user ")->result();
 
 
-        $this->load->view('templates/header');
+        $this->load->view('templates/header', $data);
         $this->load->view('templates/sidebar');
         $this->load->view('admin_bidang/surat_masuk/index', $data);
         $this->load->view('templates/footer');
@@ -40,14 +41,21 @@ class surat_masuk_bidang extends CI_Controller
 
     public function lihat($id_suratmasuk)
     {
-        // echo 'oke';
+        $id_user = $this->session->userdata('id_user');
+
+        $data['surat_valid'] = $this->db->query("SELECT * FROM surat_masuk JOIN disposisi WHERE surat_masuk.status = 4 AND disposisi.id_user = $id_user ")->result();
         $data['surat_masuk'] = $this->db->query("SELECT * FROM surat_masuk WHERE id_suratmasuk = $id_suratmasuk")->row();
         $data['instansi'] = $this->db->query("SELECT * FROM instansi")->result();
+
+        $this->db->set('status', 5);
+        $this->db->where('id_suratmasuk', $id_suratmasuk);
+        $this->db->update('surat_masuk');
+
 
         $data['sifat_surat'] = ['Penting', 'Biasa'];
         $data['klasifikasi_surat'] = ['Umum', 'Pemerintahan'];
 
-        $this->load->view('templates/header');
+        $this->load->view('templates/header', $data);
         $this->load->view('templates/sidebar');
         $this->load->view('admin_bidang/surat_masuk/lihat', $data);
         $this->load->view('templates/footer');

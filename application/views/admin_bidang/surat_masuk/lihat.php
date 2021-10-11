@@ -7,7 +7,18 @@
             </div>
             <!-- /.col-lg-12 -->
             <div class="col-lg-12">
-
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        File Surat masuk
+                    </div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <embed src="<?= base_url('uploads/surat_masuk/') . $surat_masuk->file ?>" width="100%" height="1000" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         Form Lihat Surat masuk
@@ -77,10 +88,7 @@
                                     <label>No Surat Masuk :</label>
                                     <input class="form-control" type="text" name="no_suratmasuk" disabled value="<?= $surat_masuk->no_suratmasuk ?>" required placeholder="Nomer Surat masuk">
                                 </div>
-                                <div class="form-group">
-                                    <label>Index :</label>
-                                    <input class="form-control" placeholder="Indeks Surat" disabled type="text" name="index" value="<?= $surat_masuk->index ?>" required>
-                                </div>
+
                                 <div class="form-group">
                                     <label>Tanggal Diteruskan :</label>
                                     <input class="form-control" type="date" name="tanggal_teruskan" disabled value="<?= $surat_masuk->tanggal_teruskan ?>" required>
@@ -99,7 +107,7 @@
                                     </select>
                                 </div>
 
-                                <a href="<?= base_url('surat_masuk_bidang') ?>" class="btn btn-danger ">Kembali</a>
+                                <a href="<?= base_url('admin_bidang/surat_masuk') ?>" class="btn btn-danger ">Kembali</a>
 
                                 <!-- /.col-lg-6 (nested) -->
                             </div>

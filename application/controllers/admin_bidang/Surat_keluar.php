@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class Surat_keluar_bidang extends CI_Controller
+class Surat_keluar extends CI_Controller
 {
 
     public function __construct()
@@ -24,7 +24,7 @@ class Surat_keluar_bidang extends CI_Controller
 
         $this->load->view('templates/header');
         $this->load->view('templates/sidebar');
-        $this->load->view('surat_keluar_bidang/index', $data);
+        $this->load->view('admin_bidang/surat_keluar/index', $data);
         $this->load->view('templates/footer');
     }
 
@@ -32,8 +32,9 @@ class Surat_keluar_bidang extends CI_Controller
     {
         // echo 'oke';
         $data['instansi'] = $this->db->query("SELECT * FROM instansi")->result();
+        $data['klasifikasi'] = $this->db->query("SELECT * FROM klasifikasi")->result();
 
-        $this->load->view('templates/header');
+        $this->load->view('templates/header', $data);
         $this->load->view('templates/sidebar');
         $this->load->view('admin_bidang/surat_keluar/tambah', $data);
         $this->load->view('templates/footer');
@@ -48,7 +49,7 @@ class Surat_keluar_bidang extends CI_Controller
         $data['sifat_surat'] = ['Penting', 'Biasa'];
         $data['klasifikasi_surat'] = ['Umum', 'Pemerintahan'];
 
-        $this->load->view('templates/header');
+        $this->load->view('templates/header', $data);
         $this->load->view('templates/sidebar');
         $this->load->view('admin_bidang/surat_keluar/edit', $data);
         $this->load->view('templates/footer');
@@ -63,10 +64,11 @@ class Surat_keluar_bidang extends CI_Controller
         $sifat_surat = $this->input->post('sifat_surat');
         $isi_ringkas = $this->input->post('isi_ringkas');
         $catatan = $this->input->post('catatan');
-        $no_suratkeluar = $this->input->post('no_suratkeluar');
-        $index = $this->input->post('index');
-        $tanggal_teruskan = $this->input->post('tanggal_teruskan');
-        $klasifikasi_surat = $this->input->post('klasifikasi_surat');
+        $id_klasifikasi = $this->input->post('id_klasifikasi');
+
+        $id_pengguna = $this->input->post('id_pengguna');
+        // $index = $this->input->post('index');
+        // $tanggal_teruskan = $this->input->post('tanggal_teruskan');
         // $status = $this->input->post('status');
 
         $data = array(
@@ -77,17 +79,23 @@ class Surat_keluar_bidang extends CI_Controller
             'sifat_surat'    =>  $sifat_surat,
             'isi_ringkas' =>  $isi_ringkas,
             'catatan' =>  $catatan,
-            'no_suratkeluar'    =>  $no_suratkeluar,
-            'index' =>  $index,
-            'tanggal_teruskan' =>  $tanggal_teruskan,
-            'klasifikasi_surat' =>  $klasifikasi_surat,
+            'id_klasifikasi' =>  $id_klasifikasi,
             'status' =>  0
+            // 'no_suratkeluar'    =>  $no_suratkeluar,
+            // 'index' =>  $index,
+            // 'tanggal_teruskan' =>  $tanggal_teruskan,
         );
-
-        // var_dump($data);
-        // $this->db->insert('surat_keluar', $data);
-
         $this->Model_surat_keluar->tambah_surat_keluar($data, 'surat_keluar');
+
+        $cari_suratkeluar = $this->db->query("SELECT * FROM surat_keluar ORDER BY id_suratkeluar DESC LIMIT 1")->row();
+
+        $datat = [
+            'id_suratkeluar' => $cari_suratkeluar->id_suratkeluar,
+            'id_kepala_bidang' => $id_pengguna,
+            'created_at' => date("Y-m-d H:i:s"),
+            'updated_at' => date("Y-m-d H:i:s")
+        ];
+        $this->Model_membuat->tambah_membuatt($datat, 'membuat');
         redirect('admin_bidang/surat_keluar/index');
     }
 
@@ -101,10 +109,9 @@ class Surat_keluar_bidang extends CI_Controller
         $sifat_surat = $this->input->post('sifat_surat');
         $isi_ringkas = $this->input->post('isi_ringkas');
         $catatan = $this->input->post('catatan');
-        $no_suratkeluar = $this->input->post('no_suratkeluar');
-        $index = $this->input->post('index');
-        $tanggal_teruskan = $this->input->post('tanggal_teruskan');
-        $klasifikasi_surat = $this->input->post('klasifikasi_surat');
+        $id_klasifikasi = $this->input->post('id_klasifikasi');
+
+        $id_pengguna = $this->input->post('id_pengguna');
         // $status = $this->input->post('status');
 
         $data = array(
@@ -115,18 +122,22 @@ class Surat_keluar_bidang extends CI_Controller
             'sifat_surat'    =>  $sifat_surat,
             'isi_ringkas' =>  $isi_ringkas,
             'catatan' =>  $catatan,
-            'no_suratkeluar'    =>  $no_suratkeluar,
-            'index' =>  $index,
-            'tanggal_teruskan' =>  $tanggal_teruskan,
-            'klasifikasi_surat' =>  $klasifikasi_surat,
+            'id_klasifikasi' =>  $id_klasifikasi,
             'status' =>  0
         );
-
         $where = [
             'id_suratkeluar' => $id_suratkeluar
         ];
-
         $this->Model_surat_keluar->update_data($where, $data, 'surat_keluar');
+
+        $datat = [
+            'id_kepala_bidang' => $id_pengguna,
+            'created_at' => date("Y-m-d H:i:s")
+        ];
+        $wheret = [
+            'id_suratkeluar' => $id_suratkeluar
+        ];
+        $this->Model_membuat->update_datat($wheret, $datat, 'Model_membuat');
         redirect('admin_bidang/surat_keluar/index');
     }
 

@@ -28,7 +28,6 @@
                                                             <th class="sorting" tabindex="0" aria-controls="dataTables-example" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending" style="width: 209px;">Klasifikasi</th>
                                                             <th class="sorting" tabindex="0" aria-controls="dataTables-example" rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending" style="width: 192px;">Perihal</th>
                                                             <th class="sorting" tabindex="0" aria-controls="dataTables-example" rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending" style="width: 141px;">Tanggal Masuk</th>
-                                                            <th class="sorting" tabindex="0" aria-controls="dataTables-example" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending" style="width: 10px;">Diterima</th>
                                                             <th class="sorting" tabindex="0" aria-controls="dataTables-example" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending">Aksi</th>
                                                         </tr>
                                                     </thead>
@@ -45,31 +44,12 @@
                                                                     echo $cari_instansi->nama_instansi
                                                                     ?>
                                                                 </td>
-                                                                <td><?= $masuk->klasifikasi_surat ?></td>
+                                                                <td><?= $masuk->id_klasifikasi ?></td>
                                                                 <td><?= $masuk->perihal ?></td>
                                                                 <td class="center"><?= $masuk->tanggal_surat ?></td>
+      
                                                                 <td class="center">
-                                                                    <?php if ($masuk->status == 0) {
-                                                                        echo 'Surat baru';
-                                                                    } elseif ($masuk->status == 1) {
-                                                                        echo 'Surat Terkirim Kepala Pelaksana';
-                                                                    } elseif ($masuk->status == 2) {
-                                                                        echo 'Surat sudah di baca';
-                                                                    } elseif ($masuk->status == 3) {
-                                                                        echo 'Surat tidak di validasi kepala pelaksana';
-                                                                    } elseif ($masuk->status == 4) {
-                                                                        echo 'Surat di validasi oleh kepala pelaksana';
-                                                                    } elseif ($masuk->status == 5) {
-                                                                        echo 'Surat sudah ke instansi terkait';
-                                                                    } else {
-                                                                        echo 'Surat informasi';
-                                                                    } ?>
-
-                                                                </td>
-                                                                <td class="center">
-
-                                                                    <a href="<?= base_url('surat_masuk_bidang/lampiran/') . $masuk->id_suratmasuk ?>" type="button" class="btn btn-default"><i class="fa fa-file-pdf-o fa-fw"></i>Lampiran</a>
-                                                                    <a href="<?= base_url('surat_masuk_bidang/lihat/') . $masuk->id_suratmasuk ?>" type="button" class="btn btn-success"><i class="fa fa-eye fa-fw"></i> lihat</a>
+                                                                    <a href="<?= base_url('admin_bidang/surat_masuk/lihat/') . $masuk->id_suratmasuk ?>" type="button" class="btn btn-success"><i class="fa fa-eye fa-fw"></i> lihat</a>
                                                                 </td>
                                                             </tr>
                                                         <?php endforeach ?>

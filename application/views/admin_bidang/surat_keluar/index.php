@@ -10,25 +10,15 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <p>
-                            <?php if ($this->session->userdata('hakakses') == 'Admin TU') { ?>
-                                <a href="<?= base_url('surat_keluar/tambah') ?>" class="btn btn-primary ">+ Surat keluar</a>
-
-                            <?php } elseif ($this->session->userdata('hakakses') == 'Admin Kepala') { ?>
-                            
-                                <?php } ?>
-
+                                <a href="<?= base_url('admin_bidang/surat_keluar/tambah') ?>" class="btn btn-primary ">+ Surat keluar</a>
                         </p>
                         <div class="panel panel-default mt-3">
                             <div class="panel-heading">
                                 Data Surat keluar
                             </div>
 
-
-
-
                             <!-- /.panel-heading -->
                             <div class="panel-body">
-
 
                                 <div class="table-responsive">
                                     <div id="dataTables-example_wrapper" class="dataTables_wrapper form-inline dt-bootstrap no-footer">

@@ -34,22 +34,21 @@
 </head>
 
 <body>
-<?php
+  <?php
   $id_user = $this->session->userdata('id_user');
-  if($this->session->userdata('hakakses') == 'Admin TU'){
-        $cari_pengguna = $this->db->query("SELECT * FROM sub_umum_pegawai WHERE id_user = $id_user ")->row();
-         $id_pengguna = $cari_pengguna->id_sub_umum_pegawai;
-        
-  }elseif($this->session->userdata('hakakses') == 'Admin Kepala'){
-        $cari_pengguna = $this->db->query("SELECT * FROM kepala_pelaksan WHERE id_user = $id_user")->row();
-        $id_pengguna = $cari_pengguna->id_kepala_pelaksana;
-  }elseif($this->session->userdata('hakakses') == 'Admin Bidang'){
-        $cari_pengguna = $this->db->query("SELECT * FROM kepala_bidang WHERE id_user = $id_user")->row();
-      $id_pengguna = $cari_pengguna->id_kepala_bidang;
-  }else{
-      redirect('auth/logout');
+  if ($this->session->userdata('hakakses') == 'Admin TU') {
+    $cari_pengguna = $this->db->query("SELECT * FROM sub_umum_pegawai WHERE id_user = $id_user ")->row();
+    $id_pengguna = $cari_pengguna->id_sub_umum_pegawai;
+  } elseif ($this->session->userdata('hakakses') == 'Admin Kepala') {
+    $cari_pengguna = $this->db->query("SELECT * FROM kepala_pelaksana WHERE id_user = $id_user")->row();
+    $id_pengguna = $cari_pengguna->id_kepala_pelaksana;
+  } elseif ($this->session->userdata('hakakses') == 'Admin Bidang') {
+    $cari_pengguna = $this->db->query("SELECT * FROM kepala_bidang WHERE id_user = $id_user")->row();
+    $id_pengguna = $cari_pengguna->id_kepala_bidang;
+  } else {
+    redirect('auth/logout');
   }
-?>
+  ?>
   <div id="wrapper">
 
     <!-- Navigation -->
@@ -79,7 +78,7 @@
             <a class="dropdown-toggle " data-toggle="dropdown" href="#">
               <i class="fa fa-bell fa-fw"></i><span class="text-white">
                 <?php
-                $hitung_masuk = $this->db->query("SELECT COUNT(id_suratmasuk) as surat FROM surat_masuk WHERE status = 1")->row();
+                $hitung_masuk = $this->db->query("SELECT COUNT(id_suratmasuk) as surat FROM surat_masuk WHERE status = 2")->row();
 
                 if ($hitung_masuk->surat > 0) {
                   $n_masuk = $hitung_masuk->surat;
@@ -88,7 +87,7 @@
                 }
 
 
-                $hitung_keluar = $this->db->query("SELECT COUNT(id_suratkeluar) as surat FROM surat_keluar WHERE status = 1")->row();
+                $hitung_keluar = $this->db->query("SELECT COUNT(id_suratkeluar) as surat FROM surat_keluar WHERE status = 2")->row();
 
                 if ($hitung_keluar->surat > 0) {
                   $n_keluar = $hitung_keluar->surat;
@@ -105,7 +104,7 @@
             <ul class="dropdown-menu dropdown-alerts">
               <?php foreach ($surat_kirim as $kir) : ?>
                 <li>
-                  <a href="<?= base_url('validasi_surat_masuk/lihat/' . $kir->id_suratmasuk) ?>">
+                  <a href="<?= base_url('admin_kepala/validasi_surat_masuk/lihat/' . $kir->id_suratmasuk) ?>">
                     <div>
                       <i class="fa fa-envelope-open fa-fw"></i>
                       <?php
@@ -122,7 +121,7 @@
               <?php foreach ($surat_keluar_baru as $bar) : ?>
 
                 <li>
-                  <a href="<?= base_url('persetujuan_surat_keluar/lihat/' . $bar->id_suratkeluar) ?>">
+                  <a href="<?= base_url('admin_kepala/persetujuan_surat_keluar/lihat/' . $bar->id_suratkeluar) ?>">
                     <div>
                       <i class="fa fa-envelope fa-fw"></i>
                       <?php
@@ -142,7 +141,7 @@
             <a class="dropdown-toggle " data-toggle="dropdown" href="#">
               <i class="fa fa-bell fa-fw"></i><span class="text-white">
                 <?php
-            $id_user = $this->session->userdata('id_user');
+                $id_user = $this->session->userdata('id_user');
 
                 $hitung_masuk = $this->db->query("SELECT COUNT(surat_masuk.id_suratmasuk) as surat FROM surat_masuk JOIN disposisi WHERE surat_masuk.status = 4 AND disposisi.id_user = $id_user ")->row();
 
@@ -170,7 +169,7 @@
             <ul class="dropdown-menu dropdown-alerts">
               <?php foreach ($surat_valid as $kir) : ?>
                 <li>
-                  <a href="<?= base_url('surat_masuk/lihat/' . $kir->id_suratmasuk) ?>">
+                  <a href="<?= base_url('admin_tu/surat_masuk/lihat/' . $kir->id_suratmasuk) ?>">
                     <div>
                       <i class="fa fa-envelope-open fa-fw"></i>
                       <?php
@@ -184,26 +183,55 @@
                 </li>
               <?php endforeach ?>
 
-             
+
 
             </ul>
 
           <?php } elseif ($this->session->userdata('hakakses') == 'Admin Bidang') { ?>
             <a class="dropdown-toggle " data-toggle="dropdown" href="#">
               <i class="fa fa-bell fa-fw"></i><span class="text-white">
+                <?php
+                $id_user = $this->session->userdata('id_user');
+
+                $hitung_masuk = $this->db->query("SELECT COUNT(surat_masuk.id_suratmasuk) as surat FROM surat_masuk JOIN disposisi WHERE surat_masuk.status = 4 AND disposisi.id_user = $id_user ")->row();
+
+                if ($hitung_masuk->surat > 0) {
+                  $n_masuk = $hitung_masuk->surat;
+                } else {
+                  $n_masuk = 0;
+                }
+
+
+                // $hitung_keluar = $this->db->query("SELECT COUNT(id_suratkeluar) as surat FROM surat_keluar WHERE status = 1")->row();
+
+                // if ($hitung_keluar->surat > 0) {
+                //   $n_keluar = $hitung_keluar->surat;
+                // } else {
+                //   $n_keluar = 0;
+                // }
+
+                echo  $n_masuk;
+                ?>
+
               </span>
               <b class="caret"></b>
             </a>
             <ul class="dropdown-menu dropdown-alerts">
+              <?php foreach ($surat_valid as $kir) : ?>
+                <li>
+                  <a href="<?= base_url('admin_bidang/surat_masuk/lihat/' . $kir->id_suratmasuk) ?>">
+                    <div>
+                      <i class="fa fa-envelope-open fa-fw"></i>
+                      <?php
+                      $cari_instansi = $this->db->query("SELECT * FROM instansi WHERE id_instansi = $kir->id_instansi ")->row();
 
-              <li>
-                <a href="#">
-                  <div>
-                    <i class="fa fa-envelope fa-fw"></i> Message Sent
-                    <span class="pull-right text-muted small">4 minutes ago</span>
-                  </div>
-                </a>
-              </li>
+                      echo $cari_instansi->nama_instansi
+                      ?>
+                      <span class="pull-right text-muted small">Sudah Valid</span>
+                    </div>
+                  </a>
+                </li>
+              <?php endforeach ?>
             </ul>
 
 
@@ -229,9 +257,9 @@
             <li>
 
               <?php
- //             $id_peg =  $this->session->userdata('id_user');
+              //             $id_peg =  $this->session->userdata('id_user');
 
-//              $cari_foto = $this->db->query("SELECT * FROM user WHERE id_user = $id_peg ")->row();
+              //              $cari_foto = $this->db->query("SELECT * FROM user WHERE id_user = $id_peg ")->row();
               ?>
               <img src="<?= base_url('uploads/foto/') . $cari_pengguna->foto ?>" width="100%" height="150px" alt="" srcset="">
             </li>

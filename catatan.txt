@@ -1,9 +1,9 @@
 
 surat masuk level 
 0 = artinya surat baru di buat
-1 = surat surat dikirim dari ka sub umum dan pegawai kepada kepala pelaksanan
-2 = surat masuk sudah di baca oleh kepala pelaksana 
-3 = surat masuk tidak di validasi oleh kepala pelaksana 
+1 = surat masuk tidak di validasi oleh kepala pelaksana 
+2 = surat surat dikirim dari ka sub umum dan pegawai kepada kepala pelaksanan
+3 = surat masuk sudah di baca oleh kepala pelaksana 
 4 = surat masuk sudah di validasi oleh kepala pelaksana
 
 

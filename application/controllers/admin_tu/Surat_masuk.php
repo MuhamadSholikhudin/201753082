@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class surat_masuk extends CI_Controller
+class Surat_masuk extends CI_Controller
 {
     public function __construct()
     {
@@ -54,8 +54,9 @@ class surat_masuk extends CI_Controller
 
         $data['sifat_surat'] = ['Penting', 'Biasa'];
         $data['klasifikasi_surat'] = ['Umum', 'Pemerintahan'];
+        $data['klasifikasi'] = $this->db->query("SELECT * FROM klasifikasi")->result();
 
-        $this->load->view('templates/header');
+        $this->load->view('templates/header', $data);
         $this->load->view('templates/sidebar');
         $this->load->view('admin_tu/surat_masuk/edit', $data);
         $this->load->view('templates/footer');
@@ -101,11 +102,11 @@ class surat_masuk extends CI_Controller
         $isi_ringkas = $this->input->post('isi_ringkas');
         $catatan = $this->input->post('catatan');
         $no_suratmasuk = $this->input->post('no_suratmasuk');
-//        $index = $this->input->post('index');
         $tanggal_teruskan = $this->input->post('tanggal_teruskan');
         $id_klasifikasi = $this->input->post('id_klasifikasi');
-        // $status = $this->input->post('status');
         $id_pengguna = $this->input->post('id_pengguna');
+        //        $index = $this->input->post('index');
+        // $status = $this->input->post('status');
 
          $file = $_FILES['file']['name'];
 
@@ -117,7 +118,6 @@ class surat_masuk extends CI_Controller
             if ($this->upload->do_upload('file')) {
                 $new_file = $this->upload->data('file_name');
             }
-
 
         $data = array(
             'id_instansi'    =>  $id_instansi,
@@ -136,8 +136,8 @@ class surat_masuk extends CI_Controller
 
         // var_dump($data);
         // $this->db->insert('surat_keluar', $data);
-
         $this->Model_surat_masuk->tambah_surat_masuk($data, 'surat_masuk');
+
       
         $cari_suratmasuk = $this->db->query("SELECT * FROM surat_masuk ORDER BY id_suratmasuk DESC LIMIT 1")->row();
 
@@ -150,7 +150,7 @@ class surat_masuk extends CI_Controller
         $this->Model_mendata->tambah_mendatat($datat, 'mendata');
       
 
-redirect('admin_tu/surat_masuk/index');
+     redirect('admin_tu/surat_masuk/index');
     }
 
     public function aksi_edit()
@@ -171,8 +171,6 @@ redirect('admin_tu/surat_masuk/index');
         $file = $_FILES['file']['name'];
 
         $cari_file = $this->db->query("SELECT * FROM surat_masuk WHERE id_suratmasuk = $id_suratmasuk ")->row();
-
-
             $config['allowed_types'] = 'gif|jpg|png|jpeg|pdf';
 //            $config['max_size']      = '2048';
             $config['upload_path'] = './uploads/surat_masuk/';
@@ -196,8 +194,7 @@ redirect('admin_tu/surat_masuk/index');
             'no_suratmasuk'    =>  $no_suratmasuk,
             'file' =>  $new_file,
             'tanggal_teruskan' =>  $tanggal_teruskan,
-            'id_klasifikasi' =>  $id_klasifikasi,
-            'status' =>  0
+            'id_klasifikasi' =>  $id_klasifikasi
         );
 
         $where = [
@@ -208,13 +205,12 @@ redirect('admin_tu/surat_masuk/index');
             'id_sub_umum_pegawai' => $id_pengguna,
             'updated_at' => date("Y-m-d H:i:s")
         ];
-
         $wheret = [
             'id_suratmasuk' => $id_suratmasuk
         ];
 
         $this->Model_surat_masuk->update_data($where, $data, 'surat_masuk');
-               $this->Model_mendata->update_datat($wheret, $datat, 'mendata');
+        $this->Model_mendata->update_datat($wheret, $datat, 'mendata');
    
  redirect('admin_tu/surat_masuk/index');
     }
@@ -306,11 +302,8 @@ redirect('admin_tu/surat_masuk/index');
 
     public function kirim($id_suratmasuk){
         $cari_surat = $this->db->query("SELECT * FROM surat_masuk WHERE id_suratmasuk = $id_suratmasuk")->row();
-
         $data = [
-           
-            // 'status' => $cari_surat->status
-            'status' => 1
+            'status' => 2
         ];
 
         $where = [

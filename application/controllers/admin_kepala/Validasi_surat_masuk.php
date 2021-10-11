@@ -29,18 +29,20 @@ class Validasi_surat_masuk extends CI_Controller
 
     public function lihat($id_suratmasuk)
     {
+        $data['surat_kirim'] = $this->db->query("SELECT * FROM surat_masuk WHERE status = 2")->result();
+        $data['surat_keluar_baru'] = $this->db->query("SELECT * FROM surat_keluar WHERE status = 2")->result();
+
         $tampil_surat_masuk = $this->db->query("SELECT * FROM surat_masuk WHERE id_suratmasuk = $id_suratmasuk")->row();
 
         if($tampil_surat_masuk->status == 4){
         } else {
-            $this->db->set('status', 2);
+            $this->db->set('status', 3);
             $this->db->where('id_suratmasuk', $id_suratmasuk);
             $this->db->update('surat_masuk');
         }        
 
         $data['surat_masuk'] = $this->db->query("SELECT * FROM surat_masuk WHERE id_suratmasuk = $id_suratmasuk")->row();
-        $data['surat_kirim'] = $this->db->query("SELECT * FROM surat_masuk WHERE status = 2")->result();
-        $data['surat_keluar_baru'] = $this->db->query("SELECT * FROM surat_keluar WHERE status = 2")->result();
+
         
         $data['instansi'] = $this->db->query("SELECT * FROM instansi")->result();
 
@@ -67,113 +69,99 @@ class Validasi_surat_masuk extends CI_Controller
         $checkbox = $this->input->post("cek");
         $vekk = implode(",", $checkbox);
 
-        echo $vekk;
-        echo "<br>";
+        // echo $vekk;
+        // echo "<br>";
 
         $pecah = explode(",", $vekk);
 
-        print_r($pecah);
-        echo "<br>";
+        // print_r($pecah);
+        // echo "<br>";
 
         $no = 0;
         foreach ($pecah as $ve) :
             $no += $ve;
         endforeach;
-        echo $no;
+        // echo $no;
 
         if ($no < 4) {
-            $cari_validasi = $this->db->query("SEELCT * FROM disposisi WHERE id_suratmasuk = $id_suratmasuk");  
-            if($cari_validasi->num_rows() > 0){
+            $cari_validasi = $this->db->query("SELECT * FROM disposisi WHERE id_suratmasuk = $id_suratmasuk");
+            if ($cari_validasi->num_rows() > 0) {
                 $tampil_disposisi = $cari_validasi->row();
                 $teruskan_ke = $this->input->post('teruskan_ke');
                 $id_pengguna = $this->input->post('id_pengguna');
                 $catatan = $this->input->post('catatan_disposisi');
 
-                $datat = [
-                    // 'status' => $cari_surat->status
-                    'id_suratmasuk' => $id_suratmasuk,
-                    'id_kepala_pelaksana' => $id_pengguna,
-                    'id_user' => $teruskan_ke,
-                 //   'created_at' => date('Y-m-d H:i:s'),
-                    'update_at' => date('Y-m-d H:i:s'),
-                    'catatan' => $catatan
-   
-                ];
-
                 $data = [
                     'status' => 1
                 ];
-
                 $where = [
                     'id_suratmasuk' => $id_suratmasuk
                 ];
 
+                $datat = [
+                    'id_suratmasuk' => $id_suratmasuk,
+                    'id_kepala_pelaksana' => $id_pengguna,
+                    'id_user' => $teruskan_ke,
+                    'updated_at' => date('Y-m-d H:i:s'),
+                    'catatan' => $catatan
+                 
+                ];
                 $wheret = [
                     'id_disposisi' => $tampil_disposisi->id_disposisi
                 ];
 
                 $this->Model_surat_masuk->update_data($where, $data, 'surat_masuk');
                 $this->Model_disposisi->update_datat($wheret, $datat, 'disposisi');
-
-            }else{
+            } else {
                 $teruskan_ke = $this->input->post('teruskan_ke');
-                // $tanggal_validasi = $this->input->post('tanggal_validasi');
                 $catatan = $this->input->post('catatan_disposisi');
-               
- $datat = [
-                    // 'status' => $cari_surat->status
-                    'id_suratmasuk' => $id_suratmasuk,
-                    'id_kepala_pelaksana' => $id_pengguna,
-                    'id_user' => $teruskan_ke,
-                    'created_at' => date('Y-m-d H:i:s'),
-                    'update_at' => date('Y-m-d H:i:s'),
-                    'catatan' => $catatan
-                ];
+                // $tanggal_validasi = $this->input->post('tanggal_validasi');
 
                 $data = [
                     'status' => 1
                 ];
-
                 $where = [
                     'id_suratmasuk' => $id_suratmasuk
                 ];
 
-                $this->Model_disposisi->tambah_disposisit($datat, 'disposisi');
+                $datat = [
+                    'id_suratmasuk' => $id_suratmasuk,
+                    'id_kepala_pelaksana' => $id_pengguna,
+                    'id_user' => $teruskan_ke,
+                    'created_at' => date('Y-m-d H:i:s'),
+                    'updated_at' => date('Y-m-d H:i:s'),
+                    'catatan' => $catatan
+                    
+                ];
+
                 $this->Model_surat_masuk->update_data($where, $data, 'surat_masuk');
-
+                $this->Model_disposisi->tambah_disposisit($datat, 'disposisi');
             }
-
-            redirect('validasi_surat_masuk/');
-
+            redirect('admin_kepala/validasi_surat_masuk/');
 
         } elseif ($no == 4) {
-
-            $cari_validasi = $this->db->query("SEELCT * FROM disposisi WHERE id_suratmasuk = $id_suratmasuk");  
-            if($cari_validasi->num_rows() > 0){
+            $cari_validasi = $this->db->query("SELECT * FROM disposisi WHERE id_suratmasuk = $id_suratmasuk ");
+            if ($cari_validasi->num_rows() > 0) {
                 $tampil_disposisi = $cari_validasi->row();
                 $teruskan_ke = $this->input->post('teruskan_ke');
-                $id_pengguna = $this->input->post('id_pengguna');
                 $catatan = $this->input->post('catatan_disposisi');
-
-                $datat = [
-                    // 'status' => $cari_surat->status
-                    'id_suratmasuk' => $id_suratmasuk,
-                    'id_kepala_pelaksana' => $id_pengguna,
-                    'id_user' => $teruskan_ke,
-                 //   'created_at' => date('Y-m-d H:i:s'),
-                    'update_at' => date('Y-m-d H:i:s'),
-                    'catatan' => $catatan
-   
-                ];
+                $id_pengguna = $this->input->post('id_pengguna');
+                // $id_disposisi = $this->input->post('id_disposisi');
 
                 $data = [
-                    'status' => 5
+                    'status' => 4
                 ];
-
                 $where = [
                     'id_suratmasuk' => $id_suratmasuk
                 ];
 
+                $datat = [
+                    'id_suratmasuk' => $id_suratmasuk,
+                    'id_kepala_pelaksana' => $id_pengguna,
+                    'id_user' => $teruskan_ke,
+                    'created_at' => date('Y-m-d H:i:s'),
+                    'catatan' => $catatan
+                ];
                 $wheret = [
                     'id_disposisi' => $tampil_disposisi->id_disposisi
                 ];
@@ -181,35 +169,32 @@ class Validasi_surat_masuk extends CI_Controller
                 $this->Model_surat_masuk->update_data($where, $data, 'surat_masuk');
                 $this->Model_disposisi->update_datat($wheret, $datat, 'disposisi');
 
-            }else{
+            } else {
                 $teruskan_ke = $this->input->post('teruskan_ke');
-                // $tanggal_validasi = $this->input->post('tanggal_validasi');
                 $catatan = $this->input->post('catatan_disposisi');
-               
+                $id_pengguna = $this->input->post('id_pengguna');
+       
                 $datat = [
-                    // 'status' => $cari_surat->status
                     'id_suratmasuk' => $id_suratmasuk,
                     'id_kepala_pelaksana' => $id_pengguna,
                     'id_user' => $teruskan_ke,
                     'created_at' => date('Y-m-d H:i:s'),
-                    'update_at' => date('Y-m-d H:i:s'),
+                    'updated_at' => date('Y-m-d H:i:s'),
                     'catatan' => $catatan
+                    
                 ];
 
                 $data = [
-                    'status' => 5
+                    'status' => 4
                 ];
-
                 $where = [
                     'id_suratmasuk' => $id_suratmasuk
                 ];
 
                 $this->Model_disposisi->tambah_disposisit($datat, 'disposisi');
                 $this->Model_surat_masuk->update_data($where, $data, 'surat_masuk');
-
             }
-            redirect('validasi_surat_masuk/');
-
+            redirect('admin_kepala/validasi_surat_masuk/');
         }
     }
 

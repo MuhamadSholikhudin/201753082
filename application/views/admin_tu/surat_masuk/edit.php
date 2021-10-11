@@ -2,14 +2,27 @@
 <div id="page-wrapper">
     <div class="container-fluid">
         <div class="row">
-         <div class="col-lg-12">
-                <embed  src="<?= base_url('uploads/surat_masuk/') . $surat_masuk->file ?>" width="100%" height="800" />
-            </div>
+
+
             <div class="col-lg-12">
                 <h1 class="page-header">Edit Surat Masuk</h1>
             </div>
             <!-- /.col-lg-12 -->
             <div class="col-lg-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        File Surat masuk
+                    </div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <embed src="<?= base_url('uploads/surat_masuk/') . $surat_masuk->file ?>" width="100%" height="1000" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
 
                 <div class="panel panel-default">
                     <div class="panel-heading">
@@ -22,26 +35,24 @@
                                 <div class="col-lg-6">
                                     <div class="form-group">
                                         <label>Dari :</label>
-                                        <input class="form-control" type="hidden" name="id_suratmasuk" value="<?= $surat_masuk->id_suratmasuk ?>" placeholder="Nomer Urut Surat Masuk" required>
-
-<?php
-  $id_user = $this->session->userdata('id_user');
-  if($this->session->userdata('hakakses') == 'Admin TU'){
-        $cari_pengguna = $this->db->query("SELECT * FROM sub_umum_pegawai WHERE id_user = $id_user ")->row();
-         $id_pengguna = $cari_pengguna->id_sub_umum_pegawai;
-        
-  }elseif($this->session->userdata('hakakses') == 'Admin Kepala'){
-        $cari_pengguna = $this->db->query("SELECT * FROM kepala_pelaksan WHERE id_user = $id_user")->row();
-        $id_pengguna = $cari_pengguna->id_kepala_pelaksana;
-  }elseif($this->session->userdata('hakakses') == 'Admin Bidang'){
-        $cari_pengguna = $this->db->query("SELECT * FROM kepala_bidang WHERE id_user = $id_user")->row();
-      $id_pengguna = $cari_pengguna->id_kepala_bidang;
-  }else{
-      redirect('auth/logout');
-  }
-?>                                        
-                                       <input class="form-control" type="hidden" name="id_pengguna" value="<?= $id_pengguna ?>">
-<select class="form-control" name="id_instansi" required>
+                                        <input class="form-control" type="hidden" name="id_suratmasuk" value="<?= $surat_masuk->id_suratmasuk ?>" required>
+                                        <?php
+                                        $id_user = $this->session->userdata('id_user');
+                                        if ($this->session->userdata('hakakses') == 'Admin TU') {
+                                            $cari_pengguna = $this->db->query("SELECT * FROM sub_umum_pegawai WHERE id_user = $id_user ")->row();
+                                            $id_pengguna = $cari_pengguna->id_sub_umum_pegawai;
+                                        } elseif ($this->session->userdata('hakakses') == 'Admin Kepala') {
+                                            $cari_pengguna = $this->db->query("SELECT * FROM kepala_pelaksan WHERE id_user = $id_user")->row();
+                                            $id_pengguna = $cari_pengguna->id_kepala_pelaksana;
+                                        } elseif ($this->session->userdata('hakakses') == 'Admin Bidang') {
+                                            $cari_pengguna = $this->db->query("SELECT * FROM kepala_bidang WHERE id_user = $id_user")->row();
+                                            $id_pengguna = $cari_pengguna->id_kepala_bidang;
+                                        } else {
+                                            redirect('auth/logout');
+                                        }
+                                        ?>
+                                        <input class="form-control" type="hidden" name="id_pengguna" value="<?= $id_pengguna ?>">
+                                        <select class="form-control" name="id_instansi" required>
                                             <?php foreach ($instansi as $ins) : ?>
                                                 <?php if ($ins->id_instansi == $surat_masuk->id_instansi) { ?>
                                                     <option value="<?= $ins->id_instansi ?>" selected><?= $ins->nama_instansi ?></option>
@@ -87,10 +98,10 @@
                                         <label>Catatan :</label>
                                         <textarea class="form-control" rows="3" name="catatan" required><?= $surat_masuk->catatan ?></textarea>
                                     </div>
-                                      <div class="form-group">
+                                    <div class="form-group">
                                         <label>File Surat masuk</label>
-                                        <input type="file" name="file">
-                                    </div>  
+                                        <input type="file" name="file" required>
+                                    </div>
 
                                 </div>
                                 <!-- /.col-lg-6 (nested) -->
@@ -99,7 +110,7 @@
                                         <label>No Surat Masuk :</label>
                                         <input class="form-control" type="text" name="no_suratmasuk" value="<?= $surat_masuk->no_suratmasuk ?>" required placeholder="Nomer Surat masuk">
                                     </div>
-                                   <!-- <div class="form-group">
+                                    <!-- <div class="form-group">
                                         <label>Index :</label>
                                         <input class="form-control" placeholder="Indeks Surat" type="text" name="index" value="<?= $surat_masuk->index ?>" required>
                                     </div> -->
@@ -109,13 +120,15 @@
                                     </div>
 
                                     <div class="form-group">
-                                        <label>Klasifikasi Surat :</label>
+                                        <label>Klasifikasi Surat :
+
+                                        </label>
                                         <select class="form-control" name="id_klasifikasi" required>
-                                            <?php foreach ($klasifikasi_surat as $klasifikasi) : ?>
-                                                <?php if ($klasifikasi == $surat_masuk->id_klasifikasi) { ?>
-                                                    <option value="<?= $id_klasifikasi ?>" selected><?= $klasifikasi ?></option>
+                                            <?php foreach ($klasifikasi as $kla) : ?>
+                                                <?php if ($kla->id_klasifikasi == $surat_masuk->id_klasifikasi) { ?>
+                                                    <option value="<?= $kla->id_klasifikasi ?>" selected><?= $kla->klasifikasi ?></option>
                                                 <?php } else { ?>
-                                                    <option value="<?= $id_klasifikasi ?>"><?= $klasifikasi ?></option>
+                                                    <option value="<?= $kla->id_klasifikasi ?>"><?= $kla->klasifikasi ?></option>
                                                 <?php } ?>
                                             <?php endforeach; ?>
                                         </select>

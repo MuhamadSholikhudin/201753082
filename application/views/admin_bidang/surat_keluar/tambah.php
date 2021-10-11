@@ -15,10 +15,10 @@
 
                     <div class="panel-body">
                         <div class="row">
-                            <form role="form" action="<?= base_url('surat_keluar/aksi_tambah') ?>" method="POST" enctype="multipart/form-data">
+                            <form role="form" action="<?= base_url('admin_bidang/surat_keluar/aksi_tambah') ?>" method="POST" enctype="multipart/form-data">
                                 <div class="col-lg-6">
                                     <div class="form-group">
-                                        <label>Dari :</label>
+                                        <label>Kepada :</label>
                                         <select class="form-control" name="id_instansi" required>
                                             <?php foreach ($instansi as $ins) : ?>
                                                 <option value="<?= $ins->id_instansi ?>"><?= $ins->nama_instansi ?></option>
@@ -26,10 +26,10 @@
                                         </select>
                                     </div>
 
-                                    <div class="form-group">
+                                    <!-- <div class="form-group">
                                         <label>No Urut:</label>
                                         <input class="form-control" type="text" name="no_urut" placeholder="Nomer Urut Surat keluar" required>
-                                    </div>
+                                    </div> -->
                                     <div class="form-group">
                                         <label>Tanggal Surat:</label>
                                         <input class="form-control" type="date" name="tanggal_surat" required>
@@ -47,15 +47,7 @@
                                         </select>
                                     </div>
 
-                                    <div class="form-group">
-                                        <label>Isi Ringkas :</label>
-                                        <textarea class="form-control" rows="3" name="isi_ringkas" required></textarea>
-                                    </div>
 
-                                    <div class="form-group">
-                                        <label>Catatan :</label>
-                                        <textarea class="form-control" rows="3" name="catatan" required></textarea>
-                                    </div>
                                     <!--  <div class="form-group">
                                         <label>File input</label>
                                         <input type="file" name="file">
@@ -65,23 +57,33 @@
                                 <!-- /.col-lg-6 (nested) -->
                                 <div class="col-lg-6">
                                     <div class="form-group">
-                                        <label>No Surat keluar :</label>
-                                        <input class="form-control" type="text" name="no_suratkeluar" required placeholder="Nomer Surat keluar">
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Index :</label>
-                                        <input class="form-control" placeholder="Indeks Surat" type="text" name="index" required>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Tanggal Diteruskan :</label>
-                                        <input class="form-control" type="date" name="tanggal_teruskan" required>
+                                        <label>Isi Ringkas :</label>
+                                        <textarea class="form-control" rows="3" name="isi_ringkas" required></textarea>
                                     </div>
 
                                     <div class="form-group">
+                                        <label>Catatan :</label>
+                                        <textarea class="form-control" rows="3" name="catatan" required></textarea>
+                                    </div>
+                                    <!-- <div class="form-group">
+                                        <label>No Surat keluar :</label>
+                                        <input class="form-control" type="text" name="no_suratkeluar" required placeholder="Nomer Surat keluar">
+                                    </div> -->
+                                    <!-- <div class="form-group">
+                                        <label>Index :</label>
+                                        <input class="form-control" placeholder="Indeks Surat" type="text" name="index" required>
+                                    </div> -->
+                                    <!-- <div class="form-group">
+                                        <label>Tanggal Diteruskan :</label>
+                                        <input class="form-control" type="date" name="tanggal_teruskan" required>
+                                    </div> -->
+
+                                    <div class="form-group">
                                         <label>Klasifikasi Surat :</label>
-                                        <select class="form-control" name="klasifikasi_surat" required>
-                                            <option value="Umum">Umum</option>
-                                            <option value="Pemerintahan">Pemerintahan</option>
+                                        <select class="form-control" name="id_klasifikasi" required>
+                                            <?php foreach ($klasifikasi as $ins) : ?>
+                                                <option value="<?= $ins->id_klasifikasi ?>"><?= $ins->klasifikasi ?></option>
+                                            <?php endforeach; ?>
 
                                         </select>
                                     </div>

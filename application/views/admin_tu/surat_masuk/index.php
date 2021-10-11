@@ -72,11 +72,11 @@
                                                                     <?php if ($masuk->status == 0) {
                                                                         echo 'Surat baru';
                                                                     } elseif ($masuk->status == 1) {
-                                                                        echo 'Surat Terkirim Kepala Pelaksana';
+                                                                        echo 'Dikembalikan oleh kepala pelaksana';
                                                                     } elseif ($masuk->status == 2) {
-                                                                        echo 'Surat sudah di baca';
+                                                                        echo 'Surat Terkirim ke kepala pelaksana';
                                                                     } elseif ($masuk->status == 3) {
-                                                                        echo 'Surat tidak di validasi kepala pelaksana';
+                                                                        echo 'Surat sudah di baca kepala pelaksana';
                                                                     } elseif ($masuk->status == 4) {
                                                                         echo 'Surat di validasi oleh kepala pelaksana';
                                                                     } elseif ($masuk->status == 5) {
