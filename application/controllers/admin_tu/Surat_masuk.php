@@ -32,9 +32,13 @@ class surat_masuk extends CI_Controller
     public function tambah()
     {
         // echo 'oke';
+         $id_user = $this->session->userdata('id_user');
+        $data['surat_valid'] = $this->db->query("SELECT * FROM surat_masuk JOIN disposisi WHERE surat_masuk.status = 4 AND disposisi.id_user = $id_user ")->result();
+        
         $data['instansi'] = $this->db->query("SELECT * FROM instansi")->result();
+        $data['klasifikasi'] = $this->db->query("SELECT * FROM klasifikasi")->result();
 
-        $this->load->view('templates/header');
+        $this->load->view('templates/header', $data);
         $this->load->view('templates/sidebar');
         $this->load->view('admin_tu/surat_masuk/tambah', $data);
         $this->load->view('templates/footer');
@@ -135,15 +139,15 @@ $file = $_FILES['file']['name'];
 
         $this->Model_surat_masuk->tambah_surat_masuk($data, 'surat_masuk');
       
-        $cari_suratmasuk = $this->db->query("SELECT * FROM surat_masuk ORDER BY id_suratmasuk LIMIT 1")->row();  
+        $cari_suratmasuk = $this->db->query("SELECT * FROM surat_masuk ORDER BY id_suratmasuk LIMIT 1")->row();
 
-$datat = [
-'id_suratmasut' => $cari_masuk->id_suratmasuk,
-'id_sub_umum_pegawai' => $id_pengguna,
-'created_at' => date("Y-m-d H:i:s"),
-'updated_at' => date("Y-m-d H:i:s")
-];
-        $this->Model_mendata->tambah_nendatat($datat, 'mendata');
+        $datat = [
+            'id_suratmasuk' => $cari_suratmasuk->id_suratmasuk,
+            'id_sub_umum_pegawai' => $id_pengguna,
+            'created_at' => date("Y-m-d H:i:s"),
+            'updated_at' => date("Y-m-d H:i:s")
+        ];
+        $this->Model_mendata->tambah_mendatat($datat, 'mendata');
       
 
 redirect('admin_tu/surat_masuk/index');
@@ -163,10 +167,10 @@ redirect('admin_tu/surat_masuk/index');
 
         $tanggal_teruskan = $this->input->post('tanggal_teruskan');
         $id_klasifikasi = $this->input->post('id_klasifikasi');
-        
-$file = $_FILES['file']['name'];
 
-$cari_file = $thid->db->query("SELECT * FROM surat_masuk WHERE id_suratmasuk = $idsuratmasuk ")->row();
+        $file = $_FILES['file']['name'];
+
+        $cari_file = $this->db->query("SELECT * FROM surat_masuk WHERE id_suratmasuk = $id_suratmasuk ")->row();
 
 
             $config['allowed_types'] = 'gif|jpg|png|jpeg|pdf';
@@ -174,10 +178,10 @@ $cari_file = $thid->db->query("SELECT * FROM surat_masuk WHERE id_suratmasuk = $
             $config['upload_path'] = './uploads/surat_masuk/';
             $this->load->library('upload', $config);
 
-            if ($this->upload->do_upload('file')) {
-unlink(FCPATH . 'uploads/surat_masuk/' . $cari_file->file);               
- $new_file = $this->upload->data('file_name');
-            }
+        if ($this->upload->do_upload('file')) {
+            unlink(FCPATH . 'uploads/surat_masuk/' . $cari_file->file);
+            $new_file = $this->upload->data('file_name');
+        }
 
         $id_pengguna = $this->input->post('id_pengguna');
 
@@ -200,12 +204,12 @@ unlink(FCPATH . 'uploads/surat_masuk/' . $cari_file->file);
             'id_suratmasuk' => $id_suratmasuk
         ];
 
-datat = [
-'id_sub_umum_pegawai' => $id_pengguna,
-'updated_at' => date("Y-m-d H:i:s")
-];
+        $datat = [
+            'id_sub_umum_pegawai' => $id_pengguna,
+            'updated_at' => date("Y-m-d H:i:s")
+        ];
 
-$wheret = [
+        $wheret = [
             'id_suratmasuk' => $id_suratmasuk
         ];
 

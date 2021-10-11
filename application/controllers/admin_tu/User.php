@@ -30,19 +30,21 @@ class User extends CI_Controller {
     {
         $id_user = $this->session->userdata('id_user');
         $data['surat_valid'] = $this->db->query("SELECT * FROM surat_masuk JOIN disposisi WHERE surat_masuk.status = 4 AND disposisi.id_user = $id_user ")->result();
-        
+        $data['status'] = ['Aktif', 'Tidak Aktif'];
+
         $this->load->view('templates/header', $data);
         $this->load->view('templates/sidebar');
-        $this->load->view('admin_tu/user/tambah');
+        $this->load->view('admin_tu/user/tambah', $data);
         $this->load->view('templates/footer');
     }
 
     public function edit($id_user)
     {
-        $id_user = $this->session->userdata('id_user');
-        $data['surat_valid'] = $this->db->query("SELECT * FROM surat_masuk JOIN disposisi WHERE surat_masuk.status = 4 AND disposisi.id_user = $id_user ")->result();
+        $id_userr = $this->session->userdata('id_user');
+        $data['surat_valid'] = $this->db->query("SELECT * FROM surat_masuk JOIN disposisi WHERE surat_masuk.status = 4 AND disposisi.id_user = $id_userr ")->result();
         
         $user = $this->db->query("SELECT * FROM user WHERE id_user = $id_user ")->row();
+        $data['t_user'] = $this->db->query("SELECT * FROM user WHERE id_user = $id_user ")->row();
 
         if($user->hakakses == 'Admin TU'){
             $data['user'] = $this->db->query("SELECT * FROM sub_umum_pegawai WHERE id_user = $id_user ")->row();
@@ -53,6 +55,7 @@ class User extends CI_Controller {
         }
         
         $data['pegawai'] = [1, 2, 3];
+        $data['status'] = ['Aktif', 'Tidak Aktif'];
 
         // echo 'oke';
         $this->load->view('templates/header', $data);
@@ -128,22 +131,22 @@ class User extends CI_Controller {
 
 
         $id_user = $this->input->post('id_user');
-        $nama = $this->input->post('nama');
-        $nip = $this->input->post('nip');
-        // $foto = $this->input->post('foto');
-        $jabatan = $this->input->post('jabatan');
-        $hakakses = $this->input->post('hakakses');
         $username = $this->input->post('username');
         $password = $this->input->post('password');
-
-            $cari_foto = $this->db->query("SELECT * FROM user WHERE id_user = $id_user")->row();
+        $hakakses = $this->input->post('hakakses');
+        $status = $this->input->post('status');
+        
+        $nama = $this->input->post('nama');
+        $nip = $this->input->post('nip');
+        $jabatan = $this->input->post('jabatan');
+        // $id_user = $this->input->post('id_user');
+        
+        $cari_foto = $this->db->query("SELECT * FROM user WHERE id_user = $id_user")->row();
 
         $foto = $_FILES['foto']['name'];
-        // $file_ket_ijin = $_FILES['file_ket_ijin']['name'];
-
         $config['allowed_types'] = 'gif|jpg|png|jpeg|pdf';
         $config['max_size']      = '2048';
-        $config['upload_path'] = './uploads/';
+        $config['upload_path'] = './uploads/foto/';
         $this->load->library('upload', $config);
 
         if ($this->upload->do_upload('foto')) {
@@ -154,18 +157,33 @@ class User extends CI_Controller {
         }
 
         $data = array(
-            //utang dagang 
+            'username'    =>  $username,
+            'password'    =>  $password,
+            'status' => $status
+        );
+        $where = [
+            'id_user' => $id_user
+        ];
+
+        $datat = array(
             'nama'    =>  $nama,
             'nip' =>  $nip,
             'foto' =>  $new_foto,
-            'jabatan'    =>  $jabatan,
-            'hakakses'    =>  $hakakses,
-            'username'    =>  $username,
-            'password'    =>  $password
+            'jabatan'    =>  $jabatan
         );
-        $this->db->set($data);
-        $this->db->where('id_user', $id_user);
-        $this->db->update('user');
+        $wheret = [
+            'id_user' => $id_user
+        ];
+
+        $this->Model_user->update_data($where, $data, 'user');
+        if ($hakakses == 'Admin TU') {
+            $this->Model_sub_umum_pegawai->update_datat($wheret, $datat, 'sub_umum_pegawai');
+        } elseif ($hakakses == 'Admin Kepala') {
+            $this->Model_kepala_pelaksana->update_datat($wheret, $datat, 'kepala_pelaksana');
+        } elseif ($hakakses == 'Admin Bidang') {
+            $this->Model_kepala_bidang->update_datat($wheret, $datat, 'kepala_bidang');
+        }
+
         redirect('admin_tu/user/index');
 
         }

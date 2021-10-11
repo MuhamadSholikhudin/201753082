@@ -32,28 +32,30 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
         <![endif]-->
 </head>
-<?php
-if($this->session->userdata('hakakses') == 'Admin TU'){
-$cari_pengguna = $this->db->query("SELECT * FROM sub_umum_pegawai WHERE id_user = $this->session->userdata('id_user')")->row();
-$id_pengguna = $cari_pengguna->id_sub_umum_pegawai;
-}elseif($this->session->userdata('hakakses') == 'Admin Kepala'){
-$cari_pengguna = $this->db->query("SELECT * FROM kepala_pelaksan WHERE id_user = $this->session->userdata('id_user')")->row();
-$id_pengguna = $cari_pengguna->id_kepala_pelaksana;
-}elseif($this->session->userdata('hakakses') == 'Admin Bidang'){
-$cari_pengguna = $this->db->query("SELECT * FROM kepala_bidang WHERE id_user = $this->session->userdata('id_user')")->row();
-$id_pengguna = $cari_pengguna->id_kepala_bidang;
-}else{
-redirect('auth/logout');
-}
-?>
-<body>
 
+<body>
+<?php
+  $id_user = $this->session->userdata('id_user');
+  if($this->session->userdata('hakakses') == 'Admin TU'){
+        $cari_pengguna = $this->db->query("SELECT * FROM sub_umum_pegawai WHERE id_user = $id_user ")->row();
+         $id_pengguna = $cari_pengguna->id_sub_umum_pegawai;
+        
+  }elseif($this->session->userdata('hakakses') == 'Admin Kepala'){
+        $cari_pengguna = $this->db->query("SELECT * FROM kepala_pelaksan WHERE id_user = $id_user")->row();
+        $id_pengguna = $cari_pengguna->id_kepala_pelaksana;
+  }elseif($this->session->userdata('hakakses') == 'Admin Bidang'){
+        $cari_pengguna = $this->db->query("SELECT * FROM kepala_bidang WHERE id_user = $id_user")->row();
+      $id_pengguna = $cari_pengguna->id_kepala_bidang;
+  }else{
+      redirect('auth/logout');
+  }
+?>
   <div id="wrapper">
 
     <!-- Navigation -->
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
       <div class="navbar-header">
-        <a class="navbar-brand" href="<?= base_url('dashboard') ?>">Surat BPBD</a>
+        <a class="navbar-brand" href="<?= base_url('dashboard') ?>"> Surat BPBD</a>
       </div>
 
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -142,7 +144,7 @@ redirect('auth/logout');
                 <?php
             $id_user = $this->session->userdata('id_user');
 
-                $hitung_masuk = $this->db->query("SELECT COUNT(surat_masuk.id_suratmasuk) as surat FROM surat_masuk JOIN disposisi WHERE surat_masuk.status = 4 AND disposisi.teruskan_ke = $id_user ")->row();
+                $hitung_masuk = $this->db->query("SELECT COUNT(surat_masuk.id_suratmasuk) as surat FROM surat_masuk JOIN disposisi WHERE surat_masuk.status = 4 AND disposisi.id_user = $id_user ")->row();
 
                 if ($hitung_masuk->surat > 0) {
                   $n_masuk = $hitung_masuk->surat;

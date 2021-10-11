@@ -44,14 +44,23 @@
                                                     <tbody>
 
                                                         <?php foreach ($user as $peg) : ?>
+                                                        <?php
+                                                            if ($peg->hakakses == "Admin TU") {
+                                                                $cari_user = $this->db->query("SELECT * FROM sub_umum_pegawai WHERE id_user = $peg->id_user ")->row();
+                                                            } elseif ($peg->hakakses == "Admin Kepala") {
+                                                                $cari_user = $this->db->query("SELECT * FROM kepala_pelaksana WHERE id_user = $peg->id_user ")->row();
+                                                            } elseif ($peg->hakakses == "Admin Bidang") {
+                                                                $cari_user = $this->db->query("SELECT * FROM kepala_bidang WHERE id_user = $peg->id_user ")->row();
+                                                            }
+                                                        ?>
                                                             <tr class="gradeA odd" role="row">
-                                                                <td class="sorting_1"><?= $peg->nama ?></td>
-                                                                <td><?= $peg->nip ?></td>
-                                                                <td><?= $peg->jabatan ?></td>
+                                                                <td class="sorting_1"><?= $cari_user->nama ?></td>
+                                                                <td><?= $cari_user->nip ?></td>
+                                                                <td><?= $cari_user->jabatan ?></td>
                                                                 <td class="center"><?= $peg->username ?></td>
                                                                 <td class="center"><?= $peg->hakakses ?></td>
                                                                 <td class="center">
-                                                                    <img src="<?= base_url('uploads/') . $peg->foto ?>" alt="" height="50px" width="50px">
+                                                                    <img src="<?= base_url('uploads/foto/') . $cari_user->foto ?>" alt="" height="50px" width="50px">
                                                                 </td>
                                                                 <td class="center">
 

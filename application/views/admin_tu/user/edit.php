@@ -19,36 +19,35 @@
                                 <div class="col-lg-6">
                                     <div class="form-group">
                                         <label>Nama user :</label>
-                                        <input class="form-control" type="hidden" name="id_user" value="<?= $user->id_user ?>">
-                                        <input class="form-control" type="text" name="nama" value="<?= $user->nama ?>">
-                                        <p class="help-block">Example block-level help text here.</p>
+                                        <input class="form-control" type="hidden" name="id_user" value="<?= $t_user->id_user ?>" required>
+                                        <input class="form-control" type="hidden" name="hakakses" value="<?= $t_user->hakakses ?>" required>
+                                        <input class="form-control" type="text" name="nama" value="<?= $user->nama ?>" required>
                                     </div>
                                     <div class="form-group">
                                         <label> Nip :</label>
-                                        <input class="form-control" type="text" name="nip" value="<?= $user->nip ?>">
+                                        <input class="form-control" type="text" name="nip" value="<?= $user->nip ?>" required>
                                     </div>
 
                                     <div class="form-group">
                                         <label>Foto : </label>
 
-                                        <input type="file" id='' name="foto">
+                                        <input type="file" id='' name="foto" required>
                                     </div>
                                     <script>
                                         // alert('ok');
                                     </script>
                                     <div class="form-group">
                                         <label> Username :</label>
-                                        <input class="form-control" type="text" name="username" value="<?= $user->username ?>">
+                                        <input class="form-control" type="text" name="username" value="<?= $t_user->username ?>" required>
                                     </div>
                                 </div>
                                 <!-- /.col-lg-6 (nested) -->
                                 <div class="col-lg-6">
                                     <div class="form-group">
                                         <label>Jabatan :</label>
-                                        <input class="form-control" type="text" name="jabatan" value="<?= $user->jabatan ?>">
-                                        <p class="help-block">Example block-level help text here.</p>
+                                        <input class="form-control" type="text" name="jabatan" value="<?= $user->jabatan ?>" required>
                                     </div>
-                                    <div class="form-group">
+                                    <!-- <div class="form-group">
                                         <label>Hak Akses :</label>
                                         <select class="form-control" name="hakakses">
                                             <option>1</option>
@@ -57,15 +56,29 @@
                                             <option>4</option>
                                             <option>5</option>
                                         </select>
-                                    </div>
+                                    </div> -->
+                                    <!-- <br>
                                     <br>
-                                    <br>
-                                    <br>
+                                    <br> -->
 
                                     <div class="form-group">
                                         <label>Password :</label>
-                                        <input class="form-control" type="text" name="password" value="<?= $user->password ?>">
-                                        <p class="help-block">Example block-level help text here.</p>
+                                        <input class="form-control" type="text" name="password" value="<?= $t_user->password ?>" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Status :</label>
+                                        <select class="form-control" name="status" required>
+                                            <?php foreach ($status as $sta) : ?>
+                                                <?php if ($sta == $t_user->status) { ?>
+                                                    <option value="<?= $sta ?>" selected><?= $sta ?></option>
+
+                                                <?php } else { ?>
+                                                    <option value="<?= $sta ?>"><?= $sta ?></option>
+
+                                                <?php } ?>
+                                            <?php endforeach ?>
+
+                                        </select>
                                     </div>
                                     <button type="submit" class="btn btn-primary">Simpan</button>
                                     <a href="<?= base_url('admin_tu/user') ?>" class="btn btn-danger ">Batal</a>

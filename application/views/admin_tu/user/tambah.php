@@ -28,7 +28,7 @@
 
                                     <div class="form-group">
                                         <label>Foto : </label>
-                                        <input type="file" name="foto">
+                                        <input type="file" name="foto" required>
                                     </div>
                                     <div class="form-group">
                                         <label> Username :</label>
@@ -56,6 +56,14 @@
                                     <div class="form-group">
                                         <label>Password :</label>
                                         <input class="form-control" type="text" name="password" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Status :</label>
+                                        <select class="form-control" name="status" required>
+                                            <?php foreach ($status as $sta) : ?>
+                                                    <option value="<?= $sta ?>"><?= $sta ?></option>
+                                            <?php endforeach ?>
+                                        </select>
                                     </div>
                                     <button type="submit" class="btn btn-primary">Simpan</button>
                                     <a href="<?= base_url('admin_tu/user') ?>" class="btn btn-danger ">Batal</a>
