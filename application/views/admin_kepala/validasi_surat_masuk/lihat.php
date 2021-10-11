@@ -19,6 +19,23 @@
                                 <div class="col-lg-6">
                                     <div class="form-group">
                                         <label>Dari :</label>
+<?php
+  $id_user = $this->session->userdata('id_user');
+  if($this->session->userdata('hakakses') == 'Admin TU'){
+        $cari_pengguna = $this->db->query("SELECT * FROM sub_umum_pegawai WHERE id_user = $id_user ")->row();
+         $id_pengguna = $cari_pengguna->id_sub_umum_pegawai;
+        
+  }elseif($this->session->userdata('hakakses') == 'Admin Kepala'){
+        $cari_pengguna = $this->db->query("SELECT * FROM kepala_pelaksan WHERE id_user = $id_user")->row();
+        $id_pengguna = $cari_pengguna->id_kepala_pelaksana;
+  }elseif($this->session->userdata('hakakses') == 'Admin Bidang'){
+        $cari_pengguna = $this->db->query("SELECT * FROM kepala_bidang WHERE id_user = $id_user")->row();
+      $id_pengguna = $cari_pengguna->id_kepala_bidang;
+  }else{
+      redirect('auth/logout');
+  }
+?>
+<input type="hidden" name="id_pengguna" value="<?= $id_pengguna ?>" required>
                                         <select class="form-control" name="id_instansi" required disabled>
                                             <?php foreach ($instansi as $ins) : ?>
                                                 <?php if ($ins->id_instansi == $surat_masuk->id_instansi) { ?>
@@ -158,7 +175,7 @@ $terus_kan = $tampil_disposisi->terus_kan;
                                                 <div class="form-group">
                                                     <label>Di tujukan ke :</label>
                                                     <input class="form-control" type="hidden" name="id_suratmasuk" value="<?= $surat_masuk->id_suratmasuk ?>" placeholder="Nomer Urut Surat Masuk" required>
-                                                    <select class="form-control" name="teruskan_ke" required>
+                                                    <select class="form-control" name="id_user" required>
                                                         <?php foreach ($terus as $ins) : ?>
                                                             <?php if ($ins->id_user == $disposisi->teruskan_ke) { ?>
                                                                 <option value="<?= $ins->id_user ?>" selected><?= $ins->nama ?></option>
