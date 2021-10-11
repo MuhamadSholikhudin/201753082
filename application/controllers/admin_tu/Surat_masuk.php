@@ -139,7 +139,7 @@ $file = $_FILES['file']['name'];
 
         $this->Model_surat_masuk->tambah_surat_masuk($data, 'surat_masuk');
       
-        $cari_suratmasuk = $this->db->query("SELECT * FROM surat_masuk ORDER BY id_suratmasuk LIMIT 1")->row();
+        $cari_suratmasuk = $this->db->query("SELECT * FROM surat_masuk ORDER BY id_suratmasuk DESC LIMIT 1")->row();
 
         $datat = [
             'id_suratmasuk' => $cari_suratmasuk->id_suratmasuk,
