@@ -31,12 +31,12 @@
                                     <div class="form-group">
                                         <label>Foto : </label>
 
-                                        <input type="file" id='' name="foto" required>
+                                        <input type="file" id='' name="foto" accept="image/png, image/gif, image/jpeg"" required>
                                     </div>
                                     <script>
                                         // alert('ok');
                                     </script>
-                                    <div class="form-group">
+                                    <div class=" form-group">
                                         <label> Username :</label>
                                         <input class="form-control" type="text" name="username" value="<?= $t_user->username ?>" required>
                                     </div>

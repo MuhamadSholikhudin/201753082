@@ -92,7 +92,7 @@ class Validasi_surat_masuk extends CI_Controller
                 $datat = [
                     // 'status' => $cari_surat->status
                     'id_suratmasuk' => $id_suratmasuk,
-                    'id_kepala_pelaksana' => $id_pengguna
+                    'id_kepala_pelaksana' => $id_pengguna,
                     'id_user' => $teruskan_ke,
                  //   'created_at' => date('Y-m-d H:i:s'),
                     'update_at' => date('Y-m-d H:i:s'),
@@ -123,7 +123,7 @@ class Validasi_surat_masuk extends CI_Controller
  $datat = [
                     // 'status' => $cari_surat->status
                     'id_suratmasuk' => $id_suratmasuk,
-                    'id_kepala_pelaksana' => $id_pengguna
+                    'id_kepala_pelaksana' => $id_pengguna,
                     'id_user' => $teruskan_ke,
                     'created_at' => date('Y-m-d H:i:s'),
                     'update_at' => date('Y-m-d H:i:s'),
@@ -158,7 +158,7 @@ class Validasi_surat_masuk extends CI_Controller
                 $datat = [
                     // 'status' => $cari_surat->status
                     'id_suratmasuk' => $id_suratmasuk,
-                    'id_kepala_pelaksana' => $id_pengguna
+                    'id_kepala_pelaksana' => $id_pengguna,
                     'id_user' => $teruskan_ke,
                  //   'created_at' => date('Y-m-d H:i:s'),
                     'update_at' => date('Y-m-d H:i:s'),
@@ -189,7 +189,7 @@ class Validasi_surat_masuk extends CI_Controller
                 $datat = [
                     // 'status' => $cari_surat->status
                     'id_suratmasuk' => $id_suratmasuk,
-                    'id_kepala_pelaksana' => $id_pengguna
+                    'id_kepala_pelaksana' => $id_pengguna,
                     'id_user' => $teruskan_ke,
                     'created_at' => date('Y-m-d H:i:s'),
                     'update_at' => date('Y-m-d H:i:s'),

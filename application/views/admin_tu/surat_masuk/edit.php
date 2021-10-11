@@ -2,6 +2,9 @@
 <div id="page-wrapper">
     <div class="container-fluid">
         <div class="row">
+         <div class="col-lg-12">
+                <embed  src="<?= base_url('uploads/surat_masuk/') . $surat_masuk->file ?>" width="100%" height="800" />
+            </div>
             <div class="col-lg-12">
                 <h1 class="page-header">Edit Surat Masuk</h1>
             </div>
@@ -20,7 +23,23 @@
                                     <div class="form-group">
                                         <label>Dari :</label>
                                         <input class="form-control" type="hidden" name="id_suratmasuk" value="<?= $surat_masuk->id_suratmasuk ?>" placeholder="Nomer Urut Surat Masuk" required>
-                                        
+
+<?php
+  $id_user = $this->session->userdata('id_user');
+  if($this->session->userdata('hakakses') == 'Admin TU'){
+        $cari_pengguna = $this->db->query("SELECT * FROM sub_umum_pegawai WHERE id_user = $id_user ")->row();
+         $id_pengguna = $cari_pengguna->id_sub_umum_pegawai;
+        
+  }elseif($this->session->userdata('hakakses') == 'Admin Kepala'){
+        $cari_pengguna = $this->db->query("SELECT * FROM kepala_pelaksan WHERE id_user = $id_user")->row();
+        $id_pengguna = $cari_pengguna->id_kepala_pelaksana;
+  }elseif($this->session->userdata('hakakses') == 'Admin Bidang'){
+        $cari_pengguna = $this->db->query("SELECT * FROM kepala_bidang WHERE id_user = $id_user")->row();
+      $id_pengguna = $cari_pengguna->id_kepala_bidang;
+  }else{
+      redirect('auth/logout');
+  }
+?>                                        
                                        <input class="form-control" type="hidden" name="id_pengguna" value="<?= $id_pengguna ?>">
 <select class="form-control" name="id_instansi" required>
                                             <?php foreach ($instansi as $ins) : ?>
@@ -93,10 +112,10 @@
                                         <label>Klasifikasi Surat :</label>
                                         <select class="form-control" name="id_klasifikasi" required>
                                             <?php foreach ($klasifikasi_surat as $klasifikasi) : ?>
-                                                <?php if ($klasifikasi == $surat_masuk->klasifikasi_surat) { ?>
-                                                    <option value="<?= $klasifikasi ?>" selected><?= $klasifikasi ?></option>
+                                                <?php if ($klasifikasi == $surat_masuk->id_klasifikasi) { ?>
+                                                    <option value="<?= $id_klasifikasi ?>" selected><?= $klasifikasi ?></option>
                                                 <?php } else { ?>
-                                                    <option value="<?= $klasifikasi ?>"><?= $klasifikasi ?></option>
+                                                    <option value="<?= $id_klasifikasi ?>"><?= $klasifikasi ?></option>
                                                 <?php } ?>
                                             <?php endforeach; ?>
                                         </select>

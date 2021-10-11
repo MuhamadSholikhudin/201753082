@@ -107,7 +107,7 @@ class surat_masuk extends CI_Controller
         // $status = $this->input->post('status');
         $id_pengguna = $this->input->post('id_pengguna');
 
-$file = $_FILES['file']['name'];
+         $file = $_FILES['file']['name'];
 
             $config['allowed_types'] = 'gif|jpg|png|jpeg|pdf';
 //            $config['max_size']      = '2048';

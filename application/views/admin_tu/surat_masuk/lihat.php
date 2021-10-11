@@ -77,10 +77,7 @@
                                     <label>No Surat Masuk :</label>
                                     <input class="form-control" type="text" name="no_suratmasuk" readonly value="<?= $surat_masuk->no_suratmasuk ?>" required placeholder="Nomer Surat masuk">
                                 </div>
-                                <div class="form-group">
-                                    <label>Index :</label>
-                                    <input class="form-control" placeholder="Indeks Surat" type="text" name="index" readonly value="<?= $surat_masuk->index ?>" required>
-                                </div>
+                                
                                 <div class="form-group">
                                     <label>Tanggal Diteruskan :</label>
                                     <input class="form-control" type="date" name="tanggal_teruskan" readonly value="<?= $surat_masuk->tanggal_teruskan ?>" required>
@@ -101,10 +98,11 @@
                                 <div class="form-group">
                                     <label>Diteruskan Kepada :</label>
                                     <?php 
-        $cari_disposisi = $this->db->query("SELECT * FROM  disposisi WHERE  disposisi.teruskan_ke = $surat_masuk->id_suratmasuk ")->row();
-        $cari_orang = $this->db->query("SELECT * FROM  user WHERE  id_user = $cari_disposisi->teruskan_ke ")->row();
-                                    
+                                        $cari_disposisi = $this->db->query("SELECT * FROM  disposisi WHERE  disposisi.id_user = $surat_masuk->id_suratmasuk ")->row();
+                                        
+                                        $pil_id_user =  implode(" ", $cari_disposisi->id_user);
 
+                                        $cari_orang = $this->db->query("SELECT * FROM  user WHERE  id_user = $pil_id_user ")->row();
                                     ?>
                                     <input class="form-control" type="text" name="tanggal_teruskan" readonly value="<?=  $cari_orang->jabatan .' / '. $cari_orang->nama ?>" required>
                                 </div>

@@ -3,8 +3,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-12">
-                <object src="<?= base_url('uploads/surat_masuk/') . $surat_masuk->file ?>" width="100%" height="800" >
-            </div>
+                <embed  src="<?= base_url('uploads/surat_masuk/') . $surat_masuk->file ?>" width="100%" height="800" />            </div>
             <div class="col-lg-12">
                 <h1 class="page-header">Edit Surat Masuk</h1>
             </div>
@@ -164,13 +163,13 @@
                                                 </div>
                                                 <?php
 
-$disposisi = $this->db->query("SELECT * FROM disposisi WHERE id_suratmasuk = $surat_masuk->id_suratmasuk ");
-if($disposisi->num_rows() > 0){
-$tampil_disposisi = $disposisi->row();
+                                            $disposisi = $this->db->query("SELECT * FROM disposisi WHERE id_suratmasuk = $surat_masuk->id_suratmasuk ");
+                                            if($disposisi->num_rows() > 0){
+                                            $tampil_disposisi = $disposisi->row();
 
-$terus_kan = $tampil_disposisi->terus_kan;
+                                            $terus_kan = $tampil_disposisi->terus_kan;
                                                     $disposisi_catatan = $tampil_disposisi->catatan;
-}else{
+                                            }else{
                                                     $terus_kan = 1;
                                                     $disposisi_catatan = "";
 }

@@ -20,6 +20,8 @@ class Auth extends CI_Controller{
                 $this->session->set_userdata('hakakses', $auth->hakakses);
                 $this->session->set_userdata('id_user', $auth->id_user);
 
+
+
                 switch($auth->hakakses){
                     case "Admin TU" : redirect('dashboard');
                         break;

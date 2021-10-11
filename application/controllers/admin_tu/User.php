@@ -70,7 +70,8 @@ class User extends CI_Controller {
         $hakakses = $this->input->post('hakakses');
         $username = $this->input->post('username');
         $password = $this->input->post('password');
-        $cari_user = $this->db->query("SELECT * FROM user WHERE username = ");
+        $status = $this->input->post('status');
+        $cari_user = $this->db->query("SELECT * FROM user WHERE username = '$username' ");
 
         $nama = $this->input->post('nama');
         $nip = $this->input->post('nip');
@@ -78,20 +79,21 @@ class User extends CI_Controller {
         
         if ($cari_user->num_rows() < 1) {
             $datat = array(
-
                 'hakakses'    =>  $hakakses,
                 'username'    =>  $username,
-                'password'    =>  $password
+                'password'    =>  $password,
+                'status'      =>  $status
             );
             $this->Model_user->tambah_usert($datat, 'user');
 
-            $user_row = $cari_user->row();
-            $id_user = $user_row->id_user;
+            $cari_user_id = $this->db->query("SELECT * FROM user ORDER BY id_user DESC LIMIT 1")->row();
+
+            $id_user = $cari_user_id->id_user;
 
             $foto = $_FILES['foto']['name'];
 
             $config['allowed_types'] = 'gif|jpg|png|jpeg|pdf';
-            $config['max_size']      = '2048';
+            // $config['max_size']      = '2048';
             $config['upload_path'] = './uploads/foto/';
             $this->load->library('upload', $config);
 
@@ -100,12 +102,13 @@ class User extends CI_Controller {
             }
 
             $data = array(
-                'id_user' => $id_user,
+                'id_user' => $cari_user_id->id_user,
                 'nama'    =>  $nama,
                 'nip' =>  $nip,
                 'foto' =>  $new_foto,
                 'jabatan'    =>  $jabatan
             );
+
             if ($hakakses == 'Admin TU') {
                 $this->Model_sub_umum_pegawai->tambah_sub_umum_pegawai($data, 'sub_umum_pegawai');
             } elseif ($hakakses == 'Admin Kepala') {

@@ -12,18 +12,13 @@
                         <p>
                             <a href="<?= base_url('admin_tu/user/tambah') ?>" class="btn btn-primary ">+ user</a>
                         </p>
+                        <?= $this->session->flashdata('pesan'); ?>
                         <div class="panel panel-default mt-3">
                             <div class="panel-heading">
                                 Data user
                             </div>
-
-
-
-
                             <!-- /.panel-heading -->
                             <div class="panel-body">
-
-
                                 <div class="table-responsive">
                                     <div id="dataTables-example_wrapper" class="dataTables_wrapper form-inline dt-bootstrap no-footer">
 
@@ -44,7 +39,7 @@
                                                     <tbody>
 
                                                         <?php foreach ($user as $peg) : ?>
-                                                        <?php
+                                                            <?php
                                                             if ($peg->hakakses == "Admin TU") {
                                                                 $cari_user = $this->db->query("SELECT * FROM sub_umum_pegawai WHERE id_user = $peg->id_user ")->row();
                                                             } elseif ($peg->hakakses == "Admin Kepala") {
@@ -52,7 +47,7 @@
                                                             } elseif ($peg->hakakses == "Admin Bidang") {
                                                                 $cari_user = $this->db->query("SELECT * FROM kepala_bidang WHERE id_user = $peg->id_user ")->row();
                                                             }
-                                                        ?>
+                                                            ?>
                                                             <tr class="gradeA odd" role="row">
                                                                 <td class="sorting_1"><?= $cari_user->nama ?></td>
                                                                 <td><?= $cari_user->nip ?></td>

@@ -28,9 +28,9 @@
 
                                     <div class="form-group">
                                         <label>Foto : </label>
-                                        <input type="file" name="foto" required>
+                                        <input type="file" name="foto" accept="image/png, image/gif, image/jpeg"" required>
                                     </div>
-                                    <div class="form-group">
+                                    <div class=" form-group">
                                         <label> Username :</label>
                                         <input class="form-control" type="text" name="username" required>
                                     </div>
@@ -61,7 +61,7 @@
                                         <label>Status :</label>
                                         <select class="form-control" name="status" required>
                                             <?php foreach ($status as $sta) : ?>
-                                                    <option value="<?= $sta ?>"><?= $sta ?></option>
+                                                <option value="<?= $sta ?>"><?= $sta ?></option>
                                             <?php endforeach ?>
                                         </select>
                                     </div>
