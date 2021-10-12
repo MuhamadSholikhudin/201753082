@@ -57,7 +57,7 @@ class Instansi extends CI_Controller {
         $alamat_instansi = $this->input->post('alamat_instansi');
         $no_telp = $this->input->post('no_telp');
         $email = $this->input->post('email');
-        $posisi = $this->input->post('posisi');
+        $kota = $this->input->post('kota');
             
             $data = array(
               
@@ -65,7 +65,7 @@ class Instansi extends CI_Controller {
             'alamat_instansi' =>  $alamat_instansi,
             'no_telp' =>  $no_telp,
             'email' =>  $email,
-            'posisi' =>  $posisi
+            'kota' =>  $kota
                 );
         
         $this->Model_instansi->tambah_instansi($data, 'instansi');
@@ -79,14 +79,14 @@ class Instansi extends CI_Controller {
         $alamat_instansi = $this->input->post('alamat_instansi');
         $no_telp = $this->input->post('no_telp');
         $email = $this->input->post('email');
-        $posisi = $this->input->post('posisi');
+        $kota = $this->input->post('kota');
             
         $data = array(
             'nama_instansi'    =>  $nama_instansi,
             'alamat_instansi' =>  $alamat_instansi,
             'no_telp' =>  $no_telp,
             'email' =>  $email,
-            'posisi' =>  $posisi   
+            'kota' =>  $kota   
         );
 
         $this->db->set($data);

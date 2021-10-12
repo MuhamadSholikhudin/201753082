@@ -27,14 +27,14 @@ class Validasi_surat_masuk extends CI_Controller
         $this->load->view('templates/footer');
     }
 
-    public function lihat($id_suratmasuk)
+    public function cek($id_suratmasuk)
     {
         $data['surat_kirim'] = $this->db->query("SELECT * FROM surat_masuk WHERE status = 2")->result();
         $data['surat_keluar_baru'] = $this->db->query("SELECT * FROM surat_keluar WHERE status = 2")->result();
 
         $tampil_surat_masuk = $this->db->query("SELECT * FROM surat_masuk WHERE id_suratmasuk = $id_suratmasuk")->row();
 
-        if($tampil_surat_masuk->status == 4){
+        if($tampil_surat_masuk->status >= 4){
         } else {
             $this->db->set('status', 3);
             $this->db->where('id_suratmasuk', $id_suratmasuk);
@@ -45,7 +45,29 @@ class Validasi_surat_masuk extends CI_Controller
 
         
         $data['instansi'] = $this->db->query("SELECT * FROM instansi")->result();
+        $data['terus'] = $this->db->query("SELECT * FROM user WHERE hakakses != 'Admin Kepala'")->result();
 
+
+        $data['sifat_surat'] = ['Penting', 'Biasa'];
+        $data['klasifikasi_surat'] = ['Umum', 'Pemerintahan'];
+
+
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/sidebar');
+        $this->load->view('admin_kepala/validasi_surat_masuk/cek', $data);
+        $this->load->view('templates/footer');
+    }
+
+    public function lihat($id_suratmasuk)
+    {
+        $data['surat_kirim'] = $this->db->query("SELECT * FROM surat_masuk WHERE status = 2")->result();
+        $data['surat_keluar_baru'] = $this->db->query("SELECT * FROM surat_keluar WHERE status = 2")->result();
+
+
+        $data['surat_masuk'] = $this->db->query("SELECT * FROM surat_masuk WHERE id_suratmasuk = $id_suratmasuk")->row();
+
+
+        $data['instansi'] = $this->db->query("SELECT * FROM instansi")->result();
         $data['terus'] = $this->db->query("SELECT * FROM user WHERE hakakses != 'Admin Kepala'")->result();
 
 

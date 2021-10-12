@@ -16,12 +16,10 @@ class Surat_masuk extends CI_Controller
 
     public function index()
     {
-        
-        // $data['instansi'] = $this->db->query("SELECT * FROM instansi")->result();
-        $data['surat_masuk'] = $this->db->query("SELECT * FROM surat_masuk")->result();
         $id_user = $this->session->userdata('id_user');
         $data['surat_valid'] = $this->db->query("SELECT * FROM surat_masuk JOIN disposisi WHERE surat_masuk.status = 4 AND disposisi.id_user = $id_user ")->result();
-
+        
+        $data['surat_masuk'] = $this->db->query("SELECT * FROM surat_masuk")->result();
 
         $this->load->view('templates/header', $data);
         $this->load->view('templates/sidebar');
@@ -69,7 +67,7 @@ class Surat_masuk extends CI_Controller
 
         $tampil_surat_masuk = $this->db->query("SELECT * FROM surat_masuk WHERE id_suratmasuk = $id_suratmasuk")->row();
 
-        // echo $tampil_surat_masuk->status;
+
         if ($tampil_surat_masuk->status == 4) {
 
             $this->db->set('status', 5);
@@ -79,9 +77,11 @@ class Surat_masuk extends CI_Controller
         } else {
             
         }
-        // echo 'oke';
+
         $data['surat_masuk'] = $this->db->query("SELECT * FROM surat_masuk WHERE id_suratmasuk = $id_suratmasuk")->row();
         $data['instansi'] = $this->db->query("SELECT * FROM instansi")->result();
+        $data['klasifikasi'] = $this->db->query("SELECT * FROM klasifikasi")->result();
+        $data['terus'] = $this->db->query("SELECT * FROM user WHERE hakakses != 'Admin Kepala'")->result();
 
         $data['sifat_surat'] = ['Penting', 'Biasa'];
         $data['klasifikasi_surat'] = ['Umum', 'Pemerintahan'];
@@ -303,7 +303,8 @@ class Surat_masuk extends CI_Controller
     public function kirim($id_suratmasuk){
         $cari_surat = $this->db->query("SELECT * FROM surat_masuk WHERE id_suratmasuk = $id_suratmasuk")->row();
         $data = [
-            'status' => 2
+            'status' => 2,
+            'tanggal_teruskan' => date('Y-m-d')
         ];
 
         $where = [
@@ -312,7 +313,5 @@ class Surat_masuk extends CI_Controller
 
         $this->Model_surat_masuk->update_data($where, $data, 'surat_masuk');
         redirect('admin_tu/surat_masuk/');
-
-
     }
 }

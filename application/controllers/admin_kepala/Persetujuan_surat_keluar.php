@@ -28,7 +28,7 @@ class Persetujuan_surat_keluar extends CI_Controller
         $this->load->view('templates/footer');
     }
 
-    public function lihat($id_suratkeluar)
+        public function cek($id_suratkeluar)
     {
 
         $data['surat_kirim'] = $this->db->query("SELECT * FROM surat_masuk WHERE status = 2")->result();
@@ -53,6 +53,26 @@ class Persetujuan_surat_keluar extends CI_Controller
 
         $this->load->view('templates/header', $data);
         $this->load->view('templates/sidebar');
+        $this->load->view('admin_kepala/persetujuan_surat_keluar/cek', $data);
+        $this->load->view('templates/footer');
+    }
+    public function lihat($id_suratkeluar)
+    {
+
+        $data['surat_kirim'] = $this->db->query("SELECT * FROM surat_masuk WHERE status = 2")->result();
+        $data['surat_keluar_baru'] = $this->db->query("SELECT * FROM surat_keluar WHERE status = 2")->result();
+        
+             
+
+        $data['surat_keluar'] = $this->db->query("SELECT * FROM surat_keluar WHERE id_suratkeluar = $id_suratkeluar")->row();       
+        $data['instansi'] = $this->db->query("SELECT * FROM instansi")->result();
+
+        $data['sifat_surat'] = ['Penting', 'Biasa'];
+        $data['klasifikasi_surat'] = ['Umum', 'Pemerintahan'];
+
+
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/sidebar');
         $this->load->view('admin_kepala/persetujuan_surat_keluar/lihat', $data);
         $this->load->view('templates/footer');
     }
@@ -64,18 +84,14 @@ class Persetujuan_surat_keluar extends CI_Controller
         $id_suratkeluar = $this->input->post('id_suratkeluar');
         $id_pengguna = $this->input->post('id_pengguna');
         $cari_surat = $this->db->query("SELECT * FROM surat_keluar WHERE id_suratkeluar = $id_suratkeluar")->row();
+        
         $checkbox = $this->input->post("cek");
-
         $vekk = implode(",", $checkbox);
-
         // echo $vekk;
         // echo "<br>";
-
         $pecah = explode(",", $vekk);
-
         // print_r($pecah);
         // echo "<br>";
-
         $no = 0;
         foreach ($pecah as $ve) :
             $no += $ve;
@@ -109,6 +125,7 @@ class Persetujuan_surat_keluar extends CI_Controller
                 ];
                 $this->Model_surat_keluar->update_data($where, $data, 'surat_keluar');
                 $this->Model_setujui->update_datat($wheret, $datat, 'setujui');
+                redirect('admin_kepala/persetujuan_surat_keluar/');
 
             }else{
                 $teruskan_ke = $this->input->post('teruskan_ke');
@@ -136,10 +153,9 @@ class Persetujuan_surat_keluar extends CI_Controller
 
                 $this->Model_setujui->tambah_setujuit($datat, 'setujui');
                 $this->Model_surat_keluar->update_data($where, $data, 'surat_keluar');
-
+                redirect('admin_kepala/persetujuan_surat_keluar/');
             }           
 
-            redirect('admin_kepala/persetujuan_surat_keluar/');
 
 
         } elseif ($no == 3) {
@@ -170,6 +186,8 @@ class Persetujuan_surat_keluar extends CI_Controller
                 ];
                 $this->Model_surat_keluar->update_data($where, $data, 'surat_keluar');
                 $this->Model_setujui->update_datat($wheret, $datat, 'setujui');
+                redirect('admin_kepala/persetujuan_surat_keluar/');
+
             } else {
                 $catatan = $this->input->post('catatan_setujui');
 

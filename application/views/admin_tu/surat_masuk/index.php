@@ -39,10 +39,10 @@
                                                     <thead>
                                                         <tr role="row">
                                                             <th class="sorting_asc" tabindex="0" aria-controls="dataTables-example" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">Dari</th>
-                                                            <th class="sorting" tabindex="0" aria-controls="dataTables-example" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending" >Klasifikasi</th>
-                                                            <th class="sorting" tabindex="0" aria-controls="dataTables-example" rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending" >Perihal</th>
-                                                            <th class="sorting" tabindex="0" aria-controls="dataTables-example" rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending" >Tanggal Masuk</th>
-                                                            <th class="sorting" tabindex="0" aria-controls="dataTables-example" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending" >Diterima</th>
+                                                            <th class="sorting" tabindex="0" aria-controls="dataTables-example" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending">Klasifikasi</th>
+                                                            <th class="sorting" tabindex="0" aria-controls="dataTables-example" rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending">Perihal</th>
+                                                            <th class="sorting" tabindex="0" aria-controls="dataTables-example" rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending">Tanggal Masuk</th>
+                                                            <th class="sorting" tabindex="0" aria-controls="dataTables-example" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending">Diterima</th>
                                                             <th class="sorting" tabindex="0" aria-controls="dataTables-example" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending">Aksi</th>
                                                         </tr>
                                                     </thead>
@@ -59,13 +59,13 @@
                                                                     ?>
                                                                 </td>
                                                                 <td>
-                                                                                                                  <?php
+                                                                    <?php
                                                                     $cari_klasifikasi = $this->db->query("SELECT * FROM klasifikasi WHERE id_klasifikasi = $masuk->id_klasifikasi ")->row();
 
                                                                     echo $cari_klasifikasi->klasifikasi
                                                                     ?>
                                                                     <!-- <?= $masuk->id_klasifikasi ?> -->
-                                                            </td>
+                                                                </td>
                                                                 <td><?= $masuk->perihal ?></td>
                                                                 <td class="center"><?= $masuk->tanggal_surat ?></td>
                                                                 <td class="center">
@@ -87,14 +87,17 @@
 
                                                                 </td>
                                                                 <td class="center">
-                                                                    <?php if ($masuk->status == 0) { ?>
+                                                                    <?php if ($masuk->status <= 1) { ?>
                                                                         <a href="<?= base_url('admin_tu/surat_masuk/kirim/') . $masuk->id_suratmasuk ?>" type="button" class="btn btn-info"><i class="fa  fa-location-arrow fa-fw"></i> Kirim</a>
                                                                         <a href="<?= base_url('admin_tu/surat_masuk/edit/') . $masuk->id_suratmasuk ?>" type="button" class="btn btn-warning"><i class="fa fa-edit fa-fw"></i>Edit</a>
                                                                         <a href="<?= base_url('admin_tu/surat_masuk/hapus/') . $masuk->id_suratmasuk ?>" type="button" class="btn btn-danger"><i class="fa fa-trash fa-fw"></i>Hapus</a>
-                                                                        <?php } elseif ($masuk->status >= 4) { ?>
-                                                                            <a href="<?= base_url('admin_tu/surat_masuk/lihat/') . $masuk->id_suratmasuk ?>" type="button" class="btn btn-success"><i class="fa fa-eye fa-fw"></i>Lihat</a>
-                                                                        <?php } ?>
-                                                                        <a href="<?= base_url('admin_tu/surat_masuk/lampiran/') . $masuk->id_suratmasuk ?>" type="button" class="btn btn-default"><i class="fa fa-file-pdf-o fa-fw"></i>Lampiran</a>
+                                                                        <a href="<?= base_url('admin_tu/surat_masuk/lihat/') . $masuk->id_suratmasuk ?>" type="button" class="btn btn-success"><i class="fa fa-eye fa-fw"></i>Lihat</a>
+                                                                    <?php } elseif ($masuk->status == 2) { ?>
+                                                                        <a href="<?= base_url('admin_tu/surat_masuk/lihat/') . $masuk->id_suratmasuk ?>" type="button" class="btn btn-success"><i class="fa fa-eye fa-fw"></i>Lihat</a>
+                                                                    <?php } elseif ($masuk->status > 3) { ?>
+                                                                        <a href="<?= base_url('admin_tu/surat_masuk/lihat/') . $masuk->id_suratmasuk ?>" type="button" class="btn btn-success"><i class="fa fa-eye fa-fw"></i>Lihat</a>
+                                                                    <?php } ?>
+                                                                    <!-- <a href="<?= base_url('admin_tu/surat_masuk/lihat/') . $masuk->id_suratmasuk ?>" type="button" class="btn btn-default"><i class="fa fa-file-pdf-o fa-fw"></i>Lampiran</a> -->
                                                                 </td>
                                                             </tr>
                                                         <?php endforeach ?>

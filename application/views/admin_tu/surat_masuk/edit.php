@@ -100,7 +100,7 @@
                                     </div>
                                     <div class="form-group">
                                         <label>File Surat masuk</label>
-                                        <input type="file" name="file" required>
+                                        <input type="file" name="file" accept="application/pdf" required>
                                     </div>
 
                                 </div>

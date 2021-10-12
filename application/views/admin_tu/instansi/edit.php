@@ -39,19 +39,9 @@
                                         $posisi = ['internal', 'eksternal'];
 
                                         ?>
-                                        <label>Penempatan :</label>
-                                        <select class="form-control" name="posisi" required>
-                                            <?php foreach ($posisi as $ins) : ?>
-                                                <?php if ($ins == $instansi->posisi) { ?>
-                                                    <option value="<?= $ins ?>" selected><?= $ins ?></option>
-                                                <?php } else { ?>
-                                                    <option value="<?= $ins ?>"><?= $ins ?></option>
-                                                <?php } ?>
-                                            <?php endforeach; ?>
-                                            <!-- <option value="internal">Internal</option>
-                                            <option value="eksternal">Eksternal</option> -->
+                                        <label>Kota :</label>
+                                        <input class="form-control" type="text" name="kota" value="<?= $instansi->kota ?>" required>
 
-                                        </select>
                                     </div>
 
 

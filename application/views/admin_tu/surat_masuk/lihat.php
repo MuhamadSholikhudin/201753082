@@ -10,6 +10,20 @@
 
                 <div class="panel panel-default">
                     <div class="panel-heading">
+                        File Surat masuk
+                    </div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <embed src="<?= base_url('uploads/surat_masuk/') . $surat_masuk->file ?>" width="100%" height="1000" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="panel panel-default">
+                    <div class="panel-heading">
                         Form Lihat Surat masuk
                     </div>
 
@@ -77,7 +91,7 @@
                                     <label>No Surat Masuk :</label>
                                     <input class="form-control" type="text" name="no_suratmasuk" readonly value="<?= $surat_masuk->no_suratmasuk ?>" required placeholder="Nomer Surat masuk">
                                 </div>
-                                
+
                                 <div class="form-group">
                                     <label>Tanggal Diteruskan :</label>
                                     <input class="form-control" type="date" name="tanggal_teruskan" readonly value="<?= $surat_masuk->tanggal_teruskan ?>" required>
@@ -85,29 +99,76 @@
 
                                 <div class="form-group">
                                     <label>Klasifikasi Surat :</label>
-                                    <select class="form-control" name="klasifikasi_surat" readonly required>
-                                        <?php foreach ($klasifikasi_surat as $klasifikasi) : ?>
-                                            <?php if ($klasifikasi == $surat_masuk->klasifikasi_surat) { ?>
-                                                <option value="<?= $klasifikasi ?>" selected><?= $klasifikasi ?></option>
+                                    <select class="form-control" name="id_klasifikas" readonly required>
+                                        <?php foreach ($klasifikasi as $kla) : ?>
+                                            <?php if ($kla->id_klasifikasi == $surat_masuk->klasifikasi_surat) { ?>
+                                                <option value="<?= $kla->id_klasifikasi ?>" selected><?= $kla->klasifikasi ?></option>
                                             <?php } else { ?>
-                                                <option value="<?= $klasifikasi ?>"><?= $klasifikasi ?></option>
+                                                <option value="<?= $kla->id_klasifikasi ?>"><?= $kla->klasifikasi ?></option>
                                             <?php } ?>
                                         <?php endforeach; ?>
                                     </select>
                                 </div>
-                                <div class="form-group">
-                                    <label>Diteruskan Kepada :</label>
-                                    <?php 
-                                        $cari_disposisi = $this->db->query("SELECT * FROM  disposisi WHERE  disposisi.id_user = $surat_masuk->id_suratmasuk ")->row();
-                                        
-                                        $pil_id_user =  implode(" ", $cari_disposisi->id_user);
+                                <?php
+                                $cari_join_disposisi = $this->db->query("SELECT surat_masuk.status as status_surat, disposisi.status as status_disposisi , disposisi.id_user as id_user FROM surat_masuk JOIN disposisi ON surat_masuk.id_suratmasuk = disposisi.id_suratmasuk WHERE  surat_masuk.id_suratmasuk = $surat_masuk->id_suratmasuk ");
+                                if ($cari_join_disposisi->num_rows() > 0) {
+                                    $tampil_join_disposisi = $cari_join_disposisi->row();
+                                ?>
 
-                                        $cari_orang = $this->db->query("SELECT * FROM  user WHERE  id_user = $pil_id_user ")->row();
-                                    ?>
-                                    <input class="form-control" type="text" name="tanggal_teruskan" readonly value="<?=  $cari_orang->jabatan .' / '. $cari_orang->nama ?>" required>
-                                </div>
+                                    <div class="form-group">
+                                        <label>Di tujukan ke : </label>
+                                        <select class="form-control" readonly required>
+                                            <?php foreach ($terus as $ins) : ?>
+                                                <?php if ($ins->id_user == $tampil_join_disposisi->id_user) { ?>
+                                                    <option value="<?= $ins->id_user ?>" selected><?= $ins->username ?></option>
+                                                <?php } else { ?>
+                                                    <option value="<?= $ins->id_user ?>"><?= $ins->username ?></option>
+                                                <?php } ?>
+                                            <?php endforeach; ?>
+                                        </select>
+                                    </div>
 
-                                <a href="<?= base_url('admin_tu/surat_masuk') ?>" class="btn btn-danger ">Batal</a>
+                                <?php } else {
+                                }
+
+                                ?>
+
+
+                                <a href="<?= base_url('admin_tu/surat_masuk') ?>" class="btn btn-danger ">Kembali</a>
+                                <hr>
+                                *Keterangan :
+
+                                <?php
+                                $cari_join_disposisi = $this->db->query("SELECT surat_masuk.status as status_surat, disposisi.status as status_disposisi FROM surat_masuk JOIN disposisi ON surat_masuk.id_suratmasuk = disposisi.id_suratmasuk WHERE  surat_masuk.id_suratmasuk = $surat_masuk->id_suratmasuk ");
+                                if ($cari_join_disposisi->num_rows() > 0) {
+                                    $tampil_join_disposisi = $cari_join_disposisi->row();
+                                    if ($tampil_join_disposisi->status_surat == 5) {
+                                        echo "Surat Sudah di validasi dan telah di baca oleh instansi terkait";
+                                    } elseif ($tampil_join_disposisi->status_surat == 4) {
+                                        echo "Surat Sudah di validasi dan belum di baca oleh instansi terkait";
+                                    } elseif ($tampil_join_disposisi->status_surat == 3) {
+                                        echo "Surat Sudah di baca oleh ketua pelaksana";
+                                    } elseif ($tampil_join_disposisi->status_surat == 2) {
+                                        echo "Surat Sudah di terkirim ke ketua pelaksana";
+                                    } elseif ($tampil_join_disposisi->status_surat == 1) {
+                                        echo "Surat di kembalikan oleh kepala pelaksana";
+                                    } elseif ($tampil_join_disposisi->status_surat == 0) {
+                                        echo "Surat baru di data ";
+                                    }
+                                } else {
+                                    $cari_surat = $this->db->query("SELECT * FROM surat_masuk WHERE id_suratmasuk = $surat_masuk->id_suratmasuk ")->row();
+                                    if ($cari_surat->status == 3) {
+                                        echo "Surat Sudah di baca oleh ketua pelaksana";
+                                    } elseif ($cari_surat->status == 2) {
+                                        echo "Surat Sudah di terkirim ke ketua pelaksana";
+                                    } elseif ($cari_surat->status == 1) {
+                                        echo "Surat di kembalikan oleh kepala pelaksana";
+                                    } elseif ($cari_surat->status == 0) {
+                                        echo "Surat baru di data ";
+                                    }
+                                }
+
+                                ?>
 
                                 <!-- /.col-lg-6 (nested) -->
                             </div>

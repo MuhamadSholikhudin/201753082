@@ -36,13 +36,8 @@
                                         <input class="form-control" type="text" name="email" placeholder="Email" required>
                                     </div>
                                     <div class="form-group">
-                                        <label>Penempatan :</label>
-                                        <select class="form-control" name="posisi" required>
-
-                                            <option value="internal">Internal</option>
-                                            <option value="eksternal">Eksternal</option>
-
-                                        </select>
+                                        <label>Kota :</label>
+                                        <input class="form-control" type="text" name="kota" placeholder="Kota" required>
                                     </div>
 
                                     <button type="submit" class="btn btn-primary">Simpan</button>

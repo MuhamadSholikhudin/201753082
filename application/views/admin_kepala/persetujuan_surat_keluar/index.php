@@ -76,8 +76,9 @@
                                                                     } ?> </td>
                                                                 <td class="center">
 
+                                                                    <a href="<?= base_url('admin_kepala/persetujuan_surat_keluar/cek/') . $keluar->id_suratkeluar ?>" type="button" class="btn btn-primary"><i class="fa fa-check-square-o fa-fw"></i> Cek</a>
                                                                     <a href="<?= base_url('admin_kepala/persetujuan_surat_keluar/lihat/') . $keluar->id_suratkeluar ?>" type="button" class="btn btn-success"><i class="fa fa-eye fa-fw"></i> Lihat</a>
-                                                                    <a href="<?= base_url('admin_kepala/persetujuan_surat_keluar/lampiran/') . $keluar->id_suratkeluar ?>" type="button" class="btn btn-default"><i class="fa fa-file-pdf-o fa-fw"></i>Lampiran</a>
+                                                                    <!-- <a href="<?= base_url('admin_kepala/persetujuan_surat_keluar/lampiran/') . $keluar->id_suratkeluar ?>" type="button" class="btn btn-default"><i class="fa fa-file-pdf-o fa-fw"></i>Lampiran</a> -->
                                                                     <!-- <a href="<?= base_url('admin_kepala/persetujuan_surat_keluar/edit/') . $keluar->id_suratkeluar ?>" type="button" class="btn btn-warning"><i class="fa fa-edit fa-fw"></i>Edit</a> -->
                                                                     <!-- <a href="<?= base_url('admin_kepala/persetujuan_surat_keluar/hapus/') . $keluar->id_suratkeluar ?>" type="button" class="btn btn-danger"><i class="fa fa-trash fa-fw"></i>Hapus</a> -->
                                                                 </td>

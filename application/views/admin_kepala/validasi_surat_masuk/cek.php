@@ -78,43 +78,12 @@
                                     <label>Catatan :</label>
                                     <textarea class="form-control" rows="3" name="catatan" required disabled><?= $surat_masuk->catatan ?></textarea>
                                 </div>
-                                <div class="form-group">
-                                    *Keterangan : 
-                                    
-
-
-                                    <?php
-                                    $cari_join_disposisi = $this->db->query("SELECT surat_masuk.status as status_surat, disposisi.status as status_disposisi FROM surat_masuk JOIN disposisi ON surat_masuk.id_suratmasuk = disposisi.id_suratmasuk WHERE  surat_masuk.id_suratmasuk = $surat_masuk->id_suratmasuk ");
-                                    if ($cari_join_disposisi->num_rows() > 0) {
-                                        $tampil_join_disposisi = $cari_join_disposisi->row();
-                                        if ($tampil_join_disposisi->status_surat == 5) {
-                                            echo "Surat Sudah di validasi dan telah di baca oleh instansi terkait";
-                                        } elseif ($tampil_join_disposisi->status_surat == 4) {
-                                            echo "Surat Sudah di validasi dan belum di baca oleh instansi terkait";
-                                        } elseif ($tampil_join_disposisi->status_surat == 3) {
-                                            echo "Surat Sudah di baca oleh ketua pelaksana";
-                                        } elseif ($tampil_join_disposisi->status_surat == 2) {
-                                            echo "Surat Sudah di terkirim ke ketua pelaksana";
-                                        } elseif ($tampil_join_disposisi->status_surat == 1) {
-                                            echo "Surat di kembalikan oleh kepala pelaksana";
-                                        } elseif ($tampil_join_disposisi->status_surat == 0) {
-                                            echo "Surat baru di data ";
-                                        }
-                                    } else {
-                                        $cari_surat = $this->db->query("SELECT * FROM surat_masuk WHERE id_suratmasuk = $surat_masuk->id_suratmasuk ")->row();
-                                        if ($cari_surat->status == 3) {
-                                            echo "Surat Sudah di baca oleh ketua pelaksana";
-                                        } elseif ($cari_surat->status == 2) {
-                                            echo "Surat Sudah di terkirim ke ketua pelaksana";
-                                        } elseif ($cari_surat->status == 1) {
-                                            echo "Surat di kembalikan oleh kepala pelaksana";
-                                        } elseif ($cari_surat->status == 0) {
-                                            echo "Surat baru di data ";
-                                        }
-                                    }
-
-                                    ?>
-                                </div>
+                                 <div class="form-group">
+                                     <?php if ($surat_masuk->status >= 4){
+                                        echo "*Keterangan : Surat Sudah di validasi";
+                                     }?>
+                                        
+                                </div> 
 
                             </div>
                             <!-- /.col-lg-6 (nested) -->
@@ -174,7 +143,7 @@
                                                         <input type="checkbox" <?php if ($surat_masuk->status >= 4) {
                                                                                     echo "checked='checked'";
                                                                                 } else {
-                                                                                } ?> value="1" name="cek[]" disabled>Instansi Surat
+                                                                                } ?> value="1" name="cek[]">Instansi Surat
                                                     </label>
                                                 </div>
                                                 <div class="checkbox">
@@ -182,7 +151,7 @@
                                                         <input type="checkbox" <?php if ($surat_masuk->status >= 4) {
                                                                                     echo "checked='checked'";
                                                                                 } else {
-                                                                                } ?> value="1" name="cek[]" disabled>Nomer Surat
+                                                                                } ?> value="1" name="cek[]">Nomer Surat
                                                     </label>
                                                 </div>
                                                 <div class="checkbox">
@@ -190,7 +159,7 @@
                                                         <input type="checkbox" <?php if ($surat_masuk->status >= 4) {
                                                                                     echo "checked='checked'";
                                                                                 } else {
-                                                                                } ?> value="1" name="cek[]" disabled>Isi surat
+                                                                                } ?> value="1" name="cek[]">Isi surat
                                                     </label>
                                                 </div>
                                                 <div class="checkbox">
@@ -198,7 +167,7 @@
                                                         <input type="checkbox" <?php if ($surat_masuk->status >= 4) {
                                                                                     echo "checked='checked'";
                                                                                 } else {
-                                                                                } ?> value="1" name="cek[]" disabled>tanggal surat
+                                                                                } ?> value="1" name="cek[]">tanggal surat
                                                     </label>
                                                 </div>
                                             </div>
@@ -209,7 +178,7 @@
                                                 $tampil_disposisi = $disposisi->row();
 
                                                 $terus_kan = $tampil_disposisi->id_user;
-                                                $disposisi_catatan = $tampil_disposisi->catatan;
+                                                $disposisi_catatan = $tampil_disposisi->catatan; 
                                             } else {
                                                 $terus_kan = 1;
                                                 $disposisi_catatan = "";
@@ -218,7 +187,7 @@
 
                                             <div class="form-group">
                                                 <label>Di tujukan ke : </label>
-                                                <select class="form-control" name="teruskan_ke" disabled required>
+                                                <select class="form-control" name="teruskan_ke" required>
                                                     <?php foreach ($terus as $ins) : ?>
                                                         <?php if ($ins->id_user == $terus_kan) { ?>
                                                             <option value="<?= $ins->id_user ?>" selected><?= $ins->username ?></option>
@@ -230,13 +199,14 @@
                                             </div>
                                             <div class="form-group">
                                                 <label>Catatan Disposisi :</label>
-                                                <textarea class="form-control" rows="3" name="catatan_disposisi" disabled required><?= $disposisi_catatan ?></textarea>
+                                                <textarea class="form-control" rows="3" name="catatan_disposisi" required><?= $disposisi_catatan ?></textarea>
                                             </div>
 
                                         </div>
                                         <div class="panel-footer">
 
-                                            <a href="<?= base_url('admin_kepala/validasi_surat_masuk') ?>" class="btn btn-danger ">Kembali</a>
+                                            <button type="submit" class="btn btn-primary">Simpan</button>
+                                            <a href="<?= base_url('admin_kepala/validasi_surat_masuk') ?>" class="btn btn-danger ">Batal</a>
                                         </div>
                                     </div>
                                 </div>
