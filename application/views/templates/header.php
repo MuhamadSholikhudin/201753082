@@ -25,6 +25,10 @@
 
   <link href="<?= base_url('assets/') ?>css/dataTables/dataTables.bootstrap.css" rel="stylesheet">
   <link href="<?= base_url('assets/') ?>css/dataTables/dataTables.responsive.css" rel="stylesheet">
+
+<!-- include summernote css/js -->
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
   <!--[if lt IE 9]>
@@ -78,7 +82,7 @@
             <a class="dropdown-toggle " data-toggle="dropdown" href="#">
               <i class="fa fa-bell fa-fw"></i><span class="text-white">
                 <?php
-                $hitung_masuk = $this->db->query("SELECT COUNT(id_suratmasuk) as surat FROM surat_masuk WHERE status = 2")->row();
+                $hitung_masuk = $this->db->query("SELECT COUNT(id_suratmasuk) as surat FROM surat_masuk WHERE status = 3")->row();
 
                 if ($hitung_masuk->surat > 0) {
                   $n_masuk = $hitung_masuk->surat;
@@ -87,7 +91,7 @@
                 }
 
 
-                $hitung_keluar = $this->db->query("SELECT COUNT(id_suratkeluar) as surat FROM surat_keluar WHERE status = 2")->row();
+                $hitung_keluar = $this->db->query("SELECT COUNT(id_suratkeluar) as surat FROM surat_keluar WHERE status = 3")->row();
 
                 if ($hitung_keluar->surat > 0) {
                   $n_keluar = $hitung_keluar->surat;
@@ -192,18 +196,13 @@
               <i class="fa fa-bell fa-fw"></i><span class="text-white">
                 <?php
                 $id_user = $this->session->userdata('id_user');
-
                 $hitung_masuk = $this->db->query("SELECT COUNT(surat_masuk.id_suratmasuk) as surat FROM surat_masuk JOIN disposisi WHERE surat_masuk.status = 4 AND disposisi.id_user = $id_user ")->row();
-
                 if ($hitung_masuk->surat > 0) {
                   $n_masuk = $hitung_masuk->surat;
                 } else {
                   $n_masuk = 0;
                 }
-
-
                 // $hitung_keluar = $this->db->query("SELECT COUNT(id_suratkeluar) as surat FROM surat_keluar WHERE status = 1")->row();
-
                 // if ($hitung_keluar->surat > 0) {
                 //   $n_keluar = $hitung_keluar->surat;
                 // } else {
@@ -224,7 +223,6 @@
                       <i class="fa fa-envelope-open fa-fw"></i>
                       <?php
                       $cari_instansi = $this->db->query("SELECT * FROM instansi WHERE id_instansi = $kir->id_instansi ")->row();
-
                       echo $cari_instansi->nama_instansi
                       ?>
                       <span class="pull-right text-muted small">Sudah Valid</span>

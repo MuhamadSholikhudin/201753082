@@ -126,7 +126,7 @@
 
                     <div class="panel-body">
                         <div class="row">
-                            <form role="form" action="<?= base_url('admin_kepala/persetujuan_surat_keluar/aksi_persetujuan') ?>" method="POST" enctype="multipart/form-data">
+                            <form role="form" action="<?= base_url('admin_tu/surat_keluar/aksi_penomoran') ?>" method="POST" enctype="multipart/form-data">
 
                                 <div class="col-lg-6">
                                     <div class="form-group">
@@ -142,10 +142,7 @@
                                         </select>
                                     </div>
 
-                                    <div class="form-group">
-                                        <label>No Urut:</label>
-                                        <input class="form-control" type="text" name="no_urut" value="<?= $surat_keluar->no_urut ?>" placeholder="Nomer Urut Surat Masuk" required disabled>
-                                    </div>
+
                                     <div class="form-group">
                                         <label>Tanggal Surat:</label>
                                         <input class="form-control" type="date" name="tanggal_surat" value="<?= $surat_keluar->tanggal_surat ?>" required disabled>
@@ -185,10 +182,7 @@
                                 </div>
                                 <!-- /.col-lg-6 (nested) -->
                                 <div class="col-lg-6">
-                                    <div class="form-group">
-                                        <label>No Surat Keluar :</label>
-                                        <input class="form-control" type="text" name="no_suratkeluar" value="<?= $surat_keluar->no_suratkeluar ?>" required placeholder="Nomer Surat masuk" disabled>
-                                    </div>
+
 
                                     <div class="form-group">
                                         <label>Tanggal Diteruskan :</label>
@@ -212,7 +206,7 @@
                                     <div class="col-lg-12">
                                         <div class="panel panel-info">
                                             <div class="panel-heading">
-                                                Persetujuan Surat Keluar
+                                                Penomoran Surat Keluar
                                             </div>
                                             <div class="panel-body">
                                                 <?php
@@ -233,48 +227,16 @@
                                                 <input class="form-control" type="hidden" name="id_pengguna" value="<?= $id_pengguna ?>" required>
                                                 <input class="form-control" type="hidden" name="id_suratkeluar" value="<?= $surat_keluar->id_suratkeluar ?>" required>
 
-                                                <div class="form-group">
-                                                    <label>Persetujuan Surat</label>
-                                                    <div class="checkbox">
-                                                        <label>
-                                                            <input type="checkbox" <?php if ($surat_keluar->status == 4) {
-                                                                                        echo "checked='checked'";
-                                                                                    } else {
-                                                                                    } ?> value="1" name="cek[]">Instansi Tujuan
-                                                        </label>
-                                                    </div>
 
-                                                    <div class="checkbox">
-                                                        <label>
-                                                            <input type="checkbox" <?php if ($surat_keluar->status == 4) {
-                                                                                        echo "checked='checked'";
-                                                                                    } else {
-                                                                                    } ?> value="1" name="cek[]">Isi surat
-                                                        </label>
-                                                    </div>
-                                                    <div class="checkbox">
-                                                        <label>
-                                                            <input type="checkbox" <?php if ($surat_keluar->status == 4) {
-                                                                                        echo "checked='checked'";
-                                                                                    } else {
-                                                                                    } ?> value="1" name="cek[]">tanggal surat
-                                                        </label>
-                                                    </div>
-                                                </div>
-                                            <?php
-
-                                            $setujui = $this->db->query("SELECT * FROM setujui WHERE id_suratkeluar = $surat_keluar->id_suratkeluar ");
-                                            if ($setujui->num_rows() > 0) {
-                                                $tampil_setujui = $setujui->row();
-                                                $setujui_catatan = $tampil_setujui->catatan; 
-                                            } else {
-                                                $setujui_catatan = "";
-                                            }
-                                            ?>
                                                 <div class="form-group">
-                                                    <label>Catatan Setujui :</label>
-                                                    <textarea class="form-control" rows="3" name="catatan_setujui" required><?= $setujui_catatan ?></textarea>
+                                                    <label>No Surat Keluar :</label>
+                                                    <input class="form-control" type="text" name="no_suratkeluar" value="<?= $surat_keluar->no_suratkeluar ?>" required placeholder="Nomer Surat masuk" >
                                                 </div>
+                                                <div class="form-group">
+                                                    <label>No Urut:</label>
+                                                    <input class="form-control" type="text" name="no_urut" value="<?= $surat_keluar->no_urut ?>" placeholder="Nomer Urut Surat Masuk" required >
+                                                </div>
+                                        
 
                                             </div>
                                             <div class="panel-footer">

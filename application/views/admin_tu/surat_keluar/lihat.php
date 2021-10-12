@@ -103,6 +103,7 @@
                                                 <h4 class="text-center">Telah Disetujui</h4><br>
                                             </div>
                                             <div>
+                                                
                                                 <h4 class="text-center"><u></u> </h4>
                                                 <h4 class="text-center">NIP :</h4>
                                             </div>
@@ -209,83 +210,10 @@
                                     </div>
                                     <hr>
 
-                                    <div class="col-lg-12">
-                                        <div class="panel panel-info">
-                                            <div class="panel-heading">
-                                                Persetujuan Surat Keluar
-                                            </div>
-                                            <div class="panel-body">
-                                                <?php
-                                                $id_user = $this->session->userdata('id_user');
-                                                if ($this->session->userdata('hakakses') == 'Admin TU') {
-                                                    $cari_pengguna = $this->db->query("SELECT * FROM sub_umum_pegawai WHERE id_user = $id_user ")->row();
-                                                    $id_pengguna = $cari_pengguna->id_sub_umum_pegawai;
-                                                } elseif ($this->session->userdata('hakakses') == 'Admin Kepala') {
-                                                    $cari_pengguna = $this->db->query("SELECT * FROM kepala_pelaksana WHERE id_user = $id_user")->row();
-                                                    $id_pengguna = $cari_pengguna->id_kepala_pelaksana;
-                                                } elseif ($this->session->userdata('hakakses') == 'Admin Bidang') {
-                                                    $cari_pengguna = $this->db->query("SELECT * FROM kepala_bidang WHERE id_user = $id_user")->row();
-                                                    $id_pengguna = $cari_pengguna->id_kepala_bidang;
-                                                } else {
-                                                    redirect('auth/logout');
-                                                }
-                                                ?>
-                                                <input class="form-control" type="hidden" name="id_pengguna" value="<?= $id_pengguna ?>" required>
-                                                <input class="form-control" type="hidden" name="id_suratkeluar" value="<?= $surat_keluar->id_suratkeluar ?>" required>
-
-                                                <div class="form-group">
-                                                    <label>Persetujuan Surat</label>
-                                                    <div class="checkbox">
-                                                        <label>
-                                                            <input type="checkbox" <?php if ($surat_keluar->status == 4) {
-                                                                                        echo "checked='checked'";
-                                                                                    } else {
-                                                                                    } ?> value="1" name="cek[]">Instansi Tujuan
-                                                        </label>
-                                                    </div>
-
-                                                    <div class="checkbox">
-                                                        <label>
-                                                            <input type="checkbox" <?php if ($surat_keluar->status == 4) {
-                                                                                        echo "checked='checked'";
-                                                                                    } else {
-                                                                                    } ?> value="1" name="cek[]">Isi surat
-                                                        </label>
-                                                    </div>
-                                                    <div class="checkbox">
-                                                        <label>
-                                                            <input type="checkbox" <?php if ($surat_keluar->status == 4) {
-                                                                                        echo "checked='checked'";
-                                                                                    } else {
-                                                                                    } ?> value="1" name="cek[]">tanggal surat
-                                                        </label>
-                                                    </div>
-                                                </div>
-                                            <?php
-
-                                            $setujui = $this->db->query("SELECT * FROM setujui WHERE id_suratkeluar = $surat_keluar->id_suratkeluar ");
-                                            if ($setujui->num_rows() > 0) {
-                                                $tampil_setujui = $setujui->row();
-                                                $setujui_catatan = $tampil_setujui->catatan; 
-                                            } else {
-                                                $setujui_catatan = "";
-                                            }
-                                            ?>
-                                                <div class="form-group">
-                                                    <label>Catatan Setujui :</label>
-                                                    <textarea class="form-control" rows="3" name="catatan_setujui" required><?= $setujui_catatan ?></textarea>
-                                                </div>
-
-                                            </div>
-                                            <div class="panel-footer">
-
-                                                <button type="submit" class="btn btn-primary">Simpan</button>
-                                                <a href="<?= base_url('admin_kepala/persetujuan_surat_keluar') ?>" class="btn btn-danger ">Batal</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                            </form>
-
+                                   
+                                </form>
+                                
+                                <a href="<?= base_url('admin_tu/surat_keluar') ?>" class="btn btn-danger ">Kembali</a>
                             <!--   /.col-lg-6 (nested) -->
                         </div>
                         <!-- /.row (nested) -->

@@ -8,7 +8,7 @@ class Surat_keluar extends CI_Controller
     {
         parent::__construct();
 
-        if ($this->session->userdata('hakakses') == "") {
+        if ($this->session->userdata('hakakses') != "Admin TU") {
             $this->session->set_flashdata('pesan', "<script> alert('Username atau Password yang anda masukkan salah')</script>");
             $this->session->sess_destroy();
             redirect('auth/login');
@@ -18,11 +18,11 @@ class Surat_keluar extends CI_Controller
 
     public function index()
     {
-        // $data['instansi'] = $this->db->query("SELECT * FROM instansi")->result();
-        $data['surat_keluar'] = $this->db->query("SELECT * FROM surat_keluar")->result();
         $id_user = $this->session->userdata('id_user');
         $data['surat_valid'] = $this->db->query("SELECT * FROM surat_masuk JOIN disposisi WHERE surat_masuk.status = 4 AND disposisi.id_user = $id_user ")->result();
-
+        $data['surat_setujui'] = $this->db->query("SELECT * FROM surat_keluar JOIN setujui WHERE surat_keluar.status = 4 AND setujui.status = 1 ")->result();
+        
+        $data['surat_keluar'] = $this->db->query("SELECT * FROM surat_keluar WHERE status >= 4")->result();
 
         $this->load->view('templates/header', $data);
         $this->load->view('templates/sidebar');
@@ -43,7 +43,7 @@ class Surat_keluar extends CI_Controller
         $this->load->view('templates/footer');
     }
 
-    public function edit($id_suratkeluar)
+    public function nomor($id_suratkeluar)
     {
         // echo 'oke';
         $data['surat_keluar'] = $this->db->query("SELECT * FROM surat_keluar WHERE id_suratkeluar = $id_suratkeluar")->row();
@@ -57,8 +57,52 @@ class Surat_keluar extends CI_Controller
 
         $this->load->view('templates/header', $data);
         $this->load->view('templates/sidebar');
-        $this->load->view('admin_tu/surat_keluar/edit', $data);
+        $this->load->view('admin_tu/surat_keluar/nomor', $data);
         $this->load->view('templates/footer');
+    }
+
+    public function lihat($id_suratkeluar)
+    {
+        // echo 'oke';
+        $data['surat_keluar'] = $this->db->query("SELECT * FROM surat_keluar WHERE id_suratkeluar = $id_suratkeluar")->row();
+        $data['instansi'] = $this->db->query("SELECT * FROM instansi")->result();
+
+        $data['sifat_surat'] = ['Penting', 'Biasa'];
+        $data['klasifikasi_surat'] = ['Umum', 'Pemerintahan'];
+        $id_user = $this->session->userdata('id_user');
+        $data['surat_valid'] = $this->db->query("SELECT * FROM surat_masuk JOIN disposisi WHERE surat_masuk.status = 4 AND disposisi.id_user = $id_user ")->result();
+
+
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/sidebar');
+        $this->load->view('admin_tu/surat_keluar/lihat', $data);
+        $this->load->view('templates/footer');
+    }
+    public function aksi_penomoran(){
+        $id_suratkeluar = $this->input->post('id_suratkeluar');
+        $id_pengguna = $this->input->post('id_pengguna');
+        $no_suratkeluar = $this->input->post('no_suratkeluar');
+        $no_urut = $this->input->post('no_urut');
+
+        $datat = [
+            'id_suratkeluar' => $id_suratkeluar,
+            'id_sub_umum_pegawai' => $id_pengguna,
+            'created_at' => date("Y-m-d H:i:s"),
+            'updated_at' => date("Y-m-d H:i:s")
+        ];
+
+        $this->Model_penomoran->tambah_penomoran($datat, 'penomoran');
+        $data =[
+        'no_suratkeluar' => $no_suratkeluar,
+        'no_urut' => $no_urut,
+            'status' => 5
+        ];
+
+        $where = [
+            'id_suratkeluar' => $id_suratkeluar
+        ];
+        $this->Model_surat_keluar->update_data($where, $data, 'surat_keluar');
+redirect('admin_tu/surat_keluar');
     }
 
     public function aksi_tambah()

@@ -16,6 +16,8 @@ class Dashboard extends CI_Controller {
             $data['surat_keluar_baru'] = $this->db->query("SELECT * FROM surat_keluar WHERE status = 1")->result();
         
         } elseif ($cari_user->hakakses == 'Admin Bidang') {
+            $data['surat_valid'] = $this->db->query("SELECT * FROM surat_masuk JOIN disposisi WHERE surat_masuk.status = 4 AND disposisi.id_user = $id_user ")->result();
+
         }
         $this->load->view('templates/header', $data);
         $this->load->view('templates/sidebar');

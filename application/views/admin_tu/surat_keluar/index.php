@@ -38,11 +38,11 @@
                                                 <table class="table table-striped table-bordered table-hover dataTable no-footer" id="dataTables-example" role="grid" aria-describedby="dataTables-example_info">
                                                     <thead>
                                                         <tr role="row">
-                                                            <th class="sorting_asc" tabindex="0" aria-controls="dataTables-example" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 165px;">Dari</th>
-                                                            <th class="sorting" tabindex="0" aria-controls="dataTables-example" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending" style="width: 209px;">Klasifikasi</th>
-                                                            <th class="sorting" tabindex="0" aria-controls="dataTables-example" rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending" style="width: 192px;">Perihal</th>
-                                                            <th class="sorting" tabindex="0" aria-controls="dataTables-example" rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending" style="width: 141px;">Tanggal keluar</th>
-                                                            <th class="sorting" tabindex="0" aria-controls="dataTables-example" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending" style="width: 10px;">Diterima</th>
+                                                            <th class="sorting_asc" tabindex="0" aria-controls="dataTables-example" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" >Kepada :</th>
+                                                            <th class="sorting" tabindex="0" aria-controls="dataTables-example" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending">Klasifikasi</th>
+                                                            <th class="sorting" tabindex="0" aria-controls="dataTables-example" rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending" >Perihal</th>
+                                                            <th class="sorting" tabindex="0" aria-controls="dataTables-example" rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending" >Tanggal surat</th>
+                                                            <th class="sorting" tabindex="0" aria-controls="dataTables-example" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending" >Status</th>
                                                             <th class="sorting" tabindex="0" aria-controls="dataTables-example" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending">Aksi</th>
                                                         </tr>
                                                     </thead>
@@ -71,20 +71,22 @@
                                                                     } elseif ($keluar->status == 3) {
                                                                         echo 'Surat tidak di validasi kepala pelaksana';
                                                                     } elseif ($keluar->status == 4) {
-                                                                        echo 'Surat di validasi oleh kepala pelaksana';
+                                                                        echo 'Surat di Setujui oleh kepala pelaksana';
                                                                     } elseif ($keluar->status == 5) {
                                                                         echo 'Surat sudah ke instansi terkait';
                                                                     } else {
                                                                         echo 'Surat informasi';
                                                                     } ?>
-
                                                                 </td>
                                                                 <td class="center">
+                                                                    <?php if ($keluar->status == 4) {?> 
+                                                                        <a href="<?= base_url('admin_tu/surat_keluar/nomor/') . $keluar->id_suratkeluar ?>" type="button" class="btn btn-info"><i class="fa   fa-edit fa-fw"></i> + Nomor Surat</a>
+                                                                    <?php } elseif ($keluar->status == 5) {?>
 
-                                                                    <a href="<?= base_url('admin_tu/surat_keluar/kirim/') . $keluar->id_suratkeluar ?>" type="button" class="btn btn-info"><i class="fa  fa-location-arrow fa-fw"></i> Kirim</a>
-                                                                    <a href="<?= base_url('admin_tu/surat_keluar/lampiran/') . $keluar->id_suratkeluar ?>" type="button" class="btn btn-default"><i class="fa fa-file-pdf-o fa-fw"></i>Lampiran</a>
-                                                                    <a href="<?= base_url('admin_tu/surat_keluar/edit/') . $keluar->id_suratkeluar ?>" type="button" class="btn btn-warning"><i class="fa fa-edit fa-fw"></i>Edit</a>
-                                                                    <a href="<?= base_url('admin_tu/surat_keluar/hapus/') . $keluar->id_suratkeluar ?>" type="button" class="btn btn-danger"><i class="fa fa-trash fa-fw"></i>Hapus</a>
+                                                                     <?php} else {?> 
+
+                                                                    <?php   } ?> 
+                                                                    <a href="<?= base_url('admin_tu/surat_keluar/lihat/') . $keluar->id_suratkeluar ?>" type="button" class="btn btn-default"><i class="fa fa-file-pdf-o fa-fw"></i>Lihat</a>
                                                                 </td>
                                                             </tr>
                                                         <?php endforeach ?>

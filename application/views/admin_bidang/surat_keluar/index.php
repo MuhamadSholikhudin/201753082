@@ -10,7 +10,7 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <p>
-                                <a href="<?= base_url('admin_bidang/surat_keluar/tambah') ?>" class="btn btn-primary ">+ Surat keluar</a>
+                            <a href="<?= base_url('admin_bidang/surat_keluar/tambah') ?>" class="btn btn-primary ">+ Surat keluar</a>
                         </p>
                         <div class="panel panel-default mt-3">
                             <div class="panel-heading">
@@ -28,11 +28,11 @@
                                                 <table class="table table-striped table-bordered table-hover dataTable no-footer" id="dataTables-example" role="grid" aria-describedby="dataTables-example_info">
                                                     <thead>
                                                         <tr role="row">
-                                                            <th class="sorting_asc" tabindex="0" aria-controls="dataTables-example" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 165px;">Dari</th>
-                                                            <th class="sorting" tabindex="0" aria-controls="dataTables-example" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending" style="width: 209px;">Klasifikasi</th>
-                                                            <th class="sorting" tabindex="0" aria-controls="dataTables-example" rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending" style="width: 192px;">Perihal</th>
-                                                            <th class="sorting" tabindex="0" aria-controls="dataTables-example" rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending" style="width: 141px;">Tanggal keluar</th>
-                                                            <th class="sorting" tabindex="0" aria-controls="dataTables-example" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending" style="width: 10px;">Diterima</th>
+                                                            <th class="sorting_asc" tabindex="0" aria-controls="dataTables-example" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" >Kepada </th>
+                                                            <th class="sorting" tabindex="0" aria-controls="dataTables-example" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending" >Klasifikasi</th>
+                                                            <th class="sorting" tabindex="0" aria-controls="dataTables-example" rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending" >Perihal</th>
+                                                            <th class="sorting" tabindex="0" aria-controls="dataTables-example" rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending" >Tanggal keluar</th>
+                                                            <th class="sorting" tabindex="0" aria-controls="dataTables-example" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending" >Diterima</th>
                                                             <th class="sorting" tabindex="0" aria-controls="dataTables-example" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending">Aksi</th>
                                                         </tr>
                                                     </thead>
@@ -48,7 +48,13 @@
                                                                     echo $cari_instansi->nama_instansi
                                                                     ?>
                                                                 </td>
-                                                                <td><?= $keluar->klasifikasi_surat ?></td>
+                                                                <td>
+                                                                    <?php
+                                                                    $cari_klasifikasi = $this->db->query("SELECT * FROM klasifikasi WHERE id_klasifikasi = $keluar->id_klasifikasi ")->row();
+
+                                                                    echo $cari_klasifikasi->klasifikasi
+                                                                    ?>
+                                                                </td>
                                                                 <td><?= $keluar->perihal ?></td>
                                                                 <td class="center"><?= $keluar->tanggal_surat ?></td>
                                                                 <td class="center">
@@ -71,10 +77,10 @@
                                                                 </td>
                                                                 <td class="center">
 
-                                                                    <a href="<?= base_url('surat_keluar_bidang/kirim/') . $keluar->id_suratkeluar ?>" type="button" class="btn btn-info"><i class="fa  fa-location-arrow fa-fw"></i> Kirim</a>
-                                                                    <a href="<?= base_url('surat_keluar_bidang/lampiran/') . $keluar->id_suratkeluar ?>" type="button" class="btn btn-default"><i class="fa fa-file-pdf-o fa-fw"></i>Lampiran</a>
-                                                                    <a href="<?= base_url('surat_keluar_bidang/edit/') . $keluar->id_suratkeluar ?>" type="button" class="btn btn-warning"><i class="fa fa-edit fa-fw"></i>Edit</a>
-                                                                    <a href="<?= base_url('surat_keluar_bidang/hapus/') . $keluar->id_suratkeluar ?>" type="button" class="btn btn-danger"><i class="fa fa-trash fa-fw"></i>Hapus</a>
+                                                                    <a href="<?= base_url('admin_bidang/surat_keluar/kirim/') . $keluar->id_suratkeluar ?>" type="button" class="btn btn-info"><i class="fa  fa-location-arrow fa-fw"></i> Kirim</a>
+                                                                    <a href="<?= base_url('admin_bidang/surat_keluar/lampiran/') . $keluar->id_suratkeluar ?>" type="button" class="btn btn-default"><i class="fa fa-file-pdf-o fa-fw"></i>Lampiran</a>
+                                                                    <a href="<?= base_url('admin_bidang/surat_keluar/edit/') . $keluar->id_suratkeluar ?>" type="button" class="btn btn-warning"><i class="fa fa-edit fa-fw"></i>Edit</a>
+                                                                    <a href="<?= base_url('admin_bidang/surat_keluar/hapus/') . $keluar->id_suratkeluar ?>" type="button" class="btn btn-danger"><i class="fa fa-trash fa-fw"></i>Hapus</a>
                                                                 </td>
                                                             </tr>
                                                         <?php endforeach ?>

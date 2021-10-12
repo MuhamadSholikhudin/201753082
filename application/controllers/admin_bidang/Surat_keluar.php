@@ -18,11 +18,12 @@ class Surat_keluar extends CI_Controller
 
     public function index()
     {
-        // $data['instansi'] = $this->db->query("SELECT * FROM instansi")->result();
+        $id_user = $this->session->userdata('id_user');
+        $data['surat_valid'] = $this->db->query("SELECT * FROM surat_masuk JOIN disposisi WHERE surat_masuk.status = 4 AND disposisi.id_user = $id_user ")->result();
         $data['surat_keluar'] = $this->db->query("SELECT * FROM surat_keluar")->result();
 
 
-        $this->load->view('templates/header');
+        $this->load->view('templates/header', $data);
         $this->load->view('templates/sidebar');
         $this->load->view('admin_bidang/surat_keluar/index', $data);
         $this->load->view('templates/footer');
@@ -30,7 +31,8 @@ class Surat_keluar extends CI_Controller
 
     public function tambah()
     {
-        // echo 'oke';
+        $id_user = $this->session->userdata('id_user');
+        $data['surat_valid'] = $this->db->query("SELECT * FROM surat_masuk JOIN disposisi WHERE surat_masuk.status = 4 AND disposisi.id_user = $id_user ")->result();
         $data['instansi'] = $this->db->query("SELECT * FROM instansi")->result();
         $data['klasifikasi'] = $this->db->query("SELECT * FROM klasifikasi")->result();
 
@@ -42,12 +44,16 @@ class Surat_keluar extends CI_Controller
 
     public function edit($id_suratkeluar)
     {
-        // echo 'oke';
+        $id_user = $this->session->userdata('id_user');
+        $data['surat_valid'] = $this->db->query("SELECT * FROM surat_masuk JOIN disposisi WHERE surat_masuk.status = 4 AND disposisi.id_user = $id_user ")->result();
+        
         $data['surat_keluar'] = $this->db->query("SELECT * FROM surat_keluar WHERE id_suratkeluar = $id_suratkeluar")->row();
         $data['instansi'] = $this->db->query("SELECT * FROM instansi")->result();
 
         $data['sifat_surat'] = ['Penting', 'Biasa'];
-        $data['klasifikasi_surat'] = ['Umum', 'Pemerintahan'];
+        // $data['klasifikasi_surat'] = ['Umum', 'Pemerintahan'];
+        $data['klasifikasi'] = $this->db->query("SELECT * FROM klasifikasi")->result();
+
 
         $this->load->view('templates/header', $data);
         $this->load->view('templates/sidebar');
@@ -137,7 +143,7 @@ class Surat_keluar extends CI_Controller
         $wheret = [
             'id_suratkeluar' => $id_suratkeluar
         ];
-        $this->Model_membuat->update_datat($wheret, $datat, 'Model_membuat');
+        $this->Model_membuat->update_datat($wheret, $datat, 'membuat');
         redirect('admin_bidang/surat_keluar/index');
     }
 
@@ -231,9 +237,7 @@ class Surat_keluar extends CI_Controller
         $cari_surat = $this->db->query("SELECT * FROM surat_keluar WHERE id_suratkeluar = $id_suratkeluar")->row();
 
         $data = [
-
-            // 'status' => $cari_surat->status
-            'status' => 1
+            'status' => 3
         ];
 
         $where = [
@@ -241,6 +245,6 @@ class Surat_keluar extends CI_Controller
         ];
 
         $this->Model_surat_keluar->update_data($where, $data, 'surat_keluar');
-        redirect('admin_bidang/surat_keluar_bidang/');
+        redirect('admin_bidang/surat_keluar/');
     }
 }
