@@ -100,14 +100,25 @@
                                             </div>
                                             <div class="mb-3">
                                                 <br>
-                                                <h4 class="text-center">Telah Disetujui</h4><br>
+                                                <h4 class="text-center">
+
+
+                                                </h4><br>
                                             </div>
                                             <div>
-                                                <?php 
-                                                    $cek_kepala = 1;
+                                                <?php
+                                                // $id_user = $this->session->userdata('id_user');
+                                                $c_setujui = $this->db->query("SELECT * FROM kepala_pelaksana JOIN setujui ON kepala_pelaksana.id_kepala_pelaksana = setujui.id_kepala_pelaksana WHERE setujui.id_suratkeluar =  $surat_keluar->id_suratkeluar");
+                                                if ($c_setujui->num_rows() < 1) { ?>
+                                                    <h4 class="text-center"><u></u> </h4>
+                                                    <h4 class="text-center">NIP : </h4>
+                                                <?php } else {
+                                                    $cek_kepala = $c_setujui->row(); ?>
+                                                    <h4 class="text-center"><u><?= $cek_kepala->nama ?></u> </h4>
+                                                    <h4 class="text-center">NIP : <?= $cek_kepala->nip ?></h4>
+                                                <?php
+                                                }
                                                 ?>
-                                                <h4 class="text-center"><u></u> </h4>
-                                                <h4 class="text-center">NIP :</h4>
                                             </div>
                                         </div>
 
@@ -147,7 +158,7 @@
 
                                     <div class="form-group">
                                         <label>No Urut:</label>
-                                        <input class="form-control" type="text" name="no_urut" value="<?= $surat_keluar->no_urut ?>" placeholder="Nomer Urut Surat Masuk" required disabled>
+                                        <input class="form-control" type="text" name="no_urut" value="<?= $surat_keluar->no_urut ?>" placeholder="Disi oleh Sub Umum setelah di setujui" required disabled>
                                     </div>
                                     <div class="form-group">
                                         <label>Tanggal Surat:</label>
@@ -190,7 +201,7 @@
                                 <div class="col-lg-6">
                                     <div class="form-group">
                                         <label>No Surat Keluar :</label>
-                                        <input class="form-control" type="text" name="no_suratkeluar" value="<?= $surat_keluar->no_suratkeluar ?>" required placeholder="Nomer Surat masuk" disabled>
+                                        <input class="form-control" type="text" name="no_suratkeluar" value="<?= $surat_keluar->no_suratkeluar ?>" required placeholder="Disi oleh Sub Umum setelah di setujui" disabled>
                                     </div>
 
                                     <div class="form-group">
@@ -264,16 +275,16 @@
                                                         </label>
                                                     </div>
                                                 </div>
-                                            <?php
+                                                <?php
 
-                                            $setujui = $this->db->query("SELECT * FROM setujui WHERE id_suratkeluar = $surat_keluar->id_suratkeluar ");
-                                            if ($setujui->num_rows() > 0) {
-                                                $tampil_setujui = $setujui->row();
-                                                $setujui_catatan = $tampil_setujui->catatan; 
-                                            } else {
-                                                $setujui_catatan = "";
-                                            }
-                                            ?>
+                                                $setujui = $this->db->query("SELECT * FROM setujui WHERE id_suratkeluar = $surat_keluar->id_suratkeluar ");
+                                                if ($setujui->num_rows() > 0) {
+                                                    $tampil_setujui = $setujui->row();
+                                                    $setujui_catatan = $tampil_setujui->catatan;
+                                                } else {
+                                                    $setujui_catatan = "";
+                                                }
+                                                ?>
                                                 <div class="form-group">
                                                     <label>Catatan Setujui :</label>
                                                     <textarea class="form-control" rows="3" name="catatan_setujui" required><?= $setujui_catatan ?></textarea>

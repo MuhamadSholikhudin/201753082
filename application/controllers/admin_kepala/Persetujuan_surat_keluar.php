@@ -66,6 +66,7 @@ class Persetujuan_surat_keluar extends CI_Controller
 
         $data['surat_keluar'] = $this->db->query("SELECT * FROM surat_keluar WHERE id_suratkeluar = $id_suratkeluar")->row();       
         $data['instansi'] = $this->db->query("SELECT * FROM instansi")->result();
+        $data['klasifikasi'] = $this->db->query("SELECT * FROM klasifikasi")->result();
 
         $data['sifat_surat'] = ['Penting', 'Biasa'];
         $data['klasifikasi_surat'] = ['Umum', 'Pemerintahan'];

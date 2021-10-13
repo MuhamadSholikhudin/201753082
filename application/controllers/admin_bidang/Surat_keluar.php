@@ -8,7 +8,7 @@ class Surat_keluar extends CI_Controller
     {
         parent::__construct();
 
-        if ($this->session->userdata('hakakses') == "") {
+        if ($this->session->userdata('hakakses') != "Admin Bidang") {
             $this->session->set_flashdata('pesan', "<script> alert('Username atau Password yang anda masukkan salah')</script>");
             $this->session->sess_destroy();
             redirect('auth/login');
@@ -20,8 +20,9 @@ class Surat_keluar extends CI_Controller
     {
         $id_user = $this->session->userdata('id_user');
         $data['surat_valid'] = $this->db->query("SELECT * FROM surat_masuk JOIN disposisi WHERE surat_masuk.status = 4 AND disposisi.id_user = $id_user ")->result();
-        $data['surat_keluar'] = $this->db->query("SELECT * FROM surat_keluar")->result();
-
+        
+        $cari_kepala_bidang = $this->db->query("SELECT * FROM kepala_bidang WHERE id_user = $id_user")->row();
+        $data['surat_keluar'] = $this->db->query("SELECT * FROM surat_keluar JOIN membuat ON surat_keluar.id_suratkeluar = membuat.id_suratkeluar AND membuat.id_kepala_bidang = $cari_kepala_bidang->id_kepala_bidang ")->result();
 
         $this->load->view('templates/header', $data);
         $this->load->view('templates/sidebar');
@@ -61,10 +62,29 @@ class Surat_keluar extends CI_Controller
         $this->load->view('templates/footer');
     }
 
+    public function lihat($id_suratkeluar)
+    {
+        $id_user = $this->session->userdata('id_user');
+        $data['surat_valid'] = $this->db->query("SELECT * FROM surat_masuk JOIN disposisi WHERE surat_masuk.status = 4 AND disposisi.id_user = $id_user ")->result();
+        
+        $data['surat_keluar'] = $this->db->query("SELECT * FROM surat_keluar WHERE id_suratkeluar = $id_suratkeluar")->row();
+        $data['instansi'] = $this->db->query("SELECT * FROM instansi")->result();
+
+        $data['sifat_surat'] = ['Penting', 'Biasa'];
+        // $data['klasifikasi_surat'] = ['Umum', 'Pemerintahan'];
+        $data['klasifikasi'] = $this->db->query("SELECT * FROM klasifikasi")->result();
+
+
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/sidebar');
+        $this->load->view('admin_bidang/surat_keluar/lihat', $data);
+        $this->load->view('templates/footer');
+    }
+
     public function aksi_tambah()
     {
         $id_instansi = $this->input->post('id_instansi');
-        $no_urut = $this->input->post('no_urut');
+        // $no_urut = $this->input->post('no_urut');
         $tanggal_surat = $this->input->post('tanggal_surat');
         $perihal = $this->input->post('perihal');
         $sifat_surat = $this->input->post('sifat_surat');
@@ -79,7 +99,7 @@ class Surat_keluar extends CI_Controller
 
         $data = array(
             'id_instansi'    =>  $id_instansi,
-            'no_urut' =>  $no_urut,
+            // 'no_urut' =>  $no_urut,
             'tanggal_surat' =>  $tanggal_surat,
             'perihal' =>  $perihal,
             'sifat_surat'    =>  $sifat_surat,
@@ -109,7 +129,7 @@ class Surat_keluar extends CI_Controller
     {
         $id_suratkeluar = $this->input->post('id_suratkeluar');
         $id_instansi = $this->input->post('id_instansi');
-        $no_urut = $this->input->post('no_urut');
+        // $no_urut = $this->input->post('no_urut');
         $tanggal_surat = $this->input->post('tanggal_surat');
         $perihal = $this->input->post('perihal');
         $sifat_surat = $this->input->post('sifat_surat');
@@ -122,7 +142,7 @@ class Surat_keluar extends CI_Controller
 
         $data = array(
             'id_instansi'    =>  $id_instansi,
-            'no_urut' =>  $no_urut,
+            // 'no_urut' =>  $no_urut,
             'tanggal_surat' =>  $tanggal_surat,
             'perihal' =>  $perihal,
             'sifat_surat'    =>  $sifat_surat,
@@ -237,7 +257,8 @@ class Surat_keluar extends CI_Controller
         $cari_surat = $this->db->query("SELECT * FROM surat_keluar WHERE id_suratkeluar = $id_suratkeluar")->row();
 
         $data = [
-            'status' => 3
+            'status' => 2,
+            'tanggal_teruskan' => date('Y-m-d')
         ];
 
         $where = [

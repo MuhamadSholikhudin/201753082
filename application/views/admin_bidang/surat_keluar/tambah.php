@@ -87,6 +87,23 @@
 
                                         </select>
                                     </div>
+                                    <?php
+                                    $id_user = $this->session->userdata('id_user');
+                                    if ($this->session->userdata('hakakses') == 'Admin TU') {
+                                        $cari_pengguna = $this->db->query("SELECT * FROM sub_umum_pegawai WHERE id_user = $id_user ")->row();
+                                        $id_pengguna = $cari_pengguna->id_sub_umum_pegawai;
+                                    } elseif ($this->session->userdata('hakakses') == 'Admin Kepala') {
+                                        $cari_pengguna = $this->db->query("SELECT * FROM kepala_pelaksan WHERE id_user = $id_user")->row();
+                                        $id_pengguna = $cari_pengguna->id_kepala_pelaksana;
+                                    } elseif ($this->session->userdata('hakakses') == 'Admin Bidang') {
+                                        $cari_pengguna = $this->db->query("SELECT * FROM kepala_bidang WHERE id_user = $id_user")->row();
+                                        $id_pengguna = $cari_pengguna->id_kepala_bidang;
+                                    } else {
+                                        redirect('auth/logout');
+                                    }
+                                    ?>
+                                    <input class="form-control" type="hidden" name="id_pengguna" value="<?= $id_pengguna ?>" required>
+
 
                                     <button type="submit" class="btn btn-primary">Simpan</button>
                                     <a href="<?= base_url('surat_keluar') ?>" class="btn btn-danger ">Batal</a>

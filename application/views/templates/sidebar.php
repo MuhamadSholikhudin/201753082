@@ -41,13 +41,13 @@
           <a href="#"><i class="fa fa-book fa-fw"></i>Laporan<span class="fa arrow"></span></a>
           <ul class="nav nav-second-level">
             <li>
-              <a href="<?= base_url('admin_kepala/laporan/surat_masuk') ?>">Surat Masuk</a>
+              <a href="<?= base_url('admin_kepala/laporan_surat_masuk') ?>">Surat Masuk</a>
             </li>
             <li>
-              <a href="<?= base_url('admin_kepala/laporan/surat_masuk') ?>">Surat Keluar</a>
+              <a href="<?= base_url('admin_kepala/laporan_surat_masuk') ?>">Surat Keluar</a>
             </li>
             <li>
-              <a href="<?= base_url('admin_kepala/laporan/user') ?>">user</a>
+              <a href="<?= base_url('admin_kepala/laporan_user') ?>">user</a>
             </li>
           </ul>
           <!-- /.nav-second-level -->

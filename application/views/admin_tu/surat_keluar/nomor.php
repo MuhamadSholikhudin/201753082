@@ -103,8 +103,19 @@
                                                 <h4 class="text-center">Telah Disetujui</h4><br>
                                             </div>
                                             <div>
-                                                <h4 class="text-center"><u></u> </h4>
-                                                <h4 class="text-center">NIP :</h4>
+                                                <?php
+                                                // $id_user = $this->session->userdata('id_user');
+                                                $c_setujui = $this->db->query("SELECT * FROM kepala_pelaksana JOIN setujui ON kepala_pelaksana.id_kepala_pelaksana = setujui.id_kepala_pelaksana WHERE setujui.id_suratkeluar =  $surat_keluar->id_suratkeluar");
+                                                if ($c_setujui->num_rows() < 1) { ?>
+                                                    <h4 class="text-center"><u></u> </h4>
+                                                    <h4 class="text-center">NIP : </h4>
+                                                <?php } else {
+                                                    $cek_kepala = $c_setujui->row(); ?>
+                                                    <h4 class="text-center"><u><?= $cek_kepala->nama ?></u> </h4>
+                                                    <h4 class="text-center">NIP : <?= $cek_kepala->nip ?></h4>
+                                                <?php
+                                                }
+                                                ?>
                                             </div>
                                         </div>
 
@@ -141,7 +152,10 @@
                                             <?php endforeach; ?>
                                         </select>
                                     </div>
-
+                                    <div class="form-group">
+                                        <label>No Urut:</label>
+                                        <input class="form-control" type="text" name="no_urut" value="<?= $surat_keluar->no_urut ?>" disabled required>
+                                    </div>
 
                                     <div class="form-group">
                                         <label>Tanggal Surat:</label>
@@ -188,6 +202,10 @@
                                         <label>Tanggal Diteruskan :</label>
                                         <input class="form-control" type="date" name="tanggal_teruskan" value="<?= $surat_keluar->tanggal_teruskan ?>" required disabled>
                                     </div>
+                                    <div class="form-group">
+                                        <label>No Surat Keluar :</label>
+                                        <input class="form-control" type="text" name="no_suratkeluar" value="<?= $surat_keluar->no_suratkeluar ?>" required disabled>
+                                    </div>
 
                                     <div class="form-group">
                                         <label>Klasifikasi Surat :</label>
@@ -230,19 +248,19 @@
 
                                                 <div class="form-group">
                                                     <label>No Surat Keluar :</label>
-                                                    <input class="form-control" type="text" name="no_suratkeluar" value="<?= $surat_keluar->no_suratkeluar ?>" required placeholder="Nomer Surat masuk" >
+                                                    <input class="form-control" type="text" name="no_suratkeluar" value="<?= $surat_keluar->no_suratkeluar ?>" required placeholder="Nomer Surat masuk">
                                                 </div>
                                                 <div class="form-group">
                                                     <label>No Urut:</label>
-                                                    <input class="form-control" type="text" name="no_urut" value="<?= $surat_keluar->no_urut ?>" placeholder="Nomer Urut Surat Masuk" required >
+                                                    <input class="form-control" type="text" name="no_urut" value="<?= $surat_keluar->no_urut ?>" placeholder="Nomer Urut Surat Masuk" required>
                                                 </div>
-                                        
+
 
                                             </div>
                                             <div class="panel-footer">
 
                                                 <button type="submit" class="btn btn-primary">Simpan</button>
-                                                <a href="<?= base_url('admin_kepala/persetujuan_surat_keluar') ?>" class="btn btn-danger ">Batal</a>
+                                                <a href="<?= base_url('admin_tu/surat_keluar') ?>" class="btn btn-danger ">Batal</a>
                                             </div>
                                         </div>
                                     </div>

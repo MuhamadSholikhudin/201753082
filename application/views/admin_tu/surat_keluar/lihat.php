@@ -103,9 +103,19 @@
                                                 <h4 class="text-center">Telah Disetujui</h4><br>
                                             </div>
                                             <div>
-                                                
-                                                <h4 class="text-center"><u></u> </h4>
-                                                <h4 class="text-center">NIP :</h4>
+                                                <?php
+                                                // $id_user = $this->session->userdata('id_user');
+                                                $c_setujui = $this->db->query("SELECT * FROM kepala_pelaksana JOIN setujui ON kepala_pelaksana.id_kepala_pelaksana = setujui.id_kepala_pelaksana WHERE setujui.id_suratkeluar =  $surat_keluar->id_suratkeluar");
+                                                if ($c_setujui->num_rows() < 1) { ?>
+                                                    <h4 class="text-center"><u></u> </h4>
+                                                    <h4 class="text-center">NIP : </h4>
+                                                <?php } else {
+                                                    $cek_kepala = $c_setujui->row(); ?>
+                                                    <h4 class="text-center"><u><?= $cek_kepala->nama ?></u> </h4>
+                                                    <h4 class="text-center">NIP : <?= $cek_kepala->nip ?></h4>
+                                                <?php
+                                                }
+                                                ?>
                                             </div>
                                         </div>
 
@@ -210,10 +220,10 @@
                                     </div>
                                     <hr>
 
-                                   
-                                </form>
-                                
-                                <a href="<?= base_url('admin_tu/surat_keluar') ?>" class="btn btn-danger ">Kembali</a>
+
+                            </form>
+
+                            <a href="<?= base_url('admin_tu/surat_keluar') ?>" class="btn btn-danger ">Kembali</a>
                             <!--   /.col-lg-6 (nested) -->
                         </div>
                         <!-- /.row (nested) -->

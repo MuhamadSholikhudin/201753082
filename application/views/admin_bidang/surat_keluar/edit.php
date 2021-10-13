@@ -48,10 +48,10 @@
                                         </select>
                                     </div>
 
-                                    <div class="form-group">
+                                    <!-- <div class="form-group">
                                         <label>No Urut:</label>
-                                        <input class="form-control" type="text" name="no_urut" value="<?= $surat_keluar->no_urut ?>" placeholder="Nomer Urut Surat keluar" required>
-                                    </div>
+                                        <input class="form-control" type="text" name="no_urut" value="<?= $surat_keluar->no_urut ?>" disabled placeholder="Nomer Urut Surat keluar" required>
+                                    </div> -->
                                     <div class="form-group">
                                         <label>Tanggal Surat:</label>
                                         <input class="form-control" type="date" name="tanggal_surat" value="<?= $surat_keluar->tanggal_surat ?>" required>

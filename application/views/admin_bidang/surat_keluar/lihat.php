@@ -116,6 +116,7 @@
                                                 <?php
                                                 }
                                                 ?>
+
                                             </div>
                                         </div>
 
@@ -321,7 +322,7 @@
                                         </div>
                                         <div class="panel-footer">
 
-                                            <a href="<?= base_url('admin_kepala/persetujuan_surat_keluar') ?>" class="btn btn-danger ">Kembali</a>
+                                            <a href="<?= base_url('admin_bidang/surat_keluar') ?>" class="btn btn-danger ">Kembali</a>
                                         </div>
                                     </div>
                                 </div>
