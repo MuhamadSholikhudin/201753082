@@ -268,4 +268,35 @@ class Surat_keluar extends CI_Controller
         $this->Model_surat_keluar->update_data($where, $data, 'surat_keluar');
         redirect('admin_bidang/surat_keluar/');
     }
+
+public function hapus($id_suratkeluar){
+        //cek setujui
+        $cek_setujui = $this->db->query("SELECT * FROM setujui WHERE id_suratkeluar = $id_suratkeluar")->num_rows();
+if($cek_setujui < 1){
+            //cek penomoran 
+
+
+            $cek_ = $this->db->query("SELECT * FROM penomoran WHERE id_suratkeluar = $id_suratkeluar")->num_rows();
+           $where = [
+                'id_suratkeluar' => $id_suratkeluar
+           ];
+
+//            $this->Model_mendata->hapus_data($where, 'mendata');
+            $this->Model_membuat->hapus_data($where, 'membuat');
+            //hapus surat masuk
+            $this->Model_surat_keluar->hapus_data($where, 'surat_keluar');
+            echo "<script> alert('Data Surat Masuk Berhasik di hapus')</script>";
+
+            redirect('admin_tu/surat_masuk/');
+
+
+}else{
+            echo "<script> alert('Data Surat Masuk Berhasik di hapus')</script>";
+            redirect('admin_tu/surat_masuk/');
+
+}
+
+
+    }
+
 }
