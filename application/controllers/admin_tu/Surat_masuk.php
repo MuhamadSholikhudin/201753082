@@ -314,4 +314,31 @@ class Surat_masuk extends CI_Controller
         $this->Model_surat_masuk->update_data($where, $data, 'surat_masuk');
         redirect('admin_tu/surat_masuk/');
     }
+
+
+    public function hapus($id_suratmasuk){
+        //cek disposisi
+        $cek_disposisi = $this->db->query("SELECT * FROM disposisi WHERE id_suratmasuk = $id_suratmasuk")->num_rows();
+if($cek_disposisi < 1){
+            //cek mendata dan hapus
+            $cek_mendata = $this->db->query("SELECT * FROM mendata WHERE id_suratmasuk = $id_suratmasuk")->num_rows();
+           $where = [
+                'id_suratmasuk' => $id_suratmasuk
+           ];
+            $this->Model_mendata->hapus_data($where, 'mendata');
+            //hapus surat masuk
+            $this->Model_surat_masuk->hapus_data($where, 'surat_masuk');
+            echo "<script> alert('Data Surat Masuk Berhasik di hapus')</script>";
+
+            redirect('admin_tu/surat_masuk/');
+
+
+}else{
+            echo "<script> alert('Data Surat Masuk Berhasik di hapus')</script>";
+            redirect('admin_tu/surat_masuk/');
+
+}
+
+
+    }
 }

@@ -34,17 +34,17 @@
           <a href="<?= base_url('admin_kepala/validasi_surat_masuk') ?>"><i class="fa  fa-envelope fa-fw"></i> Validasi Surat Masuk</a>
         </li>
         <li>
-          <a href="<?= base_url('admin_kepala/persetujuan_surat_keluar') ?>"><i class="fa  fa-envelope-o fa-fw"></i>Persetujuan Surat Keluar</a>
+          <a href="<?= base_url('admin_kepala/persetujuan_surat_keluar') ?>"><i class="fa  fa-envelope-o fa-fw"></i> Persetujuan Surat Keluar</a>
         </li>
 
         <li>
           <a href="#"><i class="fa fa-book fa-fw"></i>Laporan<span class="fa arrow"></span></a>
           <ul class="nav nav-second-level">
             <li>
-              <a href="<?= base_url('admin_kepala/laporan_surat_masuk') ?>">Surat Masuk</a>
+              <a href="<?= base_url('admin_kepala/laporan_surat_masuk') ?>"> Surat Masuk</a>
             </li>
             <li>
-              <a href="<?= base_url('admin_kepala/laporan_surat_masuk') ?>">Surat Keluar</a>
+              <a href="<?= base_url('admin_kepala/laporan_surat_masuk') ?>" >Surat Keluar</a>
             </li>
             <li>
               <a href="<?= base_url('admin_kepala/laporan_user') ?>">user</a>
@@ -74,13 +74,13 @@
           <a href="#"><i class="fa fa-book fa-fw"></i>Laporan<span class="fa arrow"></span></a>
           <ul class="nav nav-second-level">
             <li>
-              <a href="<?= base_url('admin_tu/laporan/surat_masuk') ?>">Surat Masuk</a>
+              <a href="<?= base_url('admin_tu/laporan_surat_masuk') ?>">Surat Masuk</a>
             </li>
             <li>
-              <a href="<?= base_url('admin_tu/laporan/surat_masuk') ?>">Surat Keluar</a>
+              <a href="<?= base_url('admin_tu/laporan_surat_masuk') ?>">Surat Keluar</a>
             </li>
             <li>
-              <a href="<?= base_url('admin_tu/laporan/user') ?>">user</a>
+              <a href="<?= base_url('admin_tu/laporan_user') ?>">user</a>
             </li>
           </ul>
           <!-- /.nav-second-level -->

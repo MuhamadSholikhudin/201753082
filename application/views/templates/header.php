@@ -8,7 +8,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>Surat Masuk Surat Keluar</title>
+  <title>PENGELOLAAN SURAT BPBD KAB PATI</title>
 
   <!-- Bootstrap Core CSS -->
   <link href="<?= base_url('assets/') ?>css/bootstrap.min.css" rel="stylesheet">

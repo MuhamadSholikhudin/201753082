@@ -7,7 +7,7 @@ class Laporan_user extends CI_Controller
     {
         parent::__construct();
 
-        if ($this->session->userdata('hakakses') != "Admin Kepala") {
+        if ($this->session->userdata('hakakses') != "Admin TU") {
             $this->session->set_flashdata('pesan', "<script> alert('Username atau Password yang anda masukkan salah')</script>");
             $this->session->sess_destroy();
             redirect('auth/login');
@@ -23,7 +23,7 @@ class Laporan_user extends CI_Controller
 
     //     $this->load->view('templates/header', $data);
     //     $this->load->view('templates/sidebar');
-    //     $this->load->view('admin_kepala/laporan_surat_masuk/index', $data);
+    //     $this->load->view('admin_tu/laporan_surat_masuk/index', $data);
     //     $this->load->view('templates/footer');
     // }
 
@@ -40,7 +40,7 @@ class Laporan_user extends CI_Controller
 
             $this->load->view('templates/header', $data);
             $this->load->view('templates/sidebar');
-            $this->load->view('admin_kepala/laporan_user/index', $data);
+            $this->load->view('admin_tu/laporan_user/index', $data);
             $this->load->view('templates/footer');
         } else {
             $hakakses = $this->input->post('hakakses');
@@ -59,7 +59,7 @@ class Laporan_user extends CI_Controller
 
                 $this->load->view('templates/header', $data);
                 $this->load->view('templates/sidebar');
-                $this->load->view('admin_kepala/laporan_user/index', $data);
+                $this->load->view('admin_tu/laporan_user/index', $data);
                 $this->load->view('templates/footer');
             } elseif ($hakakses == 'Admin Kepala') {
 
@@ -70,7 +70,7 @@ class Laporan_user extends CI_Controller
 
                 $this->load->view('templates/header', $data);
                 $this->load->view('templates/sidebar');
-                $this->load->view('admin_kepala/laporan_user/index', $data);
+                $this->load->view('admin_tu/laporan_user/index', $data);
                 $this->load->view('templates/footer');
             } elseif ($hakakses == 'Admin Bidang') {
 
@@ -84,7 +84,7 @@ class Laporan_user extends CI_Controller
 
                 $this->load->view('templates/header', $data);
                 $this->load->view('templates/sidebar');
-                $this->load->view('admin_kepala/laporan_user/index', $data);
+                $this->load->view('admin_tu/laporan_user/index', $data);
                 $this->load->view('templates/footer');
             }elseif($hakakses == 'semua'){
                 $data['surat_kirim'] = $this->db->query("SELECT * FROM surat_masuk WHERE status = 2")->result();
@@ -99,7 +99,7 @@ class Laporan_user extends CI_Controller
 
                 $this->load->view('templates/header', $data);
                 $this->load->view('templates/sidebar');
-                $this->load->view('admin_kepala/laporan_user/index', $data);
+                $this->load->view('admin_tu/laporan_user/index', $data);
                 $this->load->view('templates/footer');
             }
         }
@@ -112,20 +112,20 @@ class Laporan_user extends CI_Controller
         $data['surat_masuk'] = $this->db->query("SELECT * FROM surat_masuk WHERE tanggal_surat BETWEEN '$tanggal_awal' AND '$tanggal_akhir'")->result();
         $data['hal'] = ['pertanggal'];
         $data['tanggal'] = [$tanggal_awal, $tanggal_akhir];
-        $this->load->view('admin_kepala/laporan_surat_masuk/cetak_laporan_surat_masuk', $data);
+        $this->load->view('admin_tu/laporan_surat_masuk/cetak_laporan_surat_masuk', $data);
     }
     public function cetak_surat_masuk_bulan($bulan, $tahun)
     {
         $data['surat_masuk'] = $this->db->query("SELECT * FROM surat_masuk WHERE MONTH(tanggal_surat) = '$bulan' AND YEAR(tanggal_surat) = '$tahun' ")->result();
         $data['hal'] = ['bulan'];
         $data['bulan'] = [$bulan, $tahun];
-        $this->load->view('admin_kepala/laporan_surat_masuk/cetak_laporan_surat_masuk', $data);
+        $this->load->view('admin_tu/laporan_surat_masuk/cetak_laporan_surat_masuk', $data);
     }
     public function cetak_surat_masuk_tahun($tahun)
     {
         $data['surat_masuk'] = $this->db->query("SELECT * FROM surat_masuk WHERE  YEAR(tanggal_surat) = '$tahun' ")->result();
         $data['hal'] = ['tahun'];
         $data['tahun'] = [$tahun];
-        $this->load->view('admin_kepala/laporan_surat_masuk/cetak_laporan_surat_masuk', $data);
+        $this->load->view('admin_tu/laporan_surat_masuk/cetak_laporan_surat_masuk', $data);
     }
 }

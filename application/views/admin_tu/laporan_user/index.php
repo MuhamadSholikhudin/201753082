@@ -16,7 +16,7 @@
                         <div class="row">
                             <div class="col-lg-4">
                                 <h3>Tampilkan user</h3>
-                                <form role="form" action="<?= base_url('admin_kepala/laporan_user') ?>" method="POST" enctype="multipart/form-data">
+                                <form role="form" action="<?= base_url('admin_tu/laporan_user') ?>" method="POST" enctype="multipart/form-data">
                                     <div class="form-group">
                                         <label>Pilih</label>
                                         <select class="form-control" name="hakakses" required>

@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Cetak Laporan Surat Keluar</title>
+    <title>Cetak Laporan Pegawai</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymojad">
 </head>
 
@@ -18,7 +18,7 @@
                 <img class="rounded center-block " src="<?= base_url('assets/img/logobpbdpati.png') ?>" width="200" alt="" srcset="">
 
                 <div class="text-center mb-3">
-                    <h4>LAPORAN DATA SURAT KELUAR
+                    <h4>LAPORAN DATA SURAT Keluar
                         <?php
                         if ($hal[0] == 'pertanggal') {
                             echo 'TANGGAl ' . $tanggal[0] . ' SAMPAI ' . $tanggal[1];
@@ -54,7 +54,9 @@
                         } elseif ($hal[0] == 'tahun') {
                             echo 'TAHUN ' . $tahun[0];
                         }
+
                         ?>
+
                     </h4>
                     <h4>BPBD KABUPATEN PATI</h4>
                     <h4>Alamat : Jl. Raya Pati-Kudus KM 3,5 Kecamatan Pati, Sawah, Margorejo, Kec. Margorejo, Kabupaten Pati, Jawa Tengah 59163 Telp : (0295) 387237</h4>
