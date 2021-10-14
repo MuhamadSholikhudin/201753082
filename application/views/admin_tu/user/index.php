@@ -60,7 +60,7 @@
                                                                 <td class="center">
 
                                                                     <a href="<?= base_url('admin_tu/user/edit/') . $peg->id_user ?>" type="button" class="btn btn-warning"><i class="fa fa-edit fa-fw"></i>Edit</a>
-                                                                    <a href="<?= base_url('admin_tu/user/hapus/') . $peg->id_user ?>" type="button" class="btn btn-danger"><i class="fa fa-trash fa-fw"></i>Hapus</a>
+                                                                    <a href="<?= base_url('admin_tu/user/lihat/') . $peg->id_user ?>" type="button" class="btn btn-success"><i class="fa fa-eye fa-fw"></i>Lihat</a>
                                                                 </td>
                                                             </tr>
                                                         <?php endforeach; ?>

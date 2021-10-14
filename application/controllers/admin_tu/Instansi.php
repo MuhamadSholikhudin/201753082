@@ -69,6 +69,7 @@ class Instansi extends CI_Controller {
                 );
         
         $this->Model_instansi->tambah_instansi($data, 'instansi');
+        $this->session->set_flashdata('pesan', "<script> alert('Data Instansi Berhasil ditambahkan')</script>");
             redirect('admin_tu/instansi/index');
         }
 
@@ -92,8 +93,8 @@ class Instansi extends CI_Controller {
         $this->db->set($data);
         $this->db->where('id_instansi', $id_instansi);
         $this->db->update('instansi');
+        $this->session->set_flashdata('pesan', "<script> alert('Data Instansi Berhasil Di Ubah')</script>");        
         redirect('admin_tu/instansi/index');
-
     }
 
     public function hapus($id_instansi)
@@ -106,25 +107,19 @@ class Instansi extends CI_Controller {
             if ($cari_keluar < 1) {
                 $this->db->delete('instansi', array('id_instansi' => $id_instansi));
                 // echo "<script>alert('Data instansi berhasil di hapus ')</script>";
-                $this->session->set_flashdata('pesan', '<div class="alert alert-success alert-dismissible">
-                                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                                        Data instansi berhasil di hapus. 
-                                    </div>');
+                $this->session->set_flashdata('pesan', "<script> alert('Data instansi berhasil di hapus. 
+                                   ')</script>");
                 redirect('admin_tu/instansi');
             } else {
                 // echo "<script>alert('Data instansi tidak dapat di hapus masih di pakai oleh surat keluar !')</script>";
-                $this->session->set_flashdata('pesan', '<div class="alert alert-success alert-dismissible">
-                                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                                        Data instansi tidak dapat di hapus masih di pakai oleh surat keluar. 
-                                    </div>');
+                $this->session->set_flashdata('pesan', "<script> alert('Data instansi tidak dapat di hapus masih di pakai oleh surat keluar. 
+                                    ')</script>");
                 redirect('admin_tu/instansi');
             }
         } else {
             // echo "<script>alert('Data instansi tidak dapat di hapus masih di pakai oleh surat masuk !')</script>";
-            $this->session->set_flashdata('pesan', '<div class="alert alert-success alert-dismissible">
-                                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                                        Data instansi tidak dapat di hapus masih di pakai oleh surat masuk !. 
-                                    </div>');
+            $this->session->set_flashdata('pesan', "<script> alert('Data instansi tidak dapat di hapus masih di pakai oleh surat masuk !. 
+                                    ')</script>");
             redirect('admin_tu/instansi');
         }
       

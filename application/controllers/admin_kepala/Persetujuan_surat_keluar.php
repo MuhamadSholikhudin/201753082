@@ -154,6 +154,7 @@ class Persetujuan_surat_keluar extends CI_Controller
 
                 $this->Model_setujui->tambah_setujuit($datat, 'setujui');
                 $this->Model_surat_keluar->update_data($where, $data, 'surat_keluar');
+                
                 redirect('admin_kepala/persetujuan_surat_keluar/');
             }           
 

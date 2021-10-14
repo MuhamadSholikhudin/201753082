@@ -18,7 +18,7 @@ class Surat_masuk extends CI_Controller
     {
         $id_user = $this->session->userdata('id_user');
         $data['surat_valid'] = $this->db->query("SELECT * FROM surat_masuk JOIN disposisi WHERE surat_masuk.status = 4 AND disposisi.id_user = $id_user ")->result();
-        
+
         $data['surat_masuk'] = $this->db->query("SELECT * FROM surat_masuk")->result();
 
         $this->load->view('templates/header', $data);
@@ -30,9 +30,9 @@ class Surat_masuk extends CI_Controller
     public function tambah()
     {
         // echo 'oke';
-         $id_user = $this->session->userdata('id_user');
+        $id_user = $this->session->userdata('id_user');
         $data['surat_valid'] = $this->db->query("SELECT * FROM surat_masuk JOIN disposisi WHERE surat_masuk.status = 4 AND disposisi.id_user = $id_user ")->result();
-        
+
         $data['instansi'] = $this->db->query("SELECT * FROM instansi")->result();
         $data['klasifikasi'] = $this->db->query("SELECT * FROM klasifikasi")->result();
 
@@ -73,9 +73,7 @@ class Surat_masuk extends CI_Controller
             $this->db->set('status', 5);
             $this->db->where('id_suratmasuk', $id_suratmasuk);
             $this->db->update('surat_masuk');
-
         } else {
-            
         }
 
         $data['surat_masuk'] = $this->db->query("SELECT * FROM surat_masuk WHERE id_suratmasuk = $id_suratmasuk")->row();
@@ -108,16 +106,16 @@ class Surat_masuk extends CI_Controller
         //        $index = $this->input->post('index');
         // $status = $this->input->post('status');
 
-         $file = $_FILES['file']['name'];
+        $file = $_FILES['file']['name'];
 
-            $config['allowed_types'] = 'gif|jpg|png|jpeg|pdf';
-//            $config['max_size']      = '2048';
-            $config['upload_path'] = './uploads/surat_masuk/';
-            $this->load->library('upload', $config);
+        $config['allowed_types'] = 'gif|jpg|png|jpeg|pdf';
+        //            $config['max_size']      = '2048';
+        $config['upload_path'] = './uploads/surat_masuk/';
+        $this->load->library('upload', $config);
 
-            if ($this->upload->do_upload('file')) {
-                $new_file = $this->upload->data('file_name');
-            }
+        if ($this->upload->do_upload('file')) {
+            $new_file = $this->upload->data('file_name');
+        }
 
         $data = array(
             'id_instansi'    =>  $id_instansi,
@@ -138,7 +136,7 @@ class Surat_masuk extends CI_Controller
         // $this->db->insert('surat_keluar', $data);
         $this->Model_surat_masuk->tambah_surat_masuk($data, 'surat_masuk');
 
-      
+
         $cari_suratmasuk = $this->db->query("SELECT * FROM surat_masuk ORDER BY id_suratmasuk DESC LIMIT 1")->row();
 
         $datat = [
@@ -148,9 +146,9 @@ class Surat_masuk extends CI_Controller
             'updated_at' => date("Y-m-d H:i:s")
         ];
         $this->Model_mendata->tambah_mendatat($datat, 'mendata');
-      
 
-     redirect('admin_tu/surat_masuk/index');
+        $this->session->set_flashdata('pesan', "<script> alert('Data Surat Masuk Berhasil ditambahkan')</script>");
+        redirect('admin_tu/surat_masuk/index');
     }
 
     public function aksi_edit()
@@ -171,10 +169,10 @@ class Surat_masuk extends CI_Controller
         $file = $_FILES['file']['name'];
 
         $cari_file = $this->db->query("SELECT * FROM surat_masuk WHERE id_suratmasuk = $id_suratmasuk ")->row();
-            $config['allowed_types'] = 'gif|jpg|png|jpeg|pdf';
-//            $config['max_size']      = '2048';
-            $config['upload_path'] = './uploads/surat_masuk/';
-            $this->load->library('upload', $config);
+        $config['allowed_types'] = 'gif|jpg|png|jpeg|pdf';
+        //            $config['max_size']      = '2048';
+        $config['upload_path'] = './uploads/surat_masuk/';
+        $this->load->library('upload', $config);
 
         if ($this->upload->do_upload('file')) {
             unlink(FCPATH . 'uploads/surat_masuk/' . $cari_file->file);
@@ -211,8 +209,8 @@ class Surat_masuk extends CI_Controller
 
         $this->Model_surat_masuk->update_data($where, $data, 'surat_masuk');
         $this->Model_mendata->update_datat($wheret, $datat, 'mendata');
-   
- redirect('admin_tu/surat_masuk/index');
+        $this->session->set_flashdata('pesan', "<script> alert('Data Surat Masuk Berhasil ditambahkan')</script>");
+        redirect('admin_tu/surat_masuk/index');
     }
 
     public function lampiran($id_suratmasuk)
@@ -249,11 +247,11 @@ class Surat_masuk extends CI_Controller
         ];
 
         $this->Model_lampiran->tambah_lampiran($data, 'lampiran');
-        redirect('admin_tu/surat_masuk/lampiran/'. $id_suratmasuk);
-
+        redirect('admin_tu/surat_masuk/lampiran/' . $id_suratmasuk);
     }
 
-    public function file_lampiran($id_lampiran){
+    public function file_lampiran($id_lampiran)
+    {
         $data['lampiran'] = $this->db->query("SELECT * FROM lampiran WHERE id_lampiran = $id_lampiran")->row();
 
         $this->load->view('templates/header');
@@ -296,11 +294,12 @@ class Surat_masuk extends CI_Controller
         ];
 
         $this->Model_lampiran->update_data($where, $data, 'lampiran');
-        redirect('admin_tu/surat_masuk/lampiran/'. $id_suratmasuk );
+        redirect('admin_tu/surat_masuk/lampiran/' . $id_suratmasuk);
     }
 
 
-    public function kirim($id_suratmasuk){
+    public function kirim($id_suratmasuk)
+    {
         $cari_surat = $this->db->query("SELECT * FROM surat_masuk WHERE id_suratmasuk = $id_suratmasuk")->row();
         $data = [
             'status' => 2,
@@ -312,33 +311,30 @@ class Surat_masuk extends CI_Controller
         ];
 
         $this->Model_surat_masuk->update_data($where, $data, 'surat_masuk');
+        $this->session->set_flashdata('pesan', "<script> alert('Data Surat Masuk Berhasil dikirim ke kepala pelaksana')</script>");
         redirect('admin_tu/surat_masuk/');
     }
 
 
-    public function hapus($id_suratmasuk){
+    public function hapus($id_suratmasuk)
+    {
         //cek disposisi
         $cek_disposisi = $this->db->query("SELECT * FROM disposisi WHERE id_suratmasuk = $id_suratmasuk")->num_rows();
-if($cek_disposisi < 1){
+        if ($cek_disposisi < 1) {
             //cek mendata dan hapus
             $cek_mendata = $this->db->query("SELECT * FROM mendata WHERE id_suratmasuk = $id_suratmasuk")->num_rows();
-           $where = [
+            $where = [
                 'id_suratmasuk' => $id_suratmasuk
-           ];
+            ];
             $this->Model_mendata->hapus_data($where, 'mendata');
             //hapus surat masuk
             $this->Model_surat_masuk->hapus_data($where, 'surat_masuk');
-            echo "<script> alert('Data Surat Masuk Berhasik di hapus')</script>";
+            $this->session->set_flashdata('pesan', "<script> alert('Data Surat Masuk Berhasik di hapus')</script>");
 
             redirect('admin_tu/surat_masuk/');
-
-
-}else{
-            echo "<script> alert('Data Surat Masuk Berhasik di hapus')</script>";
+        } else {
+            $this->session->set_flashdata('pesan', "<script> alert('Data Surat Masuk tidak dapat di hapus')</script>");
             redirect('admin_tu/surat_masuk/');
-
-}
-
-
+        }
     }
 }

@@ -70,10 +70,24 @@
                                         <select class="form-control" name="status" required>
                                             <?php foreach ($status as $sta) : ?>
                                                 <?php if ($sta == $t_user->status) { ?>
-                                                    <option value="<?= $sta ?>" selected><?= $sta ?></option>
+                                                    <option value="<?= $sta ?>" selected>
+                                                        <?php if ($sta == 1) {  ?>
+                                                            Aktif
+                                                        <?php } else { ?>
+                                                            Tidak Aktif
+                                                        <?php
+                                                        } ?>
+                                                    </option>
 
                                                 <?php } else { ?>
-                                                    <option value="<?= $sta ?>"><?= $sta ?></option>
+                                                    <option value="<?= $sta ?>">
+                                                        <?php if ($sta == 1) {  ?>
+                                                            Aktif
+                                                        <?php } else { ?>
+                                                            Tidak Aktif
+                                                        <?php
+                                                        } ?>
+                                                    </option>
 
                                                 <?php } ?>
                                             <?php endforeach ?>

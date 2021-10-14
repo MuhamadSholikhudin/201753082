@@ -18,6 +18,8 @@
                             <?php } ?>
 
                         </p>
+                        <?= $this->session->flashdata('pesan'); ?>
+
                         <div class="panel panel-default mt-3">
                             <div class="panel-heading">
                                 Data Surat Masuk

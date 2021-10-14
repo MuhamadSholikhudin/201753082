@@ -55,12 +55,38 @@ class User extends CI_Controller {
         }
         
         $data['pegawai'] = [1, 2, 3];
-        $data['status'] = ['Aktif', 'Tidak Aktif'];
+        $data['status'] = [1, 0];
 
         // echo 'oke';
         $this->load->view('templates/header', $data);
         $this->load->view('templates/sidebar');
         $this->load->view('admin_tu/user/edit', $data);
+        $this->load->view('templates/footer');
+    }
+
+    public function lihat($id_user)
+    {
+        $id_userr = $this->session->userdata('id_user');
+        $data['surat_valid'] = $this->db->query("SELECT * FROM surat_masuk JOIN disposisi WHERE surat_masuk.status = 4 AND disposisi.id_user = $id_userr ")->result();
+
+        $user = $this->db->query("SELECT * FROM user WHERE id_user = $id_user ")->row();
+        $data['t_user'] = $this->db->query("SELECT * FROM user WHERE id_user = $id_user ")->row();
+
+        if ($user->hakakses == 'Admin TU') {
+            $data['user'] = $this->db->query("SELECT * FROM sub_umum_pegawai WHERE id_user = $id_user ")->row();
+        } elseif ($user->hakakses == 'Admin Kepala') {
+            $data['user'] = $this->db->query("SELECT * FROM kepala_pelaksana WHERE id_user = $id_user ")->row();
+        } elseif ($user->hakakses == 'Admin Bidang') {
+            $data['user'] = $this->db->query("SELECT * FROM kepala_bidang WHERE id_user = $id_user ")->row();
+        }
+
+        $data['pegawai'] = [1, 2, 3];
+        $data['status'] = [1, 0];
+
+        // echo 'oke';
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/sidebar');
+        $this->load->view('admin_tu/user/lihat', $data);
         $this->load->view('templates/footer');
     }
 
@@ -186,7 +212,7 @@ class User extends CI_Controller {
         } elseif ($hakakses == 'Admin Bidang') {
             $this->Model_kepala_bidang->update_datat($wheret, $datat, 'kepala_bidang');
         }
-
+        $this->session->set_flashdata('pesan', "<script> alert('Data User Berhasil di hapus')</script>");
         redirect('admin_tu/user/index');
 
         }
@@ -194,10 +220,40 @@ class User extends CI_Controller {
     public function hapus($id_user)
     {
 
+        $cek_hakakses = $this->db->query("SELECT * FROM user WHERE id_user = $id_user")->rows();
+        if($cek_hakakses->hakakses == 'Kepala Pelaksana'){
+            $cek_pelaksana = $this->db->query("SELECT * FROM kepala_pelaksana WHERE id_user = $id_user");
+            if($cek_pelaksana->num_rows() < 1){
 
-        
+            }else{
+
+            }
+
+        }elseif($cek_hakakses->hakakses == 'Kepala Bidang'){
+
+        } elseif ($cek_hakakses->hakakses == 'Admin TU') {
+
+        }
+
+
+        // if ($cek_disposisi < 1) {
+        //     //cek mendata dan hapus
+        //     $cek_mendata = $this->db->query("SELECT * FROM mendata WHERE id_suratmasuk = $id_suratmasuk")->num_rows();
+        //     $where = [
+        //         'id_suratmasuk' => $id_suratmasuk
+        //     ];
+        //     $this->Model_mendata->hapus_data($where, 'mendata');
+        //     //hapus surat masuk
+        //     $this->Model_surat_masuk->hapus_data($where, 'surat_masuk');
+        //     $this->session->set_flashdata('pesan', "<script> alert('Data Surat Masuk Berhasik di hapus')</script>");
+
+        //     redirect('admin_tu/surat_masuk/');
+        // } else {
+        //     $this->session->set_flashdata('pesan', "<script> alert('Data Surat Masuk tidak dapat di hapus')</script>");
+        //     redirect('admin_tu/surat_masuk/');
+        // }
+
         $this->db->delete('user', array('id_user' => $id_user));
-      
         redirect('admin_tu/user');
     }
 

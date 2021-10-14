@@ -12,6 +12,8 @@
                         <p>
                             <a href="<?= base_url('admin_bidang/surat_keluar/tambah') ?>" class="btn btn-primary ">+ Surat keluar</a>
                         </p>
+                        <?= $this->session->flashdata('pesan'); ?>
+
                         <div class="panel panel-default mt-3">
                             <div class="panel-heading">
                                 Data Surat keluar
