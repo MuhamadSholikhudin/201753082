@@ -96,7 +96,7 @@
                                                                         <a href="<?= base_url('admin_tu/surat_masuk/lihat/') . $masuk->id_suratmasuk ?>" type="button" class="btn btn-success"><i class="fa fa-eye fa-fw"></i>Lihat</a>
                                                                     <?php } elseif ($masuk->status == 2) { ?>
                                                                         <a href="<?= base_url('admin_tu/surat_masuk/lihat/') . $masuk->id_suratmasuk ?>" type="button" class="btn btn-success"><i class="fa fa-eye fa-fw"></i>Lihat</a>
-                                                                    <?php } elseif ($masuk->status > 3) { ?>
+                                                                    <?php } elseif ($masuk->status >= 3) { ?>
                                                                         <a href="<?= base_url('admin_tu/surat_masuk/lihat/') . $masuk->id_suratmasuk ?>" type="button" class="btn btn-success"><i class="fa fa-eye fa-fw"></i>Lihat</a>
                                                                     <?php } ?>
                                                                     <!-- <a href="<?= base_url('admin_tu/surat_masuk/lihat/') . $masuk->id_suratmasuk ?>" type="button" class="btn btn-default"><i class="fa fa-file-pdf-o fa-fw"></i>Lampiran</a> -->
