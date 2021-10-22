@@ -22,7 +22,7 @@ class Surat_keluar extends CI_Controller
         $data['surat_valid'] = $this->db->query("SELECT * FROM surat_masuk JOIN disposisi WHERE surat_masuk.status = 4 AND disposisi.id_user = $id_user ")->result();
         
         $cari_kepala_bidang = $this->db->query("SELECT * FROM kepala_bidang WHERE id_user = $id_user")->row();
-        $data['surat_keluar'] = $this->db->query("SELECT * FROM surat_keluar JOIN membuat ON surat_keluar.id_suratkeluar = membuat.id_suratkeluar AND membuat.id_kepala_bidang = $cari_kepala_bidang->id_kepala_bidang ")->result();
+        $data['surat_keluar'] = $this->db->query("SELECT * FROM surat_keluar JOIN membuat ON surat_keluar.id_suratkeluar = membuat.id_suratkeluar AND membuat.id_kepala_bidang = $cari_kepala_bidang->id_kepala_bidang ORDER BY surat_keluar.id_suratkeluar DESC")->result();
 
         $this->load->view('templates/header', $data);
         $this->load->view('templates/sidebar');
