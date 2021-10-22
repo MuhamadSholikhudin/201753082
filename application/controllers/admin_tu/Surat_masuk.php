@@ -19,7 +19,7 @@ class Surat_masuk extends CI_Controller
         $id_user = $this->session->userdata('id_user');
         $data['surat_valid'] = $this->db->query("SELECT * FROM surat_masuk JOIN disposisi WHERE surat_masuk.status = 4 AND disposisi.id_user = $id_user ")->result();
 
-        $data['surat_masuk'] = $this->db->query("SELECT * FROM surat_masuk")->result();
+        $data['surat_masuk'] = $this->db->query("SELECT * FROM surat_masuk ORDER BY id_suratmasuk DESC")->result();
 
         $this->load->view('templates/header', $data);
         $this->load->view('templates/sidebar');
