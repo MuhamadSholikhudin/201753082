@@ -50,7 +50,13 @@
                                                                     echo $cari_instansi->nama_instansi
                                                                     ?>
                                                                 </td>
-                                                                <td><?= $masuk->id_klasifikasi ?></td>
+                                                                <td>
+                                                                <?php
+                                                                    $cari_klasifikasi = $this->db->query("SELECT * FROM klasifikasi WHERE id_klasifikasi = $masuk->id_klasifikasi ")->row();
+
+                                                                    echo $cari_klasifikasi->klasifikasi
+                                                                    ?>
+                                                                </td>
                                                                 <td><?= $masuk->perihal ?></td>
                                                                 <td class="center"><?= $masuk->tanggal_surat ?></td>
                                                                 <td class="center">
