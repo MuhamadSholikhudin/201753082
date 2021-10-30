@@ -41,7 +41,7 @@
                                                     </thead>
                                                     <tbody>
                                                         <?php foreach ($surat_masuk as $masuk) : ?>
-                                                            <tr class="gradeA odd" role="row">
+                                                            <tr class=" table-warning" role="row">
                                                                 <td class="sorting_1">
                                                                     <!-- <?= $masuk->id_instansi ?> -->
                                                                     <?php
@@ -59,15 +59,33 @@
                                                                 </td>
                                                                 <td><?= $masuk->perihal ?></td>
                                                                 <td class="center"><?= $masuk->tanggal_surat ?></td>
-                                                                <td class="center">
+                                                                <td class="center ">
                                                                     <?php if ($masuk->status == 0) {
                                                                         echo 'Surat baru';
                                                                     } elseif ($masuk->status == 1) {
                                                                         echo 'Surat Terkirim Kepala Pelaksana';
                                                                     } elseif ($masuk->status == 2) {
-                                                                        echo 'Surat sudah di baca';
+                                                                        // echo 'Surat belum di validasi kepala pelaksana'; 
+                                                                        ?>
+                                                                        <button type="button" class="btn btn-primary position-relative">
+
+                                                                            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                                                                Surat belum dibaca dan  di validasi kepala pelaksana
+                                                                            <!-- <span class="visually-hidden">unread messages</span> -->
+                                                                            </span>
+                                                                        </button>
+                                                                        <?php 
                                                                     } elseif ($masuk->status == 3) {
-                                                                        echo 'Surat tidak di validasi kepala pelaksana';
+                                                                        // echo 'Surat sudah di baca';
+                                                                        ?>
+                                                                        <button type="button" class="btn btn-warning position-relative">
+                                                                            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                                                                Surat sudah di baca
+                                                                            <!-- <span class="visually-hidden">unread messages</span> -->
+                                                                            </span>
+                                                                        </button>
+                                                                    <?php 
+
                                                                     } elseif ($masuk->status == 4) {
                                                                         echo 'Surat di validasi oleh kepala pelaksana';
                                                                     } elseif ($masuk->status == 5) {
