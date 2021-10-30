@@ -244,19 +244,96 @@
                                                 ?>
                                                 <input class="form-control" type="hidden" name="id_pengguna" value="<?= $id_pengguna ?>" required>
                                                 <input class="form-control" type="hidden" name="id_suratkeluar" value="<?= $surat_keluar->id_suratkeluar ?>" required>
-
-
-                                                <div class="form-group">
-                                                    <label>No Surat Keluar :</label>
-                                                    <input class="form-control" type="text" name="no_suratkeluar" value="<?= $surat_keluar->no_suratkeluar ?>" required placeholder="Nomer Surat masuk">
-                                                </div>
+                                                <?php
+$n_id_suratkeluar = $this->db->query("SELECT id_suratkeluar FROM surat_keluar ORDER BY id_suratkeluar DESC LIMIT 1")->row();
+// echo $n_id_suratmasuk->id_suratmasuk;
+?>
                                                 <div class="form-group">
                                                     <label>No Urut:</label>
-                                                    <input class="form-control" type="text" name="no_urut" value="<?= $surat_keluar->no_urut ?>" placeholder="Nomer Urut Surat Masuk" required>
+                                                    <input class="form-control" type="text" name="no_urut" value="<?= $n_id_suratkeluar->id_suratkeluar; ?>" placeholder="Nomer Urut Surat Masuk" required>
                                                 </div>
+                                                <div class="form-group">
+                                                    <label>No Surat Keluar :</label>
+                                                
+                                                </div>
+
+                                               <div class="input-group">
+                                               <input type="text" name="no_suratkeluar1" class="form-control" id="basic-url" aria-describedby="basic-addon3">
+  <span class="input-group-addon" id="basic-addon3">.0<?= $n_id_suratkeluar->id_suratkeluar; ?>/BPBD-KP/<?php
+   if( date("m") == 1){
+    echo "I";
+
+   }elseif(date("m") == 2){
+echo "II";
+      }elseif(date("m") == 3){
+        echo "III";
+
+   }elseif(date("m") == 4){
+    echo "IV";
+
+   }elseif(date("m") == 5){
+    echo "V";
+
+   }elseif(date("m") == 6){
+    echo "VI";
+
+   }elseif(date("m") == 7){
+    echo "VII";
+
+   }elseif(date("m") == 8){
+    echo "VIII";
+
+   }elseif(date("m") == 9){
+    echo "IX";
+
+   }elseif(date("m") == 10){
+echo "X";
+       
+   }elseif(date("m") == 11){
+    echo "XI";
+
+   }elseif(date("m") == 12){
+    echo "XII";
+
+}
+   ?>/<?= date("Y") ?></span>
+</div>
+
 
 
                                             </div>
+                                            <?php
+                                            if( date("m") == 1){
+                                                $bln = "I";
+                                            }elseif(date("m") == 2){
+                                                $bln = "II";
+                                            }elseif(date("m") == 3){
+                                                    $bln = "III";
+                                            }elseif(date("m") == 4){
+                                                $bln = "IV";
+                                            }elseif(date("m") == 5){
+                                                $bln = "V";
+                                            }elseif(date("m") == 6){
+                                                $bln = "VI";
+                                            }elseif(date("m") == 7){
+                                                $bln = "VII";
+                                            }elseif(date("m") == 8){
+                                                $bln = "VIII";
+                                            }elseif(date("m") == 9){
+                                                $bln = "IX";
+                                            }elseif(date("m") == 10){
+                                                $bln = "X";
+                                            }elseif(date("m") == 11){
+                                                $bln = "XI";
+                                            }elseif(date("m") == 12){
+                                                $bln = "XII";
+                                            }
+
+ $no_surat = "0.".$n_id_suratkeluar->id_suratkeluar."/BPBD-KP/".$bln."/".date("Y") ;
+ ?>
+
+<input class="form-control" type="hidden" name="no_suratkeluar2" value="<?= $no_surat ?>" required placeholder="Nomer Surat masuk">
+
                                             <div class="panel-footer">
 
                                                 <button type="submit" class="btn btn-primary">Simpan</button>
