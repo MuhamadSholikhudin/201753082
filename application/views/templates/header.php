@@ -38,7 +38,7 @@
 </head>
 
 <body>
-  <?php
+<?php
   $id_user = $this->session->userdata('id_user');
   if ($this->session->userdata('hakakses') == 'Admin TU') {
     $cari_pengguna = $this->db->query("SELECT * FROM sub_umum_pegawai WHERE id_user = $id_user ")->row();
@@ -77,13 +77,15 @@
 
           <?php
           if ($this->session->userdata('hakakses') == 'Admin Kepala') {
-
+            
           ?>
+
             <a class="dropdown-toggle " data-toggle="dropdown" href="#">
               <i class="fa fa-bell fa-fw"></i><span class="text-white">
                 <?php
-                $hitung_masuk = $this->db->query("SELECT COUNT(id_suratmasuk) as surat FROM surat_masuk WHERE status = 3")->row();
-
+              
+              $hitung_masuk = $this->db->query("SELECT COUNT(id_suratmasuk) as surat FROM surat_masuk WHERE status = 2")->row();
+                
                 if ($hitung_masuk->surat > 0) {
                   $n_masuk = $hitung_masuk->surat;
                 } else {
@@ -91,7 +93,7 @@
                 }
 
 
-                $hitung_keluar = $this->db->query("SELECT COUNT(id_suratkeluar) as surat FROM surat_keluar WHERE status = 3")->row();
+                $hitung_keluar = $this->db->query("SELECT COUNT(id_suratkeluar) as surat FROM surat_keluar WHERE status = 2")->row();
 
                 if ($hitung_keluar->surat > 0) {
                   $n_keluar = $hitung_keluar->surat;
