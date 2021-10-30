@@ -88,7 +88,7 @@
                                                 <br>
                                                 <br>
                                                 <br>
-                                                <a href="<?= base_url('admin_kepala/persetujuan_surat_keluar') ?>" class="btn btn-success">Kembali </a>
+                                                <a href="<?= base_url('admin_bidang/surat_keluar') ?>" class="btn btn-success">Kembali </a>
 
                                             </div>
                                         </div>
