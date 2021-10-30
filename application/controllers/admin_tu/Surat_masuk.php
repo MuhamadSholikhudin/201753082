@@ -300,6 +300,36 @@ class Surat_masuk extends CI_Controller
 
     public function kirim($id_suratmasuk)
     {
+        //emailp
+        $config = [
+            'mailtype'  => 'html',
+            'charset'   => 'utf-8',
+            'protocol'  => 'smtp',
+            'smtp_host' => 'smtp.gmail.com',
+            'smtp_user' => 'bpbdpati3@gmail.com',
+            'smtp_pass' => 'passbpbd12',
+            'smtp_crypto' => 'ssl',
+            'smtp_port'   => 465,
+            'crlf'    => "\r\n",
+            'newline' => "\r\n"
+        ];
+        
+        $this->load->library('email', $config);
+
+        $this->email->initialize($config);
+
+        $this->email->from('bpbppati3@gmail.com', 'BPBD PATI');
+        $this->email->to('muhammadsholihudin18@gmail.com');
+        $this->email->subject('INFORMASI');
+        $this->email->message('HELLO asad');
+
+        // if ($this->email->send()) {
+        //     echo 'Sukses! email berhasil dikirim.';
+        // } else {
+        //     echo 'Error! email tidak dapat dikirim.';
+        // }
+       $this->email->send();
+       
         $cari_surat = $this->db->query("SELECT * FROM surat_masuk WHERE id_suratmasuk = $id_suratmasuk")->row();
         $data = [
             'status' => 2,
@@ -312,7 +342,7 @@ class Surat_masuk extends CI_Controller
 
         $this->Model_surat_masuk->update_data($where, $data, 'surat_masuk');
         $this->session->set_flashdata('pesan', "<script> alert('Data Surat Masuk Berhasil dikirim ke kepala pelaksana')</script>");
-        redirect('admin_tu/surat_masuk/');
+        
     }
 
 
