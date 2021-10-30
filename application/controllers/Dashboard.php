@@ -11,9 +11,10 @@ class Dashboard extends CI_Controller {
 
         if ($cari_user->hakakses == 'Admin TU') {
             $data['surat_valid'] = $this->db->query("SELECT * FROM surat_masuk JOIN disposisi WHERE surat_masuk.status = 4 AND disposisi.id_user = $id_user ")->result();
+       
         } elseif ($cari_user->hakakses == 'Admin Kepala') {
-            $data['surat_kirim'] = $this->db->query("SELECT * FROM surat_masuk WHERE status = 1")->result();
-            $data['surat_keluar_baru'] = $this->db->query("SELECT * FROM surat_keluar WHERE status = 1")->result();
+            $data['surat_kirim'] = $this->db->query("SELECT * FROM surat_masuk WHERE status = 2 ")->result();
+            $data['surat_keluar_baru'] = $this->db->query("SELECT * FROM surat_keluar WHERE status = 2")->result();
         
         } elseif ($cari_user->hakakses == 'Admin Bidang') {
             $data['surat_valid'] = $this->db->query("SELECT * FROM surat_masuk JOIN disposisi WHERE surat_masuk.status = 4 AND disposisi.id_user = $id_user ")->result();
