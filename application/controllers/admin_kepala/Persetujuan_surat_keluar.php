@@ -18,9 +18,9 @@ class Persetujuan_surat_keluar extends CI_Controller
     public function index()
     {
         $data['surat_kirim'] = $this->db->query("SELECT * FROM surat_masuk WHERE status = 2")->result();
-        $data['surat_keluar_baru'] = $this->db->query("SELECT * FROM surat_keluar WHERE status = 3")->result();
+        $data['surat_keluar_baru'] = $this->db->query("SELECT * FROM surat_keluar WHERE status = 2")->result();
         
-        $data['surat_keluar'] = $this->db->query("SELECT * FROM surat_keluar WHERE status > 1 ORDER BY id_suratkeluar DESC")->result();
+        $data['surat_keluar'] = $this->db->query("SELECT * FROM surat_keluar WHERE status > 1 ORDER BY status ASC")->result();
 
         $this->load->view('templates/header', $data);
         $this->load->view('templates/sidebar');
