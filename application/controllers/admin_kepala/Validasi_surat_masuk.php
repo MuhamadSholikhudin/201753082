@@ -20,7 +20,7 @@ class Validasi_surat_masuk extends CI_Controller
         $data['surat_kirim'] = $this->db->query("SELECT * FROM surat_masuk WHERE status = 2")->result();
         $data['surat_keluar_baru'] = $this->db->query("SELECT * FROM surat_keluar WHERE status = 2")->result();
         
-        $data['surat_masuk'] = $this->db->query("SELECT * FROM surat_masuk WHERE status > 0 ORDER BY id_suratmasuk DESC")->result();
+        $data['surat_masuk'] = $this->db->query("SELECT * FROM surat_masuk WHERE status > 1 ORDER BY status ASC  ")->result();
         $this->load->view('templates/header', $data);
         $this->load->view('templates/sidebar');
         $this->load->view('admin_kepala/validasi_surat_masuk/index', $data);
