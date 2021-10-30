@@ -42,10 +42,14 @@
                                             <?php endforeach; ?>
                                         </select>
                                     </div>
-
+<?php
+$n_id_suratmasuk = $this->db->query("SELECT id_suratmasuk FROM surat_masuk ORDER BY id_suratmasuk DESC LIMIT 1")->row();
+// echo $n_id_suratmasuk->id_suratmasuk;
+?>
                                     <div class="form-group">
                                         <label>No Urut:</label>
-                                        <input class="form-control" type="text" name="no_urut" placeholder="Nomer Urut Surat Masuk" required>
+                                        <input class="form-control" type="text"  value="<?= $n_id_suratmasuk->id_suratmasuk; ?>" readonly>
+                                        <input class="form-control" type="hidden" name="no_urut" value="<?= $n_id_suratmasuk->id_suratmasuk; ?>" required>
                                     </div>
                                     <div class="form-group">
                                         <label>Tanggal Surat:</label>
