@@ -66,9 +66,27 @@
                                                                     } elseif ($keluar->status == 1) {
                                                                         echo 'Surat Belum dibaca';
                                                                     } elseif ($keluar->status == 2) {
-                                                                        echo 'Surat sudah di baca';
+
+                                                                        // echo 'Surat sudah di baca';
+                                                                        ?>
+                                                                        <button type="button" class="btn btn-primary position-relative">
+                                                                            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                                                                Surat Belum di baca
+                                                                            <!-- <span class="visually-hidden">unread messages</span> -->
+                                                                            </span>
+                                                                        </button>
+                                                                    <?php
+
                                                                     } elseif ($keluar->status == 3) {
-                                                                        echo 'Surat tidak di persetujuan kepala pelaksana';
+                                                                        // echo 'Surat tidak di persetujuan kepala pelaksana';
+                                                                        ?>
+                                                                        <button type="button" class="btn btn-warning position-relative">
+                                                                            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                                                                Surat sudah di baca
+                                                                            <!-- <span class="visually-hidden">unread messages</span> -->
+                                                                            </span>
+                                                                        </button>
+                                                                    <?php
                                                                     } elseif ($keluar->status == 4) {
                                                                         echo 'Surat di persetujuan oleh kepala pelaksana';
                                                                     } elseif ($keluar->status == 5) {
