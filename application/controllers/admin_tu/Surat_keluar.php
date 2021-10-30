@@ -79,10 +79,15 @@ class Surat_keluar extends CI_Controller
         $this->load->view('templates/footer');
     }
     public function aksi_penomoran(){
-        $id_suratkeluar = $this->input->post('id_suratkeluar');
+
+        $id_suratkeluar =  $this->input->post('id_suratkeluar');
         $id_pengguna = $this->input->post('id_pengguna');
-        $no_suratkeluar = $this->input->post('no_suratkeluar');
         $no_urut = $this->input->post('no_urut');
+
+        $no_suratkeluar1 = $this->input->post('no_suratkeluar1');
+        $no_suratkeluar2 = $this->input->post('no_suratkeluar2');
+        
+        $no_suratkeluar = $no_suratkeluar1.".".$no_suratkeluar2;
 
         $datat = [
             'id_suratkeluar' => $id_suratkeluar,
