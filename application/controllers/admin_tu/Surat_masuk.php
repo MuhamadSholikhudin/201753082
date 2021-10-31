@@ -300,6 +300,9 @@ class Surat_masuk extends CI_Controller
 
     public function kirim($id_suratmasuk)
     {
+        $cari_surat = $this->db->query("SELECT * FROM surat_masuk WHERE id_suratmasuk = $id_suratmasuk")->row();
+        
+        
         //emailp
         $config = [
             'mailtype'  => 'html',
@@ -315,13 +318,27 @@ class Surat_masuk extends CI_Controller
         ];
         
         $this->load->library('email', $config);
-
+        
         $this->email->initialize($config);
-
-        $this->email->from('bpbppati3@gmail.com', 'BPBD PATI');
+        
+        $this->email->from('bpbdpati3@gmail.com', 'BPBD PATI');
         $this->email->to('muhammadsholihudin18@gmail.com');
         $this->email->subject('INFORMASI');
-        $this->email->message('HELLO asad');
+        $this->email->message("AKU". $cari_surat->no_suratmasuk);
+/*
+        <!DOCTYPE html>
+        <html>
+        <head>
+        </head>
+        <body>
+        <h1 >The button element - Styled with CSS</h1>
+        <p>Change the background color of a button with the background-color property:</p>
+        <a href='<?= base_url('admin_kepala/validasi_surat_masuk') ?>' style='border: none; color: white; padding: 15px 32px;  text-align: center; text-decoration: none;  display: inline-block; font-size: 16px; margin: 4px 2px; cursor: pointer; background-color: #008CBA;' 
+        class='button button2'>Lihat</a>
+        </body>
+        </html>
+*/
+
 
         // if ($this->email->send()) {
         //     echo 'Sukses! email berhasil dikirim.';
@@ -330,18 +347,18 @@ class Surat_masuk extends CI_Controller
         // }
        $this->email->send();
        
-        $cari_surat = $this->db->query("SELECT * FROM surat_masuk WHERE id_suratmasuk = $id_suratmasuk")->row();
-        $data = [
-            'status' => 2,
-            'tanggal_teruskan' => date('Y-m-d')
-        ];
+        // $data = [
+        //     'status' => 2,
+        //     'tanggal_teruskan' => date('Y-m-d')
+        // ];
 
-        $where = [
-            'id_suratmasuk' => $id_suratmasuk
-        ];
+        // $where = [
+        //     'id_suratmasuk' => $id_suratmasuk
+        // ];
 
-        $this->Model_surat_masuk->update_data($where, $data, 'surat_masuk');
+        // $this->Model_surat_masuk->update_data($where, $data, 'surat_masuk');
         $this->session->set_flashdata('pesan', "<script> alert('Data Surat Masuk Berhasil dikirim ke kepala pelaksana')</script>");
+        redirect('admin_tu/surat_masuk/');
         
     }
 
