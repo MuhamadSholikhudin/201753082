@@ -302,7 +302,10 @@ class Surat_masuk extends CI_Controller
     {
         $cari_surat = $this->db->query("SELECT * FROM surat_masuk WHERE id_suratmasuk = $id_suratmasuk")->row();
         
+        $cari_kepala = $this->db->query("SELECT * FROM user WHERE hakakses = 'Admin Kepala'AND  status = 1 LIMIT 1")->row();        
         
+        $cari_instansi = $this->db->query("SELECT * FROM instansi WHERE id_instansi = $cari_surat->id_instansi")->row();
+
         //emailp
         $config = [
             'mailtype'  => 'html',
@@ -322,9 +325,22 @@ class Surat_masuk extends CI_Controller
         $this->email->initialize($config);
         
         $this->email->from('bpbdpati3@gmail.com', 'BPBD PATI');
-        $this->email->to('muhammadsholihudin18@gmail.com');
-        $this->email->subject('INFORMASI');
-        $this->email->message("AKU". $cari_surat->no_suratmasuk);
+        $this->email->to($cari_kepala->email);
+        $this->email->subject("SURAT MASUK - " . $cari_surat->sifat_surat);
+        $this->email->message("
+        <!DOCTYPE html>
+        <html>
+        <head>
+        </head>
+        <body>
+        <h1>".$cari_instansi->nama_instansi ." - ". $cari_surat->sifat_surat ."</h1>
+        <p>Untuk melihat surat masuk bpbd pati bisa klik link di bawah ini : </p>
+        <a href='" . base_url('notifikasi/surat_masuk/'). $id_suratmasuk. "/". $cari_kepala->id_user . "' style='border: none; color: white; padding: 15px 32px;  text-align: center; text-decoration: none;  display: inline-block; font-size: 16px; margin: 4px 2px; cursor: pointer; background-color: #008CBA;' 
+        class='button button2'>Lihat</a>
+        </body>
+        </html>");
+        $this->email->send();
+
 /*
         <!DOCTYPE html>
         <html>
@@ -338,25 +354,17 @@ class Surat_masuk extends CI_Controller
         </body>
         </html>
 */
-
-
-        // if ($this->email->send()) {
-        //     echo 'Sukses! email berhasil dikirim.';
-        // } else {
-        //     echo 'Error! email tidak dapat dikirim.';
-        // }
-       $this->email->send();
        
-        // $data = [
-        //     'status' => 2,
-        //     'tanggal_teruskan' => date('Y-m-d')
-        // ];
+        $data = [
+            'status' => 2,
+            'tanggal_teruskan' => date('Y-m-d')
+        ];
 
-        // $where = [
-        //     'id_suratmasuk' => $id_suratmasuk
-        // ];
+        $where = [
+            'id_suratmasuk' => $id_suratmasuk
+        ];
 
-        // $this->Model_surat_masuk->update_data($where, $data, 'surat_masuk');
+        $this->Model_surat_masuk->update_data($where, $data, 'surat_masuk');
         $this->session->set_flashdata('pesan', "<script> alert('Data Surat Masuk Berhasil dikirim ke kepala pelaksana')</script>");
         redirect('admin_tu/surat_masuk/');
         
