@@ -78,6 +78,32 @@ class Surat_keluar extends CI_Controller
         $this->load->view('admin_tu/surat_keluar/lihat', $data);
         $this->load->view('templates/footer');
     }
+
+    public function cetak($id_suratkeluar)
+    {
+        // echo 'oke';
+        $data['surat_keluar'] = $this->db->query("SELECT * FROM surat_keluar WHERE id_suratkeluar = $id_suratkeluar")->row();
+        $data['instansi'] = $this->db->query("SELECT * FROM instansi")->result();
+
+        $data['sifat_surat'] = ['Penting', 'Biasa'];
+        $data['klasifikasi_surat'] = ['Umum', 'Pemerintahan'];
+        $id_user = $this->session->userdata('id_user');
+        $data['surat_valid'] = $this->db->query("SELECT * FROM surat_masuk JOIN disposisi WHERE surat_masuk.status = 4 AND disposisi.id_user = $id_user ")->result();
+
+                 $this->load->view('admin_tu/surat_keluar/cetak', $data);
+// $this->load->library('dompdf_gen');
+
+
+//         $paper_size = "A4";
+//         $orientation = "potrait";
+//         $html = $this->output->get_output();
+//         $this->dompdf->set_paper($paper_size, $orientation);
+
+//         $this->dompdf->load_html($html);
+//         $this->dompdf->render();
+//         $this->dompdf->stream("Surat_Keluar.pdf", array("Attachment" => 0 ));
+
+    }
     public function aksi_penomoran(){
 
         $id_suratkeluar =  $this->input->post('id_suratkeluar');
