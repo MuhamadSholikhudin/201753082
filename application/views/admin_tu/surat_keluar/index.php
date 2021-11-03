@@ -89,6 +89,7 @@
                                                                     <?php } elseif ($keluar->status == 5) { ?>
 
                                                                         <a href="<?= base_url('admin_tu/surat_keluar/lihat/') . $keluar->id_suratkeluar ?>" type="button" class="btn btn-success"><i class="fa fa-eye fa-fw"></i>Lihat</a>
+                                                                        <a href="<?= base_url('admin_tu/surat_keluar/cetak/') . $keluar->id_suratkeluar ?>" type="button" class="btn btn-warning"><i class="fa fa-print fa-fw"></i>Cetak</a>
                                                                     <?php } else { ?>
 
                                                                     <?php   } ?>
