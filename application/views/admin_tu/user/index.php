@@ -30,6 +30,7 @@
                                                             <th class="sorting_asc" tabindex="0" aria-controls="dataTables-example" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 165px;">Nama user</th>
                                                             <th class="sorting" tabindex="0" aria-controls="dataTables-example" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending" style="width: 209px;">Nip</th>
                                                             <th class="sorting" tabindex="0" aria-controls="dataTables-example" rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending" style="width: 192px;">Jabatan</th>
+                                                            <!-- <th class="sorting" tabindex="0" aria-controls="dataTables-example" rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending" style="width: 192px;">Email</th> -->
                                                             <th class="sorting" tabindex="0" aria-controls="dataTables-example" rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending" style="width: 141px;">Username</th>
                                                             <th class="sorting" tabindex="0" aria-controls="dataTables-example" rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending" style="width: 141px;">Hak Akses</th>
                                                             <th class="sorting" tabindex="0" aria-controls="dataTables-example" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending" style="width: 10px;">Foto</th>
@@ -52,6 +53,7 @@
                                                                 <td class="sorting_1"><?= $cari_user->nama ?></td>
                                                                 <td><?= $cari_user->nip ?></td>
                                                                 <td><?= $cari_user->jabatan ?></td>
+                                                                <!-- <td><?= $peg->email ?></td> -->
                                                                 <td class="center"><?= $peg->username ?></td>
                                                                 <td class="center"><?= $peg->hakakses ?></td>
                                                                 <td class="center">
