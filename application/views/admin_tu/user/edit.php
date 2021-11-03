@@ -31,7 +31,7 @@
                                     <div class="form-group">
                                         <label>Foto : </label>
 
-                                        <input type="file" id='' name="foto" accept="image/png, image/gif, image/jpeg"" required>
+                                        <input type="file" id='' name="foto" accept="image/png, image/gif, image/jpeg" required>
                                     </div>
                                     <script>
                                         // alert('ok');
@@ -65,6 +65,10 @@
                                         <label>Password :</label>
                                         <input class="form-control" type="text" name="password" value="<?= $t_user->password ?>" required>
                                     </div>
+                                    <div class="form-group">
+                                    <label>Email :</label>
+                                    <input class="form-control" type="email" name="email" value="<?= $t_user->email ?>" required>
+                                </div>
                                     <div class="form-group">
                                         <label>Status :</label>
                                         <select class="form-control" name="status" required>
