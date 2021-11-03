@@ -71,9 +71,13 @@
 
 
                                         <div class="col-sm-12 lead">
-                                            <textarea class="form" rows="15" style=" border: none; background-color: transparent; resize: none; outline: none;">
-                                                <?= $surat_keluar->isi_ringkas ?>
-                                            </textarea>
+                                            <!-- <textarea class="form" rows="15" style=" border: none; background-color: transparent; resize: none; outline: none;">
+                                            <?= $surat_keluar->isi_ringkas ?>
+                                            </textarea> -->
+
+                                            <p>
+                                            <?= $surat_keluar->isi_ringkas ?>
+                                            </p>
 
                                         </div>
 
