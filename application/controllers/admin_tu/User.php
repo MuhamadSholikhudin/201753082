@@ -96,6 +96,7 @@ class User extends CI_Controller {
         $hakakses = $this->input->post('hakakses');
         $username = $this->input->post('username');
         $password = $this->input->post('password');
+        $email = $this->input->post('email');
         $status = $this->input->post('status');
         $cari_user = $this->db->query("SELECT * FROM user WHERE username = '$username' ");
 
@@ -108,6 +109,7 @@ class User extends CI_Controller {
                 'hakakses'    =>  $hakakses,
                 'username'    =>  $username,
                 'password'    =>  $password,
+                'email'    =>  $email,
                 'status'      =>  $status
             );
             $this->Model_user->tambah_usert($datat, 'user');
@@ -163,6 +165,7 @@ class User extends CI_Controller {
         $username = $this->input->post('username');
         $password = $this->input->post('password');
         $hakakses = $this->input->post('hakakses');
+        $email = $this->input->post('email');
         $status = $this->input->post('status');
         
         $nama = $this->input->post('nama');
@@ -188,6 +191,7 @@ class User extends CI_Controller {
         $data = array(
             'username'    =>  $username,
             'password'    =>  $password,
+            'email'    =>  $email,
             'status' => $status
         );
         $where = [
