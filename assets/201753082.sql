@@ -1,13 +1,14 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 4.9.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 17 Okt 2021 pada 16.55
--- Versi server: 10.4.21-MariaDB
--- Versi PHP: 8.0.10
+-- Generation Time: Nov 03, 2021 at 09:42 PM
+-- Server version: 10.4.8-MariaDB
+-- PHP Version: 7.2.24
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -24,7 +25,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `disposisi`
+-- Table structure for table `disposisi`
 --
 
 CREATE TABLE `disposisi` (
@@ -39,7 +40,7 @@ CREATE TABLE `disposisi` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `disposisi`
+-- Dumping data for table `disposisi`
 --
 
 INSERT INTO `disposisi` (`id_disposisi`, `id_suratmasuk`, `id_user`, `id_kepala_pelaksana`, `updated_at`, `created_at`, `catatan`, `status`) VALUES
@@ -49,7 +50,7 @@ INSERT INTO `disposisi` (`id_disposisi`, `id_suratmasuk`, `id_user`, `id_kepala_
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `instansi`
+-- Table structure for table `instansi`
 --
 
 CREATE TABLE `instansi` (
@@ -62,7 +63,7 @@ CREATE TABLE `instansi` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `instansi`
+-- Dumping data for table `instansi`
 --
 
 INSERT INTO `instansi` (`id_instansi`, `nama_instansi`, `kota`, `alamat_instansi`, `no_telp`, `email`) VALUES
@@ -74,7 +75,7 @@ INSERT INTO `instansi` (`id_instansi`, `nama_instansi`, `kota`, `alamat_instansi
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `kepala_bidang`
+-- Table structure for table `kepala_bidang`
 --
 
 CREATE TABLE `kepala_bidang` (
@@ -87,7 +88,7 @@ CREATE TABLE `kepala_bidang` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `kepala_bidang`
+-- Dumping data for table `kepala_bidang`
 --
 
 INSERT INTO `kepala_bidang` (`id_kepala_bidang`, `id_user`, `nama`, `nip`, `jabatan`, `foto`) VALUES
@@ -97,7 +98,7 @@ INSERT INTO `kepala_bidang` (`id_kepala_bidang`, `id_user`, `nama`, `nip`, `jaba
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `kepala_pelaksana`
+-- Table structure for table `kepala_pelaksana`
 --
 
 CREATE TABLE `kepala_pelaksana` (
@@ -110,7 +111,7 @@ CREATE TABLE `kepala_pelaksana` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `kepala_pelaksana`
+-- Dumping data for table `kepala_pelaksana`
 --
 
 INSERT INTO `kepala_pelaksana` (`id_kepala_pelaksana`, `id_user`, `nama`, `nip`, `jabatan`, `foto`) VALUES
@@ -120,7 +121,7 @@ INSERT INTO `kepala_pelaksana` (`id_kepala_pelaksana`, `id_user`, `nama`, `nip`,
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `klasifikasi`
+-- Table structure for table `klasifikasi`
 --
 
 CREATE TABLE `klasifikasi` (
@@ -130,7 +131,7 @@ CREATE TABLE `klasifikasi` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `klasifikasi`
+-- Dumping data for table `klasifikasi`
 --
 
 INSERT INTO `klasifikasi` (`id_klasifikasi`, `no_klasifikasi`, `klasifikasi`) VALUES
@@ -140,7 +141,7 @@ INSERT INTO `klasifikasi` (`id_klasifikasi`, `no_klasifikasi`, `klasifikasi`) VA
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `lampiran`
+-- Table structure for table `lampiran`
 --
 
 CREATE TABLE `lampiran` (
@@ -151,7 +152,7 @@ CREATE TABLE `lampiran` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `lampiran`
+-- Dumping data for table `lampiran`
 --
 
 INSERT INTO `lampiran` (`id_lampiran`, `id_suratmasuk`, `nama_lampiran`, `file_lampiran`) VALUES
@@ -160,7 +161,7 @@ INSERT INTO `lampiran` (`id_lampiran`, `id_suratmasuk`, `nama_lampiran`, `file_l
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `membuat`
+-- Table structure for table `membuat`
 --
 
 CREATE TABLE `membuat` (
@@ -172,16 +173,17 @@ CREATE TABLE `membuat` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `membuat`
+-- Dumping data for table `membuat`
 --
 
 INSERT INTO `membuat` (`id_membuat`, `id_suratkeluar`, `id_kepala_bidang`, `created_at`, `updated_at`) VALUES
-(1, 9, 1, '2021-10-12 18:36:36', '2021-10-12 23:36:36');
+(1, 9, 1, '2021-10-12 18:36:36', '2021-10-12 23:36:36'),
+(2, 10, 1, '2021-11-01 07:26:40', '2021-11-01 07:26:40');
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `mendata`
+-- Table structure for table `mendata`
 --
 
 CREATE TABLE `mendata` (
@@ -193,7 +195,7 @@ CREATE TABLE `mendata` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `mendata`
+-- Dumping data for table `mendata`
 --
 
 INSERT INTO `mendata` (`id_mendata`, `id_suratmasuk`, `id_sub_umum_pegawai`, `created_at`, `updated_at`) VALUES
@@ -204,7 +206,7 @@ INSERT INTO `mendata` (`id_mendata`, `id_suratmasuk`, `id_sub_umum_pegawai`, `cr
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `penomoran`
+-- Table structure for table `penomoran`
 --
 
 CREATE TABLE `penomoran` (
@@ -217,16 +219,18 @@ CREATE TABLE `penomoran` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `penomoran`
+-- Dumping data for table `penomoran`
 --
 
 INSERT INTO `penomoran` (`id_penomoran`, `id_suratkeluar`, `id_sub_umum_pegawai`, `created_at`, `updated_at`, `no_suratkeluar`) VALUES
-(1, 8, 1, '2021-10-12 03:55:29', '2021-10-12 03:55:29', '');
+(1, 8, 1, '2021-10-12 03:55:29', '2021-10-12 03:55:29', ''),
+(2, 9, 1, '2021-10-28 19:11:25', '2021-10-28 19:11:25', ''),
+(3, 10, 1, '2021-11-01 07:37:47', '2021-11-01 07:37:47', '');
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `setujui`
+-- Table structure for table `setujui`
 --
 
 CREATE TABLE `setujui` (
@@ -240,18 +244,19 @@ CREATE TABLE `setujui` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `setujui`
+-- Dumping data for table `setujui`
 --
 
 INSERT INTO `setujui` (`id_setujui`, `id_suratkeluar`, `id_kepala_pelaksana`, `created_at`, `updated_at`, `catatan`, `status`) VALUES
 (2, 2, 1, '2021-10-12 03:03:37', '2021-10-12 03:03:37', 'peminjaman Lab Komputer', 1),
 (3, 8, 1, '2021-10-12 21:32:30', '2021-10-12 16:32:30', 'langsung tindak lanjuti', 1),
-(4, 9, 1, '2021-10-12 19:35:56', '2021-10-12 19:35:56', 'Segera di tindak lanjuti', 1);
+(4, 9, 1, '2021-10-12 19:35:56', '2021-10-12 19:35:56', 'Segera di tindak lanjuti', 1),
+(5, 10, 1, '2021-11-01 07:33:00', '2021-11-01 07:33:00', 'Segera tindak lanjuti laporan', 1);
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `sub_umum_pegawai`
+-- Table structure for table `sub_umum_pegawai`
 --
 
 CREATE TABLE `sub_umum_pegawai` (
@@ -264,7 +269,7 @@ CREATE TABLE `sub_umum_pegawai` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `sub_umum_pegawai`
+-- Dumping data for table `sub_umum_pegawai`
 --
 
 INSERT INTO `sub_umum_pegawai` (`id_sub_umum_pegawai`, `nama`, `nip`, `jabatan`, `id_user`, `foto`) VALUES
@@ -274,7 +279,7 @@ INSERT INTO `sub_umum_pegawai` (`id_sub_umum_pegawai`, `nama`, `nip`, `jabatan`,
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `surat_keluar`
+-- Table structure for table `surat_keluar`
 --
 
 CREATE TABLE `surat_keluar` (
@@ -293,24 +298,25 @@ CREATE TABLE `surat_keluar` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `surat_keluar`
+-- Dumping data for table `surat_keluar`
 --
 
 INSERT INTO `surat_keluar` (`id_suratkeluar`, `id_instansi`, `no_urut`, `tanggal_surat`, `perihal`, `sifat_surat`, `isi_ringkas`, `catatan`, `no_suratkeluar`, `tanggal_teruskan`, `id_klasifikasi`, `status`) VALUES
 (1, 1, '', '0000-00-00', '', '', '', '', '', '0000-00-00', 1, '0'),
-(2, 3, '1', '2021-09-30', 'Permohonan', 'Penting', 'Dengan Hormat,\r\nParagraf 1\r\n\r\nParagraf 2\r\n\r\nParagraf 3\r\n\r\nWassalam Wr. Wb', 'peminjaman Lab Komputer', '', '0000-00-00', 2, '1'),
+(2, 3, '1', '2021-09-30', 'Permohonan', 'Penting', 'Dengan Hormat,\r\nParagraf 1\r\n\r\nParagraf 2\r\n\r\nParagraf 3\r\n\r\nWassalam Wr. Wb', 'peminjaman Lab Komputer', '', '0000-00-00', 2, '3'),
 (3, 1, '', '2021-09-23', '', '', '', '', '', '0000-00-00', 2, '0'),
 (4, 1, '1', '2021-09-30', '', '', '', '', '', '0000-00-00', 1, '0'),
 (5, 1, '1', '2021-09-16', '', '', '', '', '', '0000-00-00', 1, '0'),
 (6, 1, '1', '2021-09-30', 'Permohonan', 'Penting', '', '', '', '0000-00-00', 2, '0'),
 (7, 1, '1', '2021-09-23', 'Permohonan', 'Penting', 'isi', '', '', '0000-00-00', 2, '0'),
 (8, 1, '1111', '2021-09-30', 'Permohonan', 'Penting', 'isi', 'catatan', '1111', '2021-09-23', 1, '4'),
-(9, 1, '', '2021-10-12', 'Permohonan6', 'Penting', 'isi', 'catatan', '', '0000-00-00', 1, '4');
+(9, 1, '9', '2021-10-12', 'Permohonan6', 'Penting', 'isi', 'catatan', '12.0.9/BPBD-KP/X/2021', '0000-00-00', 1, '5'),
+(10, 4, '10', '2021-11-01', 'Permohonan', 'Penting', 'Sehubung dengan adanya kegiatan kerja bakti untuk memperbaiki selokan bpbdp bertujuan  untuk memohon meminjam alat kebersihan pada dinas kebersihan', 'Permohonan', '12.0.10/BPBD-KP/XI/2021', '0000-00-00', 1, '5');
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `surat_masuk`
+-- Table structure for table `surat_masuk`
 --
 
 CREATE TABLE `surat_masuk` (
@@ -330,54 +336,55 @@ CREATE TABLE `surat_masuk` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `surat_masuk`
+-- Dumping data for table `surat_masuk`
 --
 
 INSERT INTO `surat_masuk` (`id_suratmasuk`, `id_instansi`, `no_urut`, `tanggal_surat`, `perihal`, `sifat_surat`, `isi_ringkas`, `catatan`, `no_suratmasuk`, `tanggal_teruskan`, `id_klasifikasi`, `file`, `status`) VALUES
-(1, 1, '', '2021-10-13', '', '', '', '', '', '0000-00-00', '1', '', 0),
+(1, 1, '', '2021-10-13', '', '', '', '', '', '0000-00-00', '1', '', 3),
 (2, 3, '12345', '2021-09-30', 'Permohonan', 'Penting', 'isi', 'isi', '12345', '2021-10-12', '1', 'leafet_HIPERTENSI1.pdf', 5),
 (3, 1, '', '2021-09-23', '', '', '', '', '', '0000-00-00', '2', '', 0),
 (4, 1, '1', '2021-09-30', '', '', '', '', '', '0000-00-00', '1', '', 0),
 (5, 1, '1', '2021-09-16', '', '', '', '', '', '0000-00-00', '2', '', 0),
 (6, 1, '1', '2021-09-30', 'Permohonan', 'Penting', 'isi', '', '', '0000-00-00', '1', '', 0),
 (7, 1, '1', '2021-09-23', 'Permohonan', 'Penting', 'isi', '', '', '0000-00-00', '1', '', 0),
-(8, 1, '2', '2021-09-30', 'Permohonan', 'Penting', 'isi', 'catatan', '123', '2021-09-23', '1', '', 0),
-(11, 1, '12', '2021-10-11', 'Permohonan', 'Penting', 'saya adalah', 'catan', '123', '2021-10-11', '1', '12707-Article_Text-6753-1-10-201902173.pdf', 0),
+(8, 1, '2', '2021-09-30', 'Permohonan', 'Penting', 'isi', 'catatan', '123', '2021-11-01', '1', '', 3),
+(11, 1, '12', '2021-10-11', 'Permohonan', 'Penting', 'saya adalah', 'catan', '123', '2021-10-11', '1', '12707-Article_Text-6753-1-10-201902173.pdf', 4),
 (12, 3, '4', '2021-10-12', 'Permohonan1', 'Biasa', 'isi1', 'isi1', '1231', '2021-10-11', '2', 'Form_RDI.pdf', 5),
-(13, 1, '12345', '2021-10-11', 'Permohonan', 'Penting', 'iki', 'iki', '1234587', '2021-10-11', '2', 'leafet_HIPERTENSI.pdf', 0);
+(13, 1, '12345', '2021-10-11', 'Permohonan', 'Penting', 'iki', 'iki', '1234587', '2021-10-11', '2', 'leafet_HIPERTENSI.pdf', 3);
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `user`
+-- Table structure for table `user`
 --
 
 CREATE TABLE `user` (
   `id_user` int(11) NOT NULL,
   `username` varchar(100) NOT NULL,
   `password` varchar(100) NOT NULL,
+  `email` varchar(100) NOT NULL,
   `hakakses` varchar(100) NOT NULL,
   `status` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `user`
+-- Dumping data for table `user`
 --
 
-INSERT INTO `user` (`id_user`, `username`, `password`, `hakakses`, `status`) VALUES
-(2, 'rahajeng', '123', 'Admin TU', 1),
-(3, 'tarwi', '123', 'Admin Kepala', 1),
-(4, 'ayuk', '123', 'Admin Bidang', 1),
-(11, 'dessy', '123', 'Admin Bidang', 0),
-(12, 'ifa', '123', 'Admin TU', 0),
-(13, 'yohan', '123', 'Admin Kepala', 0);
+INSERT INTO `user` (`id_user`, `username`, `password`, `email`, `hakakses`, `status`) VALUES
+(2, 'rahajeng', '123', '', 'Admin TU', 1),
+(3, 'tarwi', '123', 'muhammadsholihudin18@gmail.com', 'Admin Kepala', 1),
+(4, 'ayuk', '123', '', 'Admin Bidang', 1),
+(11, 'dessy', '123', '', 'Admin Bidang', 0),
+(12, 'ifa', '123', '', 'Admin TU', 0),
+(13, 'yohan', '123', '', 'Admin Kepala', 0);
 
 --
 -- Indexes for dumped tables
 --
 
 --
--- Indeks untuk tabel `disposisi`
+-- Indexes for table `disposisi`
 --
 ALTER TABLE `disposisi`
   ADD PRIMARY KEY (`id_disposisi`),
@@ -386,40 +393,40 @@ ALTER TABLE `disposisi`
   ADD KEY `id_user` (`id_user`);
 
 --
--- Indeks untuk tabel `instansi`
+-- Indexes for table `instansi`
 --
 ALTER TABLE `instansi`
   ADD PRIMARY KEY (`id_instansi`);
 
 --
--- Indeks untuk tabel `kepala_bidang`
+-- Indexes for table `kepala_bidang`
 --
 ALTER TABLE `kepala_bidang`
   ADD PRIMARY KEY (`id_kepala_bidang`),
   ADD KEY `id_user` (`id_user`);
 
 --
--- Indeks untuk tabel `kepala_pelaksana`
+-- Indexes for table `kepala_pelaksana`
 --
 ALTER TABLE `kepala_pelaksana`
   ADD PRIMARY KEY (`id_kepala_pelaksana`),
   ADD KEY `id_user` (`id_user`);
 
 --
--- Indeks untuk tabel `klasifikasi`
+-- Indexes for table `klasifikasi`
 --
 ALTER TABLE `klasifikasi`
   ADD PRIMARY KEY (`id_klasifikasi`);
 
 --
--- Indeks untuk tabel `lampiran`
+-- Indexes for table `lampiran`
 --
 ALTER TABLE `lampiran`
   ADD PRIMARY KEY (`id_lampiran`),
   ADD KEY `id_suratmasuk` (`id_suratmasuk`);
 
 --
--- Indeks untuk tabel `membuat`
+-- Indexes for table `membuat`
 --
 ALTER TABLE `membuat`
   ADD PRIMARY KEY (`id_membuat`),
@@ -427,7 +434,7 @@ ALTER TABLE `membuat`
   ADD KEY `id_kepala_bidang` (`id_kepala_bidang`);
 
 --
--- Indeks untuk tabel `mendata`
+-- Indexes for table `mendata`
 --
 ALTER TABLE `mendata`
   ADD PRIMARY KEY (`id_mendata`),
@@ -435,7 +442,7 @@ ALTER TABLE `mendata`
   ADD KEY `id_sub_umum_pegawai` (`id_sub_umum_pegawai`);
 
 --
--- Indeks untuk tabel `penomoran`
+-- Indexes for table `penomoran`
 --
 ALTER TABLE `penomoran`
   ADD PRIMARY KEY (`id_penomoran`),
@@ -443,7 +450,7 @@ ALTER TABLE `penomoran`
   ADD KEY `id_sub_umum_pegawai` (`id_sub_umum_pegawai`);
 
 --
--- Indeks untuk tabel `setujui`
+-- Indexes for table `setujui`
 --
 ALTER TABLE `setujui`
   ADD PRIMARY KEY (`id_setujui`),
@@ -451,120 +458,120 @@ ALTER TABLE `setujui`
   ADD KEY `id_kepala_pelaksana` (`id_kepala_pelaksana`);
 
 --
--- Indeks untuk tabel `sub_umum_pegawai`
+-- Indexes for table `sub_umum_pegawai`
 --
 ALTER TABLE `sub_umum_pegawai`
   ADD PRIMARY KEY (`id_sub_umum_pegawai`),
   ADD KEY `id_user` (`id_user`);
 
 --
--- Indeks untuk tabel `surat_keluar`
+-- Indexes for table `surat_keluar`
 --
 ALTER TABLE `surat_keluar`
   ADD PRIMARY KEY (`id_suratkeluar`),
   ADD KEY `id_instansi` (`id_instansi`);
 
 --
--- Indeks untuk tabel `surat_masuk`
+-- Indexes for table `surat_masuk`
 --
 ALTER TABLE `surat_masuk`
   ADD PRIMARY KEY (`id_suratmasuk`),
   ADD KEY `id_instansi` (`id_instansi`);
 
 --
--- Indeks untuk tabel `user`
+-- Indexes for table `user`
 --
 ALTER TABLE `user`
   ADD PRIMARY KEY (`id_user`);
 
 --
--- AUTO_INCREMENT untuk tabel yang dibuang
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT untuk tabel `disposisi`
+-- AUTO_INCREMENT for table `disposisi`
 --
 ALTER TABLE `disposisi`
   MODIFY `id_disposisi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT untuk tabel `instansi`
+-- AUTO_INCREMENT for table `instansi`
 --
 ALTER TABLE `instansi`
   MODIFY `id_instansi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT untuk tabel `kepala_bidang`
+-- AUTO_INCREMENT for table `kepala_bidang`
 --
 ALTER TABLE `kepala_bidang`
   MODIFY `id_kepala_bidang` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT untuk tabel `kepala_pelaksana`
+-- AUTO_INCREMENT for table `kepala_pelaksana`
 --
 ALTER TABLE `kepala_pelaksana`
   MODIFY `id_kepala_pelaksana` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT untuk tabel `klasifikasi`
+-- AUTO_INCREMENT for table `klasifikasi`
 --
 ALTER TABLE `klasifikasi`
   MODIFY `id_klasifikasi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT untuk tabel `lampiran`
+-- AUTO_INCREMENT for table `lampiran`
 --
 ALTER TABLE `lampiran`
   MODIFY `id_lampiran` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT untuk tabel `membuat`
+-- AUTO_INCREMENT for table `membuat`
 --
 ALTER TABLE `membuat`
-  MODIFY `id_membuat` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_membuat` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT untuk tabel `mendata`
+-- AUTO_INCREMENT for table `mendata`
 --
 ALTER TABLE `mendata`
   MODIFY `id_mendata` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT untuk tabel `penomoran`
+-- AUTO_INCREMENT for table `penomoran`
 --
 ALTER TABLE `penomoran`
-  MODIFY `id_penomoran` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_penomoran` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT untuk tabel `setujui`
+-- AUTO_INCREMENT for table `setujui`
 --
 ALTER TABLE `setujui`
-  MODIFY `id_setujui` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_setujui` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- AUTO_INCREMENT untuk tabel `surat_keluar`
+-- AUTO_INCREMENT for table `surat_keluar`
 --
 ALTER TABLE `surat_keluar`
-  MODIFY `id_suratkeluar` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id_suratkeluar` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
--- AUTO_INCREMENT untuk tabel `surat_masuk`
+-- AUTO_INCREMENT for table `surat_masuk`
 --
 ALTER TABLE `surat_masuk`
   MODIFY `id_suratmasuk` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
--- AUTO_INCREMENT untuk tabel `user`
+-- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
   MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
--- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
+-- Constraints for dumped tables
 --
 
 --
--- Ketidakleluasaan untuk tabel `disposisi`
+-- Constraints for table `disposisi`
 --
 ALTER TABLE `disposisi`
   ADD CONSTRAINT `disposisi_ibfk_1` FOREIGN KEY (`id_suratmasuk`) REFERENCES `surat_masuk` (`id_suratmasuk`),
@@ -572,65 +579,65 @@ ALTER TABLE `disposisi`
   ADD CONSTRAINT `disposisi_ibfk_3` FOREIGN KEY (`id_user`) REFERENCES `user` (`id_user`);
 
 --
--- Ketidakleluasaan untuk tabel `kepala_bidang`
+-- Constraints for table `kepala_bidang`
 --
 ALTER TABLE `kepala_bidang`
   ADD CONSTRAINT `kepala_bidang_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `user` (`id_user`);
 
 --
--- Ketidakleluasaan untuk tabel `kepala_pelaksana`
+-- Constraints for table `kepala_pelaksana`
 --
 ALTER TABLE `kepala_pelaksana`
   ADD CONSTRAINT `kepala_pelaksana_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `user` (`id_user`);
 
 --
--- Ketidakleluasaan untuk tabel `lampiran`
+-- Constraints for table `lampiran`
 --
 ALTER TABLE `lampiran`
   ADD CONSTRAINT `lampiran_ibfk_1` FOREIGN KEY (`id_suratmasuk`) REFERENCES `surat_masuk` (`id_suratmasuk`);
 
 --
--- Ketidakleluasaan untuk tabel `membuat`
+-- Constraints for table `membuat`
 --
 ALTER TABLE `membuat`
   ADD CONSTRAINT `membuat_ibfk_1` FOREIGN KEY (`id_kepala_bidang`) REFERENCES `kepala_bidang` (`id_kepala_bidang`),
   ADD CONSTRAINT `membuat_ibfk_2` FOREIGN KEY (`id_suratkeluar`) REFERENCES `surat_keluar` (`id_suratkeluar`);
 
 --
--- Ketidakleluasaan untuk tabel `mendata`
+-- Constraints for table `mendata`
 --
 ALTER TABLE `mendata`
   ADD CONSTRAINT `mendata_ibfk_1` FOREIGN KEY (`id_sub_umum_pegawai`) REFERENCES `sub_umum_pegawai` (`id_sub_umum_pegawai`),
   ADD CONSTRAINT `mendata_ibfk_2` FOREIGN KEY (`id_suratmasuk`) REFERENCES `surat_masuk` (`id_suratmasuk`);
 
 --
--- Ketidakleluasaan untuk tabel `penomoran`
+-- Constraints for table `penomoran`
 --
 ALTER TABLE `penomoran`
   ADD CONSTRAINT `penomoran_ibfk_1` FOREIGN KEY (`id_sub_umum_pegawai`) REFERENCES `sub_umum_pegawai` (`id_sub_umum_pegawai`),
   ADD CONSTRAINT `penomoran_ibfk_2` FOREIGN KEY (`id_suratkeluar`) REFERENCES `surat_keluar` (`id_suratkeluar`);
 
 --
--- Ketidakleluasaan untuk tabel `setujui`
+-- Constraints for table `setujui`
 --
 ALTER TABLE `setujui`
   ADD CONSTRAINT `setujui_ibfk_1` FOREIGN KEY (`id_kepala_pelaksana`) REFERENCES `kepala_pelaksana` (`id_kepala_pelaksana`),
   ADD CONSTRAINT `setujui_ibfk_3` FOREIGN KEY (`id_suratkeluar`) REFERENCES `surat_keluar` (`id_suratkeluar`);
 
 --
--- Ketidakleluasaan untuk tabel `sub_umum_pegawai`
+-- Constraints for table `sub_umum_pegawai`
 --
 ALTER TABLE `sub_umum_pegawai`
   ADD CONSTRAINT `sub_umum_pegawai_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `user` (`id_user`);
 
 --
--- Ketidakleluasaan untuk tabel `surat_keluar`
+-- Constraints for table `surat_keluar`
 --
 ALTER TABLE `surat_keluar`
   ADD CONSTRAINT `surat_keluar_ibfk_1` FOREIGN KEY (`id_instansi`) REFERENCES `instansi` (`id_instansi`);
 
 --
--- Ketidakleluasaan untuk tabel `surat_masuk`
+-- Constraints for table `surat_masuk`
 --
 ALTER TABLE `surat_masuk`
   ADD CONSTRAINT `surat_masuk_ibfk_1` FOREIGN KEY (`id_instansi`) REFERENCES `instansi` (`id_instansi`);
