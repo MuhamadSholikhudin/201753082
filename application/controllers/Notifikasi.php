@@ -35,7 +35,7 @@ class Notifikasi extends CI_Controller
             $this->session->set_userdata('hakakses', $cari_kepala->hakakses);
             $this->session->set_userdata('id_user', $cari_kepala->id_user);
 
-            $cari_surat = $this->db->query("SELECT * FROM surat_keluar WHERE id_suratkeluar = $id_suratmasuk")->row();
+            $cari_surat = $this->db->query("SELECT * FROM surat_keluar WHERE id_suratkeluar = $id_suratkeluar")->row();
 
             if($cari_surat < 4){ //surat belum di validasi
                 
