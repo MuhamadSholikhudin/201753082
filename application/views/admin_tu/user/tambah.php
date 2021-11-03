@@ -3,14 +3,14 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-12">
-                <h1 class="page-header">Tambah Pegawai</h1>
+                <h1 class="page-header">Tambah User</h1>
             </div>
             <!-- /.col-lg-12 -->
             <div class="col-lg-12">
 
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        Form Tambah Pegawai
+                        Form Tambah User
                     </div>
 
                     <div class="panel-body">
@@ -28,7 +28,7 @@
 
                                     <div class="form-group">
                                         <label>Foto : </label>
-                                        <input type="file" name="foto" accept="image/png, image/gif, image/jpeg"" required>
+                                        <input type="file" name="foto" accept="image/png, image/gif, image/jpeg" required>
                                     </div>
                                     <div class=" form-group">
                                         <label> Username :</label>
@@ -49,10 +49,10 @@
                                             <option value="Admin Bidang">Admin Bidang</option>
                                         </select>
                                     </div>
-                                    <br>
-                                    <br>
-                                    <br>
-
+                                    <div class="form-group">
+                                    <label>Email :</label>
+                                    <input class="form-control" type="email" name="email" required>
+                                </div>
                                     <div class="form-group">
                                         <label>Password :</label>
                                         <input class="form-control" type="text" name="password" required>
