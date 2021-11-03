@@ -255,6 +255,47 @@ class Surat_keluar extends CI_Controller
     public function kirim($id_suratkeluar)
     {
         $cari_surat = $this->db->query("SELECT * FROM surat_keluar WHERE id_suratkeluar = $id_suratkeluar")->row();
+  
+        $cari_kepala = $this->db->query("SELECT * FROM user WHERE hakakses = 'Admin Kepala'AND  status = 1 LIMIT 1")->row();        
+        
+        $cari_instansi = $this->db->query("SELECT * FROM instansi WHERE id_instansi = $cari_surat->id_instansi")->row();
+
+
+        //emailp
+        $config = [
+            'mailtype'  => 'html',
+            'charset'   => 'utf-8',
+            'protocol'  => 'smtp',
+            'smtp_host' => 'smtp.gmail.com',
+            'smtp_user' => 'bpbdpati3@gmail.com',
+            'smtp_pass' => 'passbpbd12',
+            'smtp_crypto' => 'ssl',
+            'smtp_port'   => 465,
+            'crlf'    => "\r\n",
+            'newline' => "\r\n"
+        ];
+        
+        $this->load->library('email', $config);
+        
+        $this->email->initialize($config);
+        
+        $this->email->from('bpbdpati3@gmail.com', 'BPBD PATI');
+        $this->email->to($cari_kepala->email);
+        $this->email->subject("SURAT KELUAR - " . $cari_surat->sifat_surat);
+        $this->email->message("
+        <!DOCTYPE html>
+        <html>
+        <head>
+        </head>
+        <body>
+        <h1>".$cari_instansi->nama_instansi ." - ". $cari_surat->sifat_surat ."</h1>
+        <p>Untuk melihat surat keluar bpbd pati bisa klik link di bawah ini : </p>
+        <a href='" . base_url('notifikasi/surat_keluar/'). $id_suratkeluar. "/". $cari_kepala->id_user . "' style='border: none; color: white; padding: 15px 32px;  text-align: center; text-decoration: none;  display: inline-block; font-size: 16px; margin: 4px 2px; cursor: pointer; background-color: #008CBA;' 
+        class='button button2'>Lihat</a>
+        </body>
+        </html>");
+        $this->email->send();
+
 
         $data = [
             'status' => 2,
