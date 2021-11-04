@@ -12,8 +12,10 @@ class Auth extends CI_Controller{
             $auth = $this->Model_auth->cek_login();
             if($auth == FALSE){
                 $this->session->set_flashdata('pesan', "<script> alert('Username atau Password yang anda masukkan salah')</script>");
-
                     redirect('auth/login');
+            }elseif($auth->status == 0 ){
+                $this->session->set_flashdata('pesan', "<script> alert('Akun anda tidak aktif')</script>");
+                redirect('auth/login');
             }else {
                 $this->session->set_userdata('username', $auth->username);
    //             $this->session->set_userdata('nama', $auth->nama);
