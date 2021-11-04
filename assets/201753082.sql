@@ -302,15 +302,15 @@ CREATE TABLE `surat_keluar` (
 --
 
 INSERT INTO `surat_keluar` (`id_suratkeluar`, `id_instansi`, `no_urut`, `tanggal_surat`, `perihal`, `sifat_surat`, `isi_ringkas`, `catatan`, `no_suratkeluar`, `tanggal_teruskan`, `id_klasifikasi`, `status`) VALUES
-(1, 1, '', '0000-00-00', '', '', '', '', '', '0000-00-00', 1, '0'),
-(2, 3, '1', '2021-09-30', 'Permohonan', 'Penting', 'Dengan Hormat,\r\nParagraf 1\r\n\r\nParagraf 2\r\n\r\nParagraf 3\r\n\r\nWassalam Wr. Wb', 'peminjaman Lab Komputer', '', '0000-00-00', 2, '3'),
-(3, 1, '', '2021-09-23', '', '', '', '', '', '0000-00-00', 2, '0'),
-(4, 1, '1', '2021-09-30', '', '', '', '', '', '0000-00-00', 1, '0'),
-(5, 1, '1', '2021-09-16', '', '', '', '', '', '0000-00-00', 1, '0'),
-(6, 1, '1', '2021-09-30', 'Permohonan', 'Penting', '', '', '', '0000-00-00', 2, '0'),
-(7, 1, '1', '2021-09-23', 'Permohonan', 'Penting', 'isi', '', '', '0000-00-00', 2, '0'),
-(8, 1, '1111', '2021-09-30', 'Permohonan', 'Penting', 'isi', 'catatan', '1111', '2021-09-23', 1, '4'),
-(9, 1, '9', '2021-10-12', 'Permohonan6', 'Penting', 'isi', 'catatan', '12.0.9/BPBD-KP/X/2021', '0000-00-00', 1, '5'),
+(1, 1, '', '0000-00-00', 'Permohonan', 'Biasa', 'Dengan Hormat,\r\nParagraf 1\r\n\r\nParagraf 2\r\n\r\nParagraf 3\r\n\r\nWassalam Wr. Wb', 'peminjaman Lab Komputer', 'catatan', '', '0000-00-00', 1, '0'),
+(2, 3, '1', '2021-09-30', 'Permohonan', 'Penting', 'Dengan Hormat,\r\nParagraf 1\r\n\r\nParagraf 2\r\n\r\nParagraf 3\r\n\r\nWassalam Wr. Wb', 'peminjaman Lab Komputer', 'catatan', '0000-00-00', 2, '3'),
+(3, 1, '', '2021-09-23', 'Permohonan', 'Biasa', 'Dengan Hormat,\r\nParagraf 1\r\n\r\nParagraf 2\r\n\r\nParagraf 3\r\n\r\nWassalam Wr. Wb', 'peminjaman Lab Komputer', 'catatan', '', '0000-00-00', 2, '0'),
+(4, 1, '1', '2021-09-30', 'Permohonan', 'Biasa', 'Dengan Hormat,\r\nParagraf 1\r\n\r\nParagraf 2\r\n\r\nParagraf 3\r\n\r\nWassalam Wr. Wb', 'peminjaman Lab Komputer', 'catatan', '', '0000-00-00', 1, '0'),
+(5, 1, '1', '2021-09-16', 'Permohonan', 'Biasa', 'Dengan Hormat,\r\nParagraf 1\r\n\r\nParagraf 2\r\n\r\nParagraf 3\r\n\r\nWassalam Wr. Wb', 'peminjaman Lab Komputer', 'catatan', '', '0000-00-00', 1, '0'),
+(6, 1, '1', '2021-09-30', 'Permohonan', 'Penting', 'Dengan Hormat,\r\nParagraf 1\r\n\r\nParagraf 2\r\n\r\nParagraf 3\r\n\r\nWassalam Wr. Wb', 'peminjaman Lab Komputer', 'catatan', '', '0000-00-00', 2, '0'),
+(7, 1, '1', '2021-09-23', 'Permohonan', 'Penting', 'Dengan Hormat,\r\nParagraf 1\r\n\r\nParagraf 2\r\n\r\nParagraf 3\r\n\r\nWassalam Wr. Wb', 'peminjaman Lab Komputer', 'catatan', '', '0000-00-00', 2, '0'),
+(8, 1, '1111', '2021-09-30', 'Permohonan', 'Penting', 'Dengan Hormat,\r\nParagraf 1\r\n\r\nParagraf 2\r\n\r\nParagraf 3\r\n\r\nWassalam Wr. Wb', 'peminjaman Lab Komputer', 'catatan', '1111', '2021-09-23', 1, '4'),
+(9, 1, '9', '2021-10-12', 'Permohonan6', 'Penting', 'Dengan Hormat,\r\nParagraf 1\r\n\r\nParagraf 2\r\n\r\nParagraf 3\r\n\r\nWassalam Wr. Wb', 'peminjaman Lab Komputer', 'catatan', '12.0.9/BPBD-KP/X/2021', '0000-00-00', 1, '5'),
 (10, 4, '10', '2021-11-01', 'Permohonan', 'Penting', 'Sehubung dengan adanya kegiatan kerja bakti untuk memperbaiki selokan bpbdp bertujuan  untuk memohon meminjam alat kebersihan pada dinas kebersihan', 'Permohonan', '12.0.10/BPBD-KP/XI/2021', '0000-00-00', 1, '5');
 
 -- --------------------------------------------------------
@@ -341,16 +341,16 @@ CREATE TABLE `surat_masuk` (
 
 INSERT INTO `surat_masuk` (`id_suratmasuk`, `id_instansi`, `no_urut`, `tanggal_surat`, `perihal`, `sifat_surat`, `isi_ringkas`, `catatan`, `no_suratmasuk`, `tanggal_teruskan`, `id_klasifikasi`, `file`, `status`) VALUES
 (1, 1, '', '2021-10-13', '', '', '', '', '', '0000-00-00', '1', '', 3),
-(2, 3, '12345', '2021-09-30', 'Permohonan', 'Penting', 'isi', 'isi', '12345', '2021-10-12', '1', 'leafet_HIPERTENSI1.pdf', 5),
-(3, 1, '', '2021-09-23', '', '', '', '', '', '0000-00-00', '2', '', 0),
-(4, 1, '1', '2021-09-30', '', '', '', '', '', '0000-00-00', '1', '', 0),
-(5, 1, '1', '2021-09-16', '', '', '', '', '', '0000-00-00', '2', '', 0),
-(6, 1, '1', '2021-09-30', 'Permohonan', 'Penting', 'isi', '', '', '0000-00-00', '1', '', 0),
-(7, 1, '1', '2021-09-23', 'Permohonan', 'Penting', 'isi', '', '', '0000-00-00', '1', '', 0),
-(8, 1, '2', '2021-09-30', 'Permohonan', 'Penting', 'isi', 'catatan', '123', '2021-11-01', '1', '', 3),
-(11, 1, '12', '2021-10-11', 'Permohonan', 'Penting', 'saya adalah', 'catan', '123', '2021-10-11', '1', '12707-Article_Text-6753-1-10-201902173.pdf', 4),
-(12, 3, '4', '2021-10-12', 'Permohonan1', 'Biasa', 'isi1', 'isi1', '1231', '2021-10-11', '2', 'Form_RDI.pdf', 5),
-(13, 1, '12345', '2021-10-11', 'Permohonan', 'Penting', 'iki', 'iki', '1234587', '2021-10-11', '2', 'leafet_HIPERTENSI.pdf', 3);
+(2, 3, '12345', '2021-09-30', 'Permohonan', 'Penting', 'isi', 'isi', '12345', '2021-10-12', '12.02/BPBD/X/2021', 'leafet_HIPERTENSI1.pdf', 5),
+(3, 1, '', '2021-09-23', 'Surat Edaran', 'Biasa', 'isi surat masuk', 'catatan surat masuk', '12.03/BPBD/X/2021', '0000-00-00', '2', '', 0),
+(4, 1, '1', '2021-09-30', 'Permohonan', 'Biasa', 'isi surat masuk', 'catatan surat masuk', '12.04/BPBD/X/2021', '0000-00-00', '1', '', 0),
+(5, 1, '1', '2021-09-16', 'Permohonan', 'Biasa', 'isi surat masuk', 'catatan surat masuk', '12.05/BPBD/X/2021', '0000-00-00', '2', '', 0),
+(6, 1, '1', '2021-09-30', 'Permohonan', 'Penting', 'isi', 'catatan surat masuk', '12.06/BPBD/X/2021', '0000-00-00', '1', '', 0),
+(7, 1, '1', '2021-09-23', 'Permohonan', 'Penting', 'isi', 'catatan surat masuk', '12.07/BPBD/X/2021', '0000-00-00', '1', '', 0),
+(8, 1, '2', '2021-09-30', 'Permohonan', 'Penting', 'isi', 'catatan', '12.08/BPBD/X/2021', '2021-11-01', '1', '', 3),
+(11, 1, '12', '2021-10-11', 'Permohonan', 'Penting', 'saya adalah', 'catan', '12.09/BPBD/X/2021', '2021-10-11', '1', '12707-Article_Text-6753-1-10-201902173.pdf', 4),
+(12, 3, '4', '2021-10-12', 'Permohonan', 'Biasa', 'isi1', 'isi1', '12.012/BPBD/X/2021', '2021-10-11', '2', 'Form_RDI.pdf', 5),
+(13, 1, '12345', '2021-10-11', 'Permohonan', 'Penting', 'iki', 'iki', '12.013/BPBD/X/2021', '2021-10-11', '2', 'leafet_HIPERTENSI.pdf', 3);
 
 -- --------------------------------------------------------
 
@@ -372,12 +372,12 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id_user`, `username`, `password`, `email`, `hakakses`, `status`) VALUES
-(2, 'rahajeng', '123', '', 'Admin TU', 1),
-(3, 'tarwi', '123', 'muhammadsholihudin18@gmail.com', 'Admin Kepala', 1),
-(4, 'ayuk', '123', '', 'Admin Bidang', 1),
-(11, 'dessy', '123', '', 'Admin Bidang', 0),
-(12, 'ifa', '123', '', 'Admin TU', 0),
-(13, 'yohan', '123', '', 'Admin Kepala', 0);
+(2, 'rahajeng', '123', 'rahajeng@gmail.com', 'Admin TU', 1),
+(3, 'tarwi', '123', 'tarwinalis@gmail.com', 'Admin Kepala', 1),
+(4, 'ayuk', '123', 'ayuk123@gmail.com', 'Admin Bidang', 1),
+(11, 'dessy', '123', 'dessy@gmail.com', 'Admin Bidang', 1),
+(12, 'ifa', '123', 'ifa@gmail.com', 'Admin TU', 1),
+(13, 'yohan', '123', 'yuhan@gmail.com', 'Admin Kepala', 1);
 
 --
 -- Indexes for dumped tables
