@@ -140,25 +140,6 @@ INSERT INTO `klasifikasi` (`id_klasifikasi`, `no_klasifikasi`, `klasifikasi`) VA
 
 -- --------------------------------------------------------
 
---
--- Table structure for table `lampiran`
---
-
-CREATE TABLE `lampiran` (
-  `id_lampiran` int(11) NOT NULL,
-  `id_suratmasuk` int(11) NOT NULL,
-  `nama_lampiran` text NOT NULL,
-  `file_lampiran` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `lampiran`
---
-
-INSERT INTO `lampiran` (`id_lampiran`, `id_suratmasuk`, `nama_lampiran`, `file_lampiran`) VALUES
-(1, 2, 'tugas', '12707-Article_Text-6753-1-10-20190217.pdf');
-
--- --------------------------------------------------------
 
 --
 -- Table structure for table `membuat`
@@ -418,12 +399,6 @@ ALTER TABLE `kepala_pelaksana`
 ALTER TABLE `klasifikasi`
   ADD PRIMARY KEY (`id_klasifikasi`);
 
---
--- Indexes for table `lampiran`
---
-ALTER TABLE `lampiran`
-  ADD PRIMARY KEY (`id_lampiran`),
-  ADD KEY `id_suratmasuk` (`id_suratmasuk`);
 
 --
 -- Indexes for table `membuat`
@@ -518,11 +493,6 @@ ALTER TABLE `kepala_pelaksana`
 ALTER TABLE `klasifikasi`
   MODIFY `id_klasifikasi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
---
--- AUTO_INCREMENT for table `lampiran`
---
-ALTER TABLE `lampiran`
-  MODIFY `id_lampiran` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `membuat`
@@ -590,11 +560,6 @@ ALTER TABLE `kepala_bidang`
 ALTER TABLE `kepala_pelaksana`
   ADD CONSTRAINT `kepala_pelaksana_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `user` (`id_user`);
 
---
--- Constraints for table `lampiran`
---
-ALTER TABLE `lampiran`
-  ADD CONSTRAINT `lampiran_ibfk_1` FOREIGN KEY (`id_suratmasuk`) REFERENCES `surat_masuk` (`id_suratmasuk`);
 
 --
 -- Constraints for table `membuat`
